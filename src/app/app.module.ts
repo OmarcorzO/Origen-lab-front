@@ -54,6 +54,11 @@ import { NewNeedComponent } from './views/needs/new-need/new-need.component';
 import { NeedPipe } from './views/needs/pipes/need.pipe';
 import { NewIdeationComponent } from './views/ideation/new-ideation/new-ideation.component';
 import { NewActivityComponent } from './views/DESIGNPROTOTYPE/new-activity/new-activity.component';
+import { MyIdeaComponent } from './views/ideas/my-idea/my-idea.component';
+import { NewIdeaComponent } from './views/ideas/new-idea/new-idea.component';
+import { ViewIdeaComponent } from './views/ideas/view-idea/view-idea.component';
+// import { NewMarketingComponent } from './views/market/new-marketing/new-marketing.component';
+import { MarketModule } from "./views/market/market.module";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -66,11 +71,12 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, LandingComponent, LoginComponent, ProfileComponent, RegisterComponent, ConformationComponent, NewNeedComponent, NeedPipe, NewIdeationComponent, NewActivityComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, LandingComponent, LoginComponent, ProfileComponent, RegisterComponent, ConformationComponent, NewNeedComponent, NeedPipe, NewIdeationComponent, NewActivityComponent, MyIdeaComponent, NewIdeaComponent, ViewIdeaComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    MarketModule,
     AvatarModule,
     BreadcrumbModule,
     FooterModule,
@@ -96,10 +102,10 @@ const APP_CONTAINERS = [
     CardModule,
   ],
   providers: [
-    {
-      provide: LocationStrategy,
-      useClass: HashLocationStrategy,
-    },
+    // {
+    //   provide: LocationStrategy,
+    //   useClass: HashLocationStrategy,
+    // },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,

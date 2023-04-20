@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class ValidateMessageService {
+export class ValidationMessagesService {
   constructor(public routes: Router,) { }
 
   getErrorMessage(field: string, form: FormGroup) : string {

@@ -5,7 +5,8 @@ import { environment } from 'src/environments/environment.prod';
 @Injectable({
   providedIn: 'root'
 })
-export class ProcessIdeaService {
+export class NewIdeaService {
+
   constructor(private http: HttpClient) { }
 
   public heroku = environment.serviceApi;
@@ -21,8 +22,17 @@ export class ProcessIdeaService {
     return httpOptions;
   }
 
-  getProcessIdea(token, ideaId) {
+  createIdea(credentials, token) {
+    const formData = new FormData();
+    // console.log(credentials);
+    for (let propname in credentials) {
+      if (propname === 'anexoOne' || propname === 'anexoTwo' || propname === 'anexoThree' ) {
+        formData.append(`${propname}`, credentials[propname], `${credentials[propname].name}`); 
+      } else {
+        formData.append(`${propname}`, `${credentials[propname]}`);  
+      }
+    }
     const httpOptions = this.armarHeader(token);
-    return this.http.get(`${this.heroku}/processOfIdea/${ideaId}`, httpOptions);
+    return this.http.post(`${this.heroku}/createIdea`, formData, httpOptions);
   }
 }
