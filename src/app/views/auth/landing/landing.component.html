@@ -1,1 +1,37 @@
-<p>landing works!</p>
+<div class="app-body">
+    <main class="main d-flex align-items-center justify-content-center bg-white">
+      <div class="container">
+        <h1 class="text-center">
+          Laboratorio en Vivo OrigenLab
+        </h1>
+        <br>
+        <div class="row">
+          <div class="col">
+            <div class="card" (click)="redirectLanding(0)" style="cursor: pointer;">
+              <div class="text-center mt-2">
+                <img class="responsive" src="assets/img/logo_name_black.png" alt="logo_origen" width="350px">
+              </div>
+              <div class="card-body p-2 text-center">
+                <h4>
+                  Sección Administrador
+                </h4>
+              </div>
+            </div>
+          </div>
+      
+          <div class="col">
+            <div class="card" (click)="redirectLanding(1)" style="cursor: pointer;">
+              <div class="text-center mt-2">
+                <img class="responsive" src="assets/img/logo_name_color.png" alt="logo_origen" width="350px">
+              </div>
+              <div class="card-body p-2 text-center">
+                <h4>
+                  Sección de Actores
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>

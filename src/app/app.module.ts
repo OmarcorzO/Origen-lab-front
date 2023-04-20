@@ -49,6 +49,11 @@ import { LandingComponent } from './views/auth/landing/landing.component';
 import { LoginComponent } from './views/auth/login/login.component';
 import { ProfileComponent } from './views/auth/profile/profile.component';
 import { RegisterComponent } from './views/auth/register/register.component';
+import { ConformationComponent } from './views/needs/conformation/conformation.component';
+import { NewNeedComponent } from './views/needs/new-need/new-need.component';
+import { NeedPipe } from './views/needs/pipes/need.pipe';
+import { NewIdeationComponent } from './views/ideation/new-ideation/new-ideation.component';
+import { NewActivityComponent } from './views/DESIGNPROTOTYPE/new-activity/new-activity.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -61,7 +66,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, LandingComponent, LoginComponent, ProfileComponent, RegisterComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, LandingComponent, LoginComponent, ProfileComponent, RegisterComponent, ConformationComponent, NewNeedComponent, NeedPipe, NewIdeationComponent, NewActivityComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
