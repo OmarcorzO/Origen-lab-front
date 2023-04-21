@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+
 
 import {
   PERFECT_SCROLLBAR_CONFIG,
@@ -45,21 +46,6 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { LandingComponent } from './views/auth/landing/landing.component';
-import { LoginComponent } from './views/auth/login/login.component';
-import { ProfileComponent } from './views/auth/profile/profile.component';
-import { RegisterComponent } from './views/auth/register/register.component';
-import { ConformationComponent } from './views/needs/conformation/conformation.component';
-import { NewNeedComponent } from './views/needs/new-need/new-need.component';
-import { NeedPipe } from './views/needs/pipes/need.pipe';
-import { NewIdeationComponent } from './views/ideation/new-ideation/new-ideation.component';
-import { NewActivityComponent } from './views/DESIGNPROTOTYPE/new-activity/new-activity.component';
-import { MyIdeaComponent } from './views/ideas/my-idea/my-idea.component';
-import { NewIdeaComponent } from './views/ideas/new-idea/new-idea.component';
-import { ViewIdeaComponent } from './views/ideas/view-idea/view-idea.component';
-// import { NewMarketingComponent } from './views/market/new-marketing/new-marketing.component';
-import { MarketModule } from "./views/market/market.module";
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -71,14 +57,17 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, LandingComponent, LoginComponent, ProfileComponent, RegisterComponent, ConformationComponent, NewNeedComponent, NeedPipe, NewIdeationComponent, NewActivityComponent, MyIdeaComponent, NewIdeaComponent, ViewIdeaComponent],
+  declarations: [
+    AppComponent,
+    ...APP_CONTAINERS,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MarketModule,
     AvatarModule,
     BreadcrumbModule,
+    HttpClientModule,
     FooterModule,
     DropdownModule,
     GridModule,
@@ -111,9 +100,8 @@ const APP_CONTAINERS = [
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     IconSetService,
-    Title
+    Title,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
