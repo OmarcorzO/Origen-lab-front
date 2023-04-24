@@ -1,0 +1,57 @@
+thead {
+    color: white;
+    background-color: #20a8d8;
+}
+
+.card-header {
+    font-size: large;
+    color: #fff;
+
+    strong {
+        vertical-align: sub;
+        font-size: larger;
+    }
+}
+
+.brand-card {
+    cursor: pointer;
+}
+
+.btn {
+    border-radius: 2rem;
+}
+
+pagination {
+    display: inline-flex;
+}
+
+.form-group .form-group i {
+    font-size: x-large;
+}
+
+.lg {
+    font-size: large;
+}
+
+.like {
+    color: #fff;
+    background-color: green; 
+    border-color: green;
+}
+
+.dislike {
+    color: #fff;
+    background-color: red; 
+    border-color: red;
+}
+
+.black {
+    color: #fff;
+    background-color: black; 
+    border-color: black;
+}
+
+.files {
+    font-size: 45px; 
+    margin-right: 10px;
+}

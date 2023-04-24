@@ -12,13 +12,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'new-activity'
+        redirectTo: 'new-activity',
+        pathMatch: 'full'
       },
       {
         path: 'new-activity',
         component: NewActivityComponent,
         data: {
-          title: 'Actividades y Recursos'
+          title: 'Actividades y  Recursos'
         }
       },
     ]

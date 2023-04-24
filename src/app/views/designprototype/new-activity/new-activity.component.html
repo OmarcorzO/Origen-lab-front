@@ -1,1 +1,517 @@
-<p>new-activity works!</p>
+<!-- ACTIVITY -->
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="container">
+            <div class="card">
+                <div class="card-header lg bg-primary">
+                    <strong>Diseño y Prototipado</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header lg bg-info">
+                                    <strong>Lista de equipos</strong>
+                                </div>
+                                <div class="card-body" *ngIf="teamArray.length > 0">
+                                    <div class="text-center">
+                                      <pagination [totalItems]="(pagMyTeam.totalItems / pagMyTeam.sizePage)" [(ngModel)]="pagMyTeam.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
+                                    </div>
+                                  
+                                    <table class="table table-responsive-md table-hover table-striped table-outline table-align-middle mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>N°</th>
+                                                <th>Idea</th>
+                                                <th>Rol</th>
+                                                <th>Creador</th>
+                                                <th class="text-center">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let team of teamArray | slice: (pagMyTeam.currentPage-1) * pagMyTeam.sizePage : pagMyTeam.currentPage * pagMyTeam.sizePage; let i = index">
+                                                <td>
+                                                    {{(i+1) + ((pagMyTeam.currentPage-1) * pagMyTeam.sizePage)}}
+                                                </td>
+                                                <td>
+                                                    {{team.ideaId.name}}
+                                                </td>
+                                                <td>
+                                                    {{team.rol}}
+                                                </td>
+                                                <td>
+                                                  {{ team.ideaId.userId.email }}
+                                                </td>
+                                                <td class="text-center">
+                                                    <button (click)="searchData(team.ideaId._id, team.rol)" class="btn-primary btn-pill b-lg" tooltip="Detalles" placement="top">
+                                                        <i class="fa fa-info px-2"></i>
+                                                    </button>
+
+                                                    <button *ngIf="team.rol == 'administrator' && team.ideaId.phase == 'design/prototyping'" (click)="changePhase(team.ideaId._id)" class="btn-info btn-pill b-lg" tooltip="Cambiar de fase" placement="top">
+                                                        <i class="cil-arrow-thick-to-right px-1"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-body" *ngIf="teamArray.length === 0">
+                                    <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" height="130px">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header lg bg-warning">
+                                    <strong>Información de actividades</strong>
+                                </div>
+                                <div class="card-body" *ngIf="selected">
+                                    <div>
+                                        <button class="btn btn-info" (click)="openModal(AddActivity, 'create', '')">
+                                          <i class="cil-plus"></i> Agregar actividad
+                                        </button>
+                                    </div>
+
+                                    <div class="text-center" *ngIf="activityArray.length == 0">
+                                        <img class="responsive" src="../../../../assets/img/activity_background.png" alt="No hay resultados">
+                                    </div>
+
+                                    <br>
+                                    <div class="col text-center" *ngIf="activityArray.length > 0">
+                                        <pagination [totalItems]="(pagActi.totalItems / pagActi.sizePage)" [(ngModel)]="pagActi.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
+                                    </div> 
+                                    <table *ngIf="activityArray.length != 0" class="table table-responsive-lg table-hover col table-outline mb-0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th class="text-center">N°</th>
+                                                <th class="text-center">Actividad</th>
+                                                <th class="text-center">Descripción</th>
+                                                <th class="text-center">Fecha limite</th>
+                                                <th class="text-center">Finalizado</th>
+                                                <th class="text-center" colspan="2">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let activity of activityArray | slice: (pagActi.currentPage-1) * pagActi.sizePage : pagActi.currentPage * pagActi.sizePage; let i = index">
+                                                <td class="text-center">
+                                                    {{(i+1) + ((pagActi.currentPage-1) * pagActi.sizePage)}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{activity.title}}
+                                                </td>
+                                                <td>
+                                                    <span class="truncate"> {{activity.description}} </span> <br>
+                                                    <div class="small text-muted">
+                                                        <span> <strong>Creado:</strong> {{activity.createdAt | date:"dd-MM-yyyy" }} </span> 
+                                                        <span> <strong>Actualizado:</strong> {{activity.updatedAt | date:"dd-MM-yyyy" }} </span> 
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    {{activity.finishDate.split('T')[0] | date: 'dd-MM-yyyy'}}
+                                                </td>
+                                                <td class="text-center">
+                                                  <i *ngIf="activity.finalized" class="cil-check-circle resp"></i>
+                                                  <i *ngIf="!activity.finalized" class="cil-x-circle trash"></i>
+                                                </td>
+                                                <td class="text-center" colspan="2">
+                                                    <a (click)="openModal(ListMean, 'mean', activity._id)" class="link mr-2" placement="top" tooltip="Recursos">
+                                                        <i class="icon-folder-alt mean"></i>
+                                                    </a>
+
+                                                    <a (click)="openModal(EditActivity, 'edit', activity)" class="link mr-2" placement="top" tooltip="Editar">
+                                                        <i class="cil-pencil pencil"></i>
+                                                    </a>
+        
+                                                    <a (click)="openModalEvidence(EvidencePanel, activity._id)" class="link mr-2" placement="top" tooltip="Evidencia">
+                                                        <i class="cil-newspaper view"></i>
+                                                    </a>
+
+                                                    <a (click)="openModal(ResponsiblesPanel, 'resp', activity._id)" class="link mr-2" placement="top" tooltip="Responsables">
+                                                        <i class="icon-people resp"></i>
+                                                    </a>
+
+                                                    <a (click)="changeStateActivity(activity._id)" *ngIf="rolIdG == 'administrator'" class="link mr-2" placement="top" tooltip="Eliminar">
+                                                        <i class="cil-trash trash"></i>
+                                                    </a>
+
+                                                    <a (click)="endActivity(activity._id)" *ngIf="!activity.finalized && rolIdG == 'administrator'" class="link mr-2" placement="top" tooltip="Finalizar">
+                                                        <i class="icon-action-redo end"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="card-body text-center" *ngIf="!selected">
+                                    <img class="responsive2" src="../../../../assets/img/design_prototype_background.png" alt="No hay resultados" height="300px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #AddActivity>
+  <div class="modal-header bg-primary">
+    <h3 class="modal-title pull-left">
+      Agregar actividad
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form id="activityForm" [formGroup]="activityForm">
+        <div class="form-group col">
+          <label class="form-col-form-label" for="title">Título</label>
+          <input type="text" class="form-control" id="title" formControlName="title" placeholder="Escriba el título de la actividad" required minlength="10">
+          <div class="text-danger mt-2" *ngIf="invalidField('title', 'activity')">
+            {{ getErrorMessage("title", 'activity') }}
+          </div>
+        </div>
+        <div class="form-group col">
+          <label class="form-col-form-label" for="description">Descripción</label>
+          <textarea class="form-control" id="description" formControlName="description" placeholder="Describa la actividad" rows="4" required minlength="10"></textarea>
+          <div class="text-danger mt-2" *ngIf="invalidField('description', 'activity')">
+            {{ getErrorMessage("description", 'activity') }}
+          </div>
+        </div>
+        <div class="form-group col">
+          <label class="form-col-form-label" for="title">Fecha limite</label>
+          <input type="date" class="form-control" id="finishDate" formControlName="finishDate" required>
+          <div class="text-danger mt-2" *ngIf="invalidField('finishDate', 'activity')">
+            {{ getErrorMessage("finishDate", 'activity') }}
+          </div>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" (click)="addActivity()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Agregar</button>
+  </div>
+</ng-template>
+
+<ng-template #EditActivity>
+  <div class="modal-header bg-primary">
+    <h3 class="modal-title pull-left">
+      Editar actividad
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form id="editActivityForm" [formGroup]="activityForm">
+      <div class="form-group col">
+        <label class="form-col-form-label" for="title">Título</label>
+        <input type="text" class="form-control" id="title" formControlName="title" placeholder="Escriba el título de la actividad" required minlength="10">
+        <div class="text-danger mt-2" *ngIf="invalidField('title', 'activity')">
+          {{ getErrorMessage("title", 'activity') }}
+        </div>
+      </div>
+      <div class="form-group col">
+        <label class="form-col-form-label" for="description">Descripción</label>
+        <textarea class="form-control" id="description" formControlName="description" placeholder="Describa la actividad" rows="4" required minlength="10"></textarea>
+        <div class="text-danger mt-2" *ngIf="invalidField('description', 'activity')">
+          {{ getErrorMessage("description", 'activity') }}
+        </div>
+      </div>
+      <div class="form-group col">
+        <label class="form-col-form-label" for="title">Fecha limite</label>
+        <input type="date" class="form-control" id="finishDate" formControlName="finishDate" placeholder="Escriba su aporte" required minlength="10">
+        <div class="text-danger mt-2" *ngIf="invalidField('finishDate', 'activity')">
+          {{ getErrorMessage("finishDate", 'activity') }}
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" (click)="updateActivity()" class="btn btn-md size-l btn-success"><i class="fa fa-pencil"></i> Editar</button>
+  </div>
+</ng-template>
+
+<ng-template #ResponsiblesPanel>
+  <div class="modal-header bg-primary">
+    <h3 class="modal-title pull-left">
+      Panel de Responsables
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h4>Responsables asignados:</h4>
+    <div *ngIf="responArray.length > 0">
+      <ol class="over">
+        <li *ngFor="let item of responArray">
+          {{item.userId.email}}
+        </li>
+      </ol>
+    </div>
+    <div *ngIf="responArray.length === 0">
+      No existen responsables en la actividad <br><br>
+    </div>
+
+    <label class="switch switch-lg switch-3d switch-primary" *ngIf="rolIdG == 'administrator'">
+      <input type="checkbox" id="buttonResp" class="switch-input" (click)="controlList($event)">
+      <span class="switch-slider"></span>
+    </label>
+
+    <div *ngIf="respListButton && rolIdG == 'administrator'" class="over">
+      <label>
+        <h5> Lista de personal a asignar</h5>
+      </label>
+      <div *ngFor="let item of teamBuildingUserFilter" style="display: flex;">
+        <label class="switch switch-label switch-pill switch-outline-primary-alt">
+          <input type="checkbox" [id]="item.userId._id" class="switch-input" (click)="controlArray(item.userId._id, $event)">
+          <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+        </label>
+        <p class="p-relative">{{item.userId.email}} </p>
+      </div>
+    </div>
+
+    <div *ngIf="!respListButton && rolIdG == 'administrator'" class="over">
+      <label>
+        <h5>Lista de personal a eliminar</h5>
+      </label>
+      <div *ngFor="let item of teamBuildingUserFilter" style="display: flex;">
+        <label class="switch switch-label switch-pill switch-outline-primary-alt">
+          <input type="checkbox" [id]="item.userId._id" class="switch-input" (click)="controlArray(item.userId._id, $event)">
+          <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+        </label>
+        <p class="p-relative">{{item.userId.email}} </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" *ngIf="respListButton && rolIdG == 'administrator'" (click)="saveRespon('activity')" class="btn btn-md size-l btn-success"><i class="cil-save"></i> Guardar</button>
+    <button type="submit" *ngIf="!respListButton && rolIdG == 'administrator'" (click)="removeRespon('activity')" class="btn btn-md size-l btn-danger"><i class="cil-trash"></i> Eliminar</button>
+  </div>
+</ng-template>
+
+<ng-template #EvidencePanel>
+  <div class="modal-header bg-primary">
+    <h3 class="modal-title pull-left">
+      Panel de Evidencias
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form id="evidenceForm" [formGroup]="evidenceForm">
+      <div class="text-center">
+        <label class="form-col-form-label">Anexo de la evidencia</label>
+        <div>
+          <div class="custom2-input-file mx-auto"
+            [ngStyle]="{'background-color': evidenceForm.value.evidence !== null ?  'green': 'purple'}">
+            <input type="file" class="input-file" id="evidence" (change)="onFileSelect($event, 'activity')" [disabled]="sizeEvidence">
+            <p *ngIf="evidenceForm.value.evidence === null">Subir Archivo...</p>
+            <p *ngIf="evidenceForm.value.evidence !== null">Archivo Escogido!!!</p>
+          </div>
+        </div>
+        <p class="bottom" *ngIf="sizeEvidence"> <a [href]="evidenceForm.value.evidence.link" target="_blank" style="font-size: 18px;">Evidencia_cargada</a> </p>
+        <p class="bottom" *ngIf="!sizeEvidence" style="color: red;"> Evidencia no Adjuntada </p>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" *ngIf="!sizeEvidence" (click)="uploadEvidence('activity')" class="btn btn-md size-l btn-success"><i class="fa fa-cloud-upload"></i> Subir Evidencia</button>
+    <button type="submit" *ngIf="sizeEvidence" (click)="modal!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
+  </div>
+</ng-template>
+
+<!-- RESOURCES -->
+<ng-template #ListMean>
+  <div class="modal-header bg-primary">
+    <h4 class="modal-title pull-left">Información de Recursos</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+        <button class="btn btn-info" (click)="openSecondModal(AddMean, 'create')">
+          <i class="cil-plus"></i> Agregar Recurso
+        </button>
+    </div>
+
+    <div class="text-center" *ngIf="meanArray.length == 0">
+        <img class="responsive" src="../../../../assets/img/resources_background.png" alt="No hay resultados">
+    </div>
+
+    <br>
+    <div class="col text-center" *ngIf="meanArray.length > 0">
+        <pagination [totalItems]="(pagMean.totalItems / pagMean.sizePage)" [(ngModel)]="pagMean.currentPage" [maxSize]="3" previousText="Anterior" nextText="Siguiente"></pagination>
+    </div> 
+    <table *ngIf="meanArray.length != 0" class="table table-responsive-lg table-hover col table-outline mb-0">
+        <thead class="thead-light">
+            <tr>
+                <th class="text-center">N°</th>
+                <th class="text-center">Recurso</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let mean of meanArray | slice: (pagMean.currentPage-1) * pagMean.sizePage : pagMean.currentPage * pagMean.sizePage; let i = index">
+                <td class="text-center">
+                    {{(i+1) + ((pagMean.currentPage-1) * pagMean.sizePage)}}
+                </td>
+                <td class="text-center">
+                    {{mean.mean}}
+                </td>
+                <td>
+                    <span class="truncate"> {{mean.description}} </span> <br>
+                    <div class="small text-muted">
+                        <span> <strong>Creado:</strong> {{mean.createdAt | date:"dd-MM-yyyy" }} </span> 
+                        <span> <strong>Actualizado:</strong> {{mean.updatedAt | date:"dd-MM-yyyy" }} </span> 
+                    </div>
+                </td>
+                <td class="text-center">
+                    <!-- <a (click)="openSecondModal(EditMean, 'edit', mean)" class="link mr-2" placement="top" tooltip="Editar">
+                        <i class="cil-pencil pencil"></i>
+                    </a> -->
+
+                    <a (click)="openSecondModalEvidence(EvidencePanelTwo, mean._id)" class="link mr-2" placement="top" tooltip="Evidencia">
+                        <i class="cil-newspaper view"></i>
+                    </a>
+
+                    <a (click)="openSecondModal(ResponsiblesPanelTwo, 'resp', mean._id)" class="link mr-2" placement="top" tooltip="Responsables">
+                        <i class="icon-people resp"></i>
+                    </a>
+
+                    <a (click)="changeStateMean(mean._id)" *ngIf="rolIdG == 'administrator'" class="link mr-2" placement="top" tooltip="Eliminar">
+                        <i class="cil-trash trash"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</ng-template>
+
+<ng-template #AddMean>
+  <div class="modal-header bg-primary">
+    <h3 class="modal-title pull-left">
+      Agregar Recurso
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalTwo!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form id="meanForm" [formGroup]="meanForm">
+      <div class="form-group col">
+        <label class="form-col-form-label" for="mean">Recurso</label>
+        <input type="text" class="form-control" id="mean" formControlName="mean" placeholder="Escriba el título del recurso" required minlength="10">
+        <div class="text-danger mt-2" *ngIf="invalidField('mean', 'mean')">
+          {{ getErrorMessage("mean", 'mean') }}
+        </div>
+      </div>
+      <div class="form-group col">
+        <label class="form-col-form-label" for="description">Descripción</label>
+        <textarea class="form-control" id="description" formControlName="description" placeholder="Describa el recurso" rows="4" required minlength="10"></textarea>
+        <div class="text-danger mt-2" *ngIf="invalidField('description', 'mean')">
+          {{ getErrorMessage("description", 'mean') }}
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" (click)="addMean()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Agregar</button>
+  </div>
+</ng-template>
+
+<ng-template #ResponsiblesPanelTwo>
+  <div class="modal-header bg-primary">
+    <h3 class="modal-title pull-left">
+      Responsables del Recurso
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalTwo!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h4>Responsables asignados:</h4>
+    <div *ngIf="responArray.length > 0">
+      <ol class="over">
+        <li *ngFor="let item of responArray">
+          {{item.userId.email}}
+        </li>
+      </ol>
+    </div>
+    <div *ngIf="responArray.length === 0">
+      No existen responsables en la actividad <br><br>
+    </div>
+
+    <label class="switch switch-lg switch-3d switch-primary" *ngIf="rolIdG == 'administrator'">
+      <input type="checkbox" id="buttonResp" class="switch-input" (click)="controlList($event)">
+      <span class="switch-slider"></span>
+    </label>
+
+    <div *ngIf="respListButton && rolIdG == 'administrator'" class="over">
+      <label>
+        <h5> Lista de personal a asignar</h5>
+      </label>
+      <div *ngFor="let item of teamBuildingUserFilter" style="display: flex;">
+        <label class="switch switch-label switch-pill switch-outline-primary-alt">
+          <input type="checkbox" [id]="item.userId._id" class="switch-input" (click)="controlArray(item.userId._id, $event)">
+          <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+        </label>
+        <p class="p-relative">{{item.userId.email}} </p>
+      </div>
+    </div>
+
+    <div *ngIf="!respListButton && rolIdG == 'administrator'" class="over">
+      <label>
+        <h5>Lista de personal a eliminar</h5>
+      </label>
+      <div *ngFor="let item of teamBuildingUserFilter" style="display: flex;">
+        <label class="switch switch-label switch-pill switch-outline-primary-alt">
+          <input type="checkbox" [id]="item.userId._id" class="switch-input" (click)="controlArray(item.userId._id, $event)">
+          <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+        </label>
+        <p class="p-relative">{{item.userId.email}} </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" *ngIf="respListButton && rolIdG == 'administrator'" (click)="saveRespon('mean')" class="btn btn-md size-l btn-success"><i class="cil-save"></i> Guardar</button>
+    <button type="submit" *ngIf="!respListButton && rolIdG == 'administrator'" (click)="removeRespon('mean')" class="btn btn-md size-l btn-danger"><i class="cil-trash"></i> Eliminar</button>
+  </div>
+</ng-template>
+
+<ng-template #EvidencePanelTwo>
+  <div class="modal-header bg-primary">
+    <h3 class="modal-title pull-left">
+      Evidencias de Recursos
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalTwo!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form id="evidenceFormMean" [formGroup]="evidenceFormMean">
+      <div class="text-center">
+        <label class="form-col-form-label">Anexo de la evidencia</label>
+        <div>
+          <div class="custom2-input-file mx-auto"
+            [ngStyle]="{'background-color': evidenceFormMean.value.evidence !== null ?  'green': 'purple'}">
+            <input type="file" class="input-file" id="evidence" (change)="onFileSelect($event, 'mean')" [disabled]="sizeEvidence">
+            <p *ngIf="evidenceFormMean?.value.evidence === null">Subir Archivo...</p>
+            <p *ngIf="evidenceFormMean.value.evidence !== null">Archivo Escogido!!!</p>
+          </div>
+        </div>
+        <p class="bottom" *ngIf="sizeEvidence"> <a [href]="evidenceFormMean.value.evidence.link" target="_blank" style="font-size: 18px;">Evidencia_cargada</a> </p>
+        <p class="bottom" *ngIf="!sizeEvidence" style="color: red;"> Evidencia no Adjuntada </p>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" *ngIf="!sizeEvidence" (click)="uploadEvidence('mean')" class="btn btn-md size-l btn-success"><i class="fa fa-cloud-upload"></i> Subir Evidencia</button>
+    <button type="submit" *ngIf="sizeEvidence" (click)="modalTwo!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
+  </div>
+</ng-template>

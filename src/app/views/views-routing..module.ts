@@ -12,23 +12,23 @@ const routes: Routes = [
     children: [
       {
         path: 'ideas',
-        loadChildren: () => import('../views/IDEAS/ideas.module').then(m => m.IdeasModule)
+        loadChildren: () => import('../views/ideas/ideas.module').then(m => m.IdeasModule)
       },
       {
         path: 'needs',
-        loadChildren: () => import('../views/NEEDS/needs.module').then(m => m.NeedsModule)
+        loadChildren: () => import('../views/needs/needs.module').then(m => m.NeedsModule)
       },
       {
         path: 'ideation',
-        loadChildren: () => import('../views/IDEATION/ideation.module').then(m => m.IdeationModule)
+        loadChildren: () => import('../views/ideation/ideation.module').then(m => m.IdeationModule)
       },
       {
         path: 'design',
-        loadChildren: () => import('../views/DESIGNPROTOTYPE/design.module').then(m => m.DesignModule)
+        loadChildren: () => import('../views/designprototype/design.module').then(m => m.DesignModule)
       },
       {
         path: 'market',
-        loadChildren: () => import('../views/MARKET/market.module').then(m => m.MarketModule)
+        loadChildren: () => import('../views/market/market.module').then(m => m.MarketModule)
       },
       {
         path: 'profile',

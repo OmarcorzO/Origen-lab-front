@@ -1,0 +1,45 @@
+.card-header {
+    font-size: large;
+    color: #fff;
+}
+
+.truncate {
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: auto;
+    text-overflow: ellipsis;
+}
+
+.pencil {
+    color: #20a8d8;
+    font-size: x-large;
+    cursor: pointer;
+}
+
+.input-fixed {
+    display: flex;
+    align-items: center;
+}
+
+pagination {
+    display: inline-flex;
+}
+
+.bottom {
+    font-size: small;
+}
+
+.cil-trash {
+    vertical-align: middle;
+    color: red;
+    font-size: larger;
+    cursor: pointer;
+}
+
+.responsive {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+}

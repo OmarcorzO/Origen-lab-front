@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
+import { Paginator } from '../../interfaces/paginator';
+import { ProcessIdeaService } from '../../services/process-idea.service';
 import { SwalService } from '../../services/swal.service';
 import { ValidationMessagesService } from '../../services/validation-messages.service';
-import { MarketService } from '../services/market.service'
-import { ProcessIdeaService } from '../../services/process-idea.service'
-import { Paginator } from '../../interfaces/paginator'
+import { MarketService } from '../services/market.service';
 
 @Component({
   selector: 'app-new-marketing',
   templateUrl: './new-marketing.component.html',
   styleUrls: ['./new-marketing.component.scss']
 })
-export class NewMarketingComponent {
+export class NewMarketingComponent implements OnInit {
   public tokensave = '';
   public ideaIdG: string = '';
   public marketIdG: string = '';
@@ -46,7 +46,7 @@ export class NewMarketingComponent {
     private marketService: MarketService,
     private swalService: SwalService,
     private fb: FormBuilder,
-    public validateService: ValidationMessagesService,
+    private validateService: ValidationMessagesService,
     private modalService: BsModalService,
     public processService: ProcessIdeaService
   ) { }
@@ -577,4 +577,3 @@ export class NewMarketingComponent {
     )
   }
 }
-

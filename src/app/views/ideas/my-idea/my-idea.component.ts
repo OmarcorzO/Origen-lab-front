@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { MyIdeaService } from '../services/my-idea.service'
-import { SwalService } from '../../services/swal.service';
-import { ProcessIdeaService } from '../../services/process-idea.service';
-import { ValidationMessagesService } from '../../services/validation-messages.service';
-import Swal from 'sweetalert2';
+import { Component, OnInit } from "@angular/core";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { SwalService } from "../../services/swal.service";
+import { MyIdeaService } from "../services/my-idea.service";
+import { ValidationMessagesService } from "../../services/validation-messages.service";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-my-idea',
-  templateUrl: './my-idea.component.html',
-  styleUrls: ['./my-idea.component.scss']
+  selector: "app-my-idea",
+  templateUrl: "./my-idea.component.html",
+  styleUrls: ["./my-idea.component.scss"],
 })
-export class MyIdeaComponent {
+export class MyIdeaComponent implements OnInit {
   public tokensave: string = '';
 
   // Paginator and Array
@@ -29,8 +28,8 @@ export class MyIdeaComponent {
   modalEdit!: BsModalRef;
 
   // Forms
-  formEditIdea!: FormGroup;
-  formEditAnexo!: FormGroup;
+  formEditIdea: FormGroup;
+  formEditAnexo: FormGroup;
 
   // Validador Anexos
   sizeOne: boolean = false;

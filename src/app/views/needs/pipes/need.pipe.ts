@@ -1,12 +1,17 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'need'
+  name: 'needName'
 })
 export class NeedPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(id: string, ...array: any[]): unknown {
+    const name: any = array[0].find((m: any) => m._id == id);
+    if (name == undefined) {
+      return 'Cargando...';
+    } else {
+      return name.title;
+    }
   }
 
 }

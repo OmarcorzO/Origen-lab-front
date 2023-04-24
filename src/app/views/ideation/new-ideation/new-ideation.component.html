@@ -1,1 +1,346 @@
-<p>new-ideation works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="container">
+            <div class="card">
+                <div class="card-header lg bg-primary">
+                    <strong>Ideación</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header lg bg-info">
+                                    <strong>Lista de equipos</strong>
+                                </div>
+                                <div class="card-body" *ngIf="teamArray.length > 0">
+                                    <div class="col text-center">
+                                      <pagination [totalItems]="(paginatorMyTeam.totalItems / paginatorMyTeam.sizePage)" [(ngModel)]="paginatorMyTeam.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
+                                    </div> 
+                                    <table class="table table-responsive-xl table-hover table-striped table-outline table-align-middle mb-0">
+                                      <thead>
+                                        <tr>
+                                          <th>N°</th>
+                                          <th>Idea</th>
+                                          <th>Rol</th>
+                                          <th>Creador</th>
+                                          <th class="text-center">Acciones</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let teamU of teamArray | slice: (paginatorMyTeam.currentPage-1) * paginatorMyTeam.sizePage : paginatorMyTeam.currentPage * paginatorMyTeam.sizePage; let i = index">
+                                          <td>
+                                            {{(i+1) + ((paginatorMyTeam.currentPage-1) * paginatorMyTeam.sizePage)}}
+                                          </td>
+                                          <td>
+                                            {{ teamU.ideaId.name }}
+                                          </td>
+                                          <td>
+                                            {{ teamU.rol }}
+                                          </td>
+                                          <td>
+                                            {{ teamU.ideaId.userId.email }}
+                                          </td>
+                                          <td class="text-center">
+                                            <button (click)="processIdea(teamU.ideaId._id, 0, ShowNeeds)" class="btn-info btn-pill b-lg" tooltip="Estado" placement="top">
+                                              <i class="cil-bookmark b-lg"></i>
+                                            </button>
+                                            <button (click)="searchData(teamU.ideaId._id)" class="btn-primary btn-pill b-lg" tooltip="Detalles" placement="top">
+                                              <i class="fa fa-info px-2"></i>
+                                            </button>
+                                            <button *ngIf="teamU.rol == 'administrator' && teamU.ideaId.phase == 'ideation'" (click)="changePhase(teamU.ideaId._id)" class="btn-info btn-pill b-lg" tooltip="Cambiar de fase" placement="top">
+                                              <i class="cil-arrow-thick-to-right px-1"></i>
+                                            </button>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  <div class="card-body text-center" *ngIf="teamArray.length == 0">
+                                    <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" height="100px">
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                            <div class="card-header lg bg-warning">
+                                <strong>Información del Equipo</strong>
+                            </div>
+                            <div class="card-body" *ngIf="selected">
+                                <tabset>
+                                    <tab heading="Enlace Meet">
+                                      <form id="linkMeetForm" [formGroup]="linkMeetForm">
+                                        <div class="row">
+                                          <div class="form-group col-sm-12">
+                                              <label class="form-col-form-label" for="link">Link del Meet</label>
+                                              <button (click)="processIdea(ideaIdG, 1, '')" class="btn-info btn-pill b-lg" tooltip="Estado" placement="top">
+                                                <i class="cil-bookmark b-lg"></i>
+                                              </button>
+                                              <div class="input-group">
+
+                                                <input type="text" class="form-control" id="link" formControlName="link" pattern="^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$" placeholder="Digite el link de la reunión" required minlength="10">
+                                                <button class="btn btn-success" (click)="searchUrl()">
+                                                  <i class="fa fa-search"></i>
+                                                </button>
+                                              </div>
+                                              <div class="text-danger mt-2" *ngIf="invalidField('link', 'meet')">
+                                                {{ getErrorMessage("link", "meet") }}
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <div>
+                                          <button type="submit" *ngIf="!existLink" (click)="create('link')" class="btn btn-md size-l btn-info"><i class="cil-plus"></i> Subir</button>
+                                          <button type="submit" *ngIf="existLink" (click)="update('link')" class="btn btn-md size-l btn-success"><i class="cil-loop-circular"></i> Actualizar</button>
+                                        </div>
+                                      </form>
+                                    </tab>
+                                    <tab heading="Aportes Cocreación">
+                                      <div class="text-center" *ngIf="contributionCooArray.length == 0">
+                                        <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
+                                      </div>
+                                      <div class="col text-center" *ngIf="contributionCooArray.length > 0">
+                                        <pagination [totalItems]="(paginatorCoo.totalItems / paginatorCoo.sizePage)" [(ngModel)]="paginatorCoo.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
+                                      </div> 
+                                      <table class="table table-responsive-md table-hover table-striped table-outline table-align-middle mb-0" *ngIf="contributionCooArray.length > 0">
+                                        <thead>
+                                          <tr>
+                                            <th>N°</th>
+                                            <th>Comentario</th>
+                                            <th class="text-center">Acciones</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr *ngFor="let contri of contributionCooArray | slice: (paginatorCoo.currentPage-1) * paginatorCoo.sizePage : paginatorCoo.currentPage * paginatorCoo.sizePage; let i = index">
+                                            <td>
+                                              {{(i+1) + ((paginatorCoo.currentPage-1) * paginatorCoo.sizePage)}}
+                                            </td>
+                                            <td style="max-width: 1px;">
+                                              <span class="truncate">{{ contri.comment }}</span>
+                                            </td>
+                                            <td class="text-center">
+                                              <a (click)="openModal(ViewTeamContri, 'view', contri)" class="link mr-2" placement="top" tooltip="Visualizar">
+                                                <i class="fa fa-eye view"></i>
+                                              </a>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </tab>
+                                    <tab heading="Aportes Cuadrihélice">
+                                      <div>
+                                        <button class="btn btn-info" (click)="openModal(CreateTeamContri, 'create', '')">
+                                          <i class="cil-plus"></i> Agregar aporte
+                                        </button>
+                                      </div>
+
+                                      <br>
+                                      <div class="text-center" *ngIf="contributionTeamArray.length == 0">
+                                        <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
+                                      </div>
+
+                                      <div class="col text-center" *ngIf="contributionTeamArray.length > 0">
+                                        <pagination [totalItems]="(paginatorTeam.totalItems / paginatorTeam.sizePage)" [(ngModel)]="paginatorTeam.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
+                                      </div> 
+                                      <table class="table table-responsive-lg table-hover table-striped table-outline table-align-middle mb-0" *ngIf="contributionTeamArray.length > 0">
+                                        <thead>
+                                          <tr>
+                                            <th>N°</th>
+                                            <th>Aporte</th>
+                                            <th class="text-center">Acciones</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr *ngFor="let contriTeam of contributionTeamArray | slice: (paginatorTeam.currentPage-1) * paginatorTeam.sizePage : paginatorTeam.currentPage * paginatorTeam.sizePage; let i = index">
+                                            <td>
+                                              {{(i+1) + ((paginatorTeam.currentPage-1) * paginatorTeam.sizePage)}}
+                                            </td>
+                                            <td style="max-width: 1px;">
+                                              <span class="truncate">{{ contriTeam.comment }}</span>
+                                            </td>
+                                            <td class="text-center">
+                                              <a (click)="openModal(EditTeamContri, 'edit', contriTeam)" *ngIf="userIdG === contriTeam.userId._id" class="link mr-2" placement="top" tooltip="Editar">
+                                                <i class="cil-pencil pencil"></i>
+                                              </a>
+
+                                              <a (click)="openModal(ViewTeamContri, 'view', contriTeam)" *ngIf="userIdG !== contriTeam.userId._id" class="link mr-2" placement="top" tooltip="Visualizar">
+                                                <i class="fa fa-eye view"></i>
+                                              </a>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </tab>
+                                    <tab heading="Descripción del proyecto">
+                                      <form id="descForm" [formGroup]="descForm">
+                                        <div class="row">
+                                          <div class="form-group col-sm-12">
+                                              <label class="form-col-form-label" for="description">Descripción del proyecto</label>
+                                              <button (click)="processIdea(ideaIdG, 2, '')" class="btn-info btn-pill b-lg" tooltip="Estado" placement="top">
+                                                <i class="cil-bookmark b-lg"></i>
+                                              </button>
+                                              <textarea type="text" class="form-control" id="link" formControlName="description" rows="6" class="form-control" placeholder="Digite la descripción del proyecto" required minlength="20" > </textarea>
+                                              <div class="text-danger mt-2" *ngIf="invalidField('description', 'desc')">
+                                                {{ getErrorMessage("description", "desc") }}
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <div>
+                                          <button type="submit" *ngIf="!existDesc" (click)="create('desc')" class="btn btn-md size-l btn-info"><i class="cil-plus"></i> Agregar</button>
+                                          <button type="submit" *ngIf="existDesc" (click)="update('desc')" class="btn btn-md size-l btn-success"><i class="cil-loop-circular"></i> Actualizar</button>
+                                        </div>
+                                      </form>
+                                    </tab>
+                                </tabset>
+                            </div>
+                            <div class="card-body" *ngIf="!selected">
+                              <img class="responsive2" src="../../../../assets/img/ideation_background.jpg" alt="No hay resultados" height="300px">
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #CreateTeamContri>
+  <div class="modal-header bg-primary">
+    <h3 class="modal-title pull-left">
+      Agregar Aporte
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form id="teamContriForm" [formGroup]="teamContriForm">
+      <div class="row">
+        <div class="form-group col">
+          <label class="form-col-form-label" for="comment">Aporte</label>
+          <input type="text" class="form-control" id="comment" formControlName="comment" placeholder="Escriba su aporte" required minlength="10">
+          <div class="text-danger mt-2" *ngIf="invalidField('comment', 'teamC')">
+            {{ getErrorMessage("comment", 'teamC') }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" (click)="createContribution()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Agregar</button>
+  </div>
+</ng-template>
+
+<ng-template #EditTeamContri>
+  <div class="modal-header bg-success">
+    <h3 class="modal-title pull-left">
+      Editar Aporte
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form id="teamContriForm" [formGroup]="teamContriForm">
+      <div class="row">
+        <div class="form-group col">
+          <label class="form-col-form-label" for="comment">Aporte</label>
+          <input type="text" class="form-control" id="comment" formControlName="comment" placeholder="Escriba su aporte" required minlength="10">
+          <div class="text-danger mt-2" *ngIf="invalidField('comment', 'teamC')">
+            {{ getErrorMessage("comment", 'teamC') }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" (click)="updateContribution()" class="btn btn-md size-l btn-info"><i class="cil-loop-circular"></i> Editar</button>
+  </div>
+</ng-template>
+
+<ng-template #ViewTeamContri>
+  <div class="modal-header bg-success">
+    <h3 class="modal-title pull-left">
+      Más detalles
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form id="teamContriForm" [formGroup]="teamContriForm">
+      <div class="row" *ngIf="extraData.length === 3">
+        <div class="form-group col">
+          <label class="form-col-form-label">Tipo de aporte</label>
+          <input type="text" class="form-control" [attr.disabled]="true" [value]="extraData[2]">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label class="form-col-form-label" for="comment">Aporte</label>
+          <input type="text" class="form-control" id="comment" formControlName="comment" placeholder="Escriba su aporte" [attr.disabled]="true">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label class="form-col-form-label">Creado por</label>
+          <input type="text" class="form-control" [attr.disabled]="true" [value]="extraData[0]">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label class="form-col-form-label">Email</label>
+          <input type="text" class="form-control" [attr.disabled]="true" [value]="extraData[1]">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.hide()" class="btn btn-md size-l btn-danger"><i class="cil-x"></i> Cerrar</button>
+  </div>
+</ng-template>
+
+<ng-template #ShowNeeds>
+  <div class="modal-header bg-success">
+    <h3 class="modal-title pull-left">
+      Necesidades Asociadas
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="text-center" *ngIf="processData.regionNeeds.length == 0">
+      <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
+    </div>
+
+    <div class="row">
+      <div class="col-12 over">
+        <table *ngIf="processData.regionNeeds.length != 0" class="table table-responsive-sm table-hover col table-outline mb-0">
+          <thead class="thead-light">
+            <tr>
+              <th>Necesidad</th>
+              <th>Descripción</th>
+              <th class="text-center">Municipio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let need of processData.regionNeeds">
+              <td>
+                {{ need.needs.title }}
+              </td>
+              <td>
+                {{need.needs.description}}
+              </td>
+              <td class="text-center">
+                {{need.needs.municipality}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.hide()" class="btn btn-md size-l btn-danger"><i class="cil-x"></i> Cerrar</button>
+  </div>
+</ng-template>

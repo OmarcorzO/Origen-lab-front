@@ -12,7 +12,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'new-ideation'
+        redirectTo: 'new-ideation',
+        pathMatch: 'full'
       },
       {
         path: 'new-ideation',

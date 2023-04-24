@@ -1,1 +1,177 @@
-<p>conformation works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="container">
+          <div class="card">
+              <div class="card-header lg bg-primary">
+                  <strong> Conformación de equipo</strong>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="card">
+                              <div class="card-header bg-info lg">
+                                <strong>Ideas disponibles para unirse</strong> 
+                              </div>
+                              <div class="card-body" *ngIf="ideasTBArray.length > 0">
+                                <div class="col text-center">
+                                  <pagination [totalItems]="(paginatorTeam.totalItems / paginatorTeam.sizePage)" [(ngModel)]="paginatorTeam.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
+                                </div> 
+                                <table class="table table-responsive-xl table-hover table-striped table-outline table-align-middle mb-0">
+                                  <thead>
+                                    <tr>
+                                      <th>Nombre</th>
+                                      <th>Descripción</th>
+                                      <th>Fase</th>
+                                      <th class="text-center">Acciones</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let ideas of ideasTBArray | slice: (paginatorTeam.currentPage-1) * paginatorTeam.sizePage : paginatorTeam.currentPage * paginatorTeam.sizePage; let i = index">
+                                      <td>
+                                        {{ ideas.name }}
+                                      </td>
+                                      <td>
+                                        <span class="truncate">{{ ideas.description }}</span>
+                                      </td>
+                                      <td>
+                                        {{ ideas.phase }}
+                                      </td>
+                                      <td class="text-center">
+                                        <button (click)="addTeam(AddUser, ideas._id)" class="btn-primary btn-pill" tooltip="Inscribirse" placement="top">
+                                          <i class="cil-plus b-lg"></i>
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                              <div class="card-body text-center" *ngIf="ideasTBArray.length == 0">
+                                <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" height="150px">
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Tabla de idea donde se unió -->
+                      <div class="col-md-6">
+                          <div class="card">
+                              <div class="card-header bg-warning lg">
+                                <strong>Equipos inscritos</strong> 
+                              </div>
+                              <div class="card-body" *ngIf="teamUserArray.length > 0">
+                                <div class="col text-center">
+                                  <pagination [totalItems]="(paginatorTeamUser.totalItems / paginatorTeamUser.sizePage)" [(ngModel)]="paginatorTeamUser.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
+                                </div> 
+                                <table class="table table-responsive-xl table-hover table-striped table-align-middle table-outline mb-0" >
+                                    <thead class="text-center">
+                                      <tr>
+                                        <th>Idea</th>
+                                        <th>Rol</th>
+                                        <th>Fase</th>
+                                        <th>Acciones</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-center" *ngFor="let teamU of teamUserArray | slice: (paginatorTeamUser.currentPage-1) * paginatorTeamUser.sizePage : paginatorTeamUser.currentPage * paginatorTeamUser.sizePage; let i = index">
+                                            <td>
+                                              {{ teamU.ideaId.name }}
+                                            </td>
+                                            <td>
+                                              {{ teamU.rol }}
+                                            </td>
+                                            <td>
+                                              {{ teamU.ideaId.phase }}
+                                            </td>
+                                            <td>
+                                              <button (click)="processIdea(teamU.ideaId._id, teamU.ideaId.phase)" class="btn-info btn-pill" tooltip="Estado" placement="top">
+                                                <i class="cil-bookmark b-lg"></i>
+                                              </button>
+                                              <button (click)="removeTeam(teamU.ideaId._id)" class="btn-danger btn-pill" tooltip="Retirarse" placement="top">
+                                                <i class="cil-minus b-lg"></i>
+                                              </button>
+                                              <button *ngIf="teamU.rol == 'administrator' && teamU.ideaId.phase == 'teamBuilding'" (click)="changePhase(teamU.ideaId._id)" class="btn-info btn-pill" tooltip="Cambiar de fase" placement="top">
+                                                <i class="cil-arrow-thick-to-right b-lg"></i>
+                                              </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                              </div>
+                              <div class="card-body text-center" *ngIf="teamUserArray.length == 0">
+                                <img class="responsive" src="../../../../assets/img/team_goal_background.png" alt="No hay resultados" height="150px">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!--/.row-->
+</div>
+
+<ng-template #AddUser>
+  <div class="modal-header bg-primary">
+    <h3 class="modal-title pull-left">
+      Escoja las necesidades
+    </h3>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalAddUser!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="text-center" *ngIf="needsArray.length == 0">
+      <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
+    </div>
+
+    <div class="row">
+      <div class="col-12 over">
+        <table *ngIf="needsArray.length != 0" class="table table-responsive-sm table-hover col table-outline mb-0">
+          <thead class="thead-light">
+            <tr>
+              <th>Necesidad</th>
+              <th>Descripción</th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let need of needsArray">
+              <td>
+                {{ need._id | needName: needsArray }}
+              </td>
+              <td>
+                <div class="small text-muted">
+                  <span class="truncate"> {{need.description}} </span>
+                  <span> <strong>Creado:</strong> {{need.createdAt | date:"dd-MM-yyyy" }} </span> 
+                  <span> <strong>Actualizado:</strong> {{need.updatedAt | date:"dd-MM-yyyy" }} </span> 
+                </div>
+              </td>
+  
+              <td class="text-center">
+                <label class="switch switch-label switch-pill switch-outline-success-alt">
+                  <input type="checkbox" class="switch-input" (click)="dataEnte(need, $event)">
+                  <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="col-12 mt-2">
+        <div class="row">
+          <div class="col-12">
+            ¿Quiere postularse como administrador?
+          </div>
+          <div class="col">
+            <label class="switch switch-label switch-pill switch-outline-success-alt form-col-form-label">
+              <input type="checkbox" class="switch-input form-control" (click)="dataEnte(null, $event)">
+              <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" (click)="sendEnte()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Unirse</button>
+  </div>
+</ng-template>

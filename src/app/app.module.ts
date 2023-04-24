@@ -3,6 +3,8 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginModule } from '../app/views/auth/login/login.module'
+import { RegisterModule } from '../app/views/auth/register/register.module'
 
 
 import {
@@ -69,6 +71,8 @@ const APP_CONTAINERS = [
     BreadcrumbModule,
     HttpClientModule,
     FooterModule,
+    LoginModule,
+    RegisterModule,
     DropdownModule,
     GridModule,
     HeaderModule,

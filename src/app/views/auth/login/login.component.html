@@ -1,1 +1,43 @@
-<p>login works!</p>
+<div class="app-body">
+    <main class="main d-flex align-items-center justify-content-center bg-white">
+      <div class="card">
+        <div class="card-header bg-grey">
+          <div>
+            <i class="fa fa-arrow-left fa-lg" style="color: green; cursor: pointer;" routerLink="/landing"></i>
+          </div>
+          <div class="text-center">
+            <img src="assets/img/logo_name_color.png" alt="logo_origen" height="30px">
+          </div>
+        </div>
+  
+        <div class="card-body p-4">
+          <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">@</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Correo" formControlName="email" required>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="cil3d"></i></span>
+              </div>
+              <input type="password" class="form-control" placeholder="Contraseña" formControlName="password" required>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button type="button block" class="btn btn-grey btn-block">Iniciar Sesión</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        <div class="card-footer text-center">
+          <div>
+            <button type="button" (click)="register()" class="btn btn-link" style="color: #3e9e41;">Registrate ahora!</button>
+          </div>
+        </div>
+  
+      </div>
+    </main>
+  </div>

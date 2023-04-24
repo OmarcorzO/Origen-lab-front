@@ -1,1 +1,83 @@
-<p>new-idea works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="container">
+        <div class="card">
+          <div class="card-header bg-primary">
+            <strong>Crear Idea</strong>
+          </div>
+          <div class="card-body">
+            <form id="ideaForm" [formGroup]="ideaForm">
+              <div class="row">
+                <div class="form-group col-sm-11">
+                    <label class="form-col-form-label"for="name">Nombre</label>
+                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite su nombre" required minlength="10" >
+                    <div class="text-danger mt-2" *ngIf="invalidField('name')">
+                      {{ getErrorMessage("name") }}
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-11">
+                    <label class="form-col-form-label"for="description">Descripción</label>
+                    <textarea class="form-control" id="description" formControlName="description" placeholder="Digite la descripción" required minlength="20" cols="30" rows="5"></textarea>
+                    <div class="text-danger mt-2" *ngIf="invalidField('description')">
+                      {{ getErrorMessage("description") }}
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-11">
+                    <label class="form-col-form-label" for="visualization">Visualizar en mural</label>
+                    <br>
+                    <label class="switch switch-3d switch-primary" >
+                      <input type="checkbox" class="switch-input" formControlName="visualization" id="visualization" (click)="checkVi($event.target)">
+                      <span class="switch-slider"></span>
+                    </label>
+                    <div class="text-danger mt-2" *ngIf="invalidField('visualization')">
+                      {{ getErrorMessage("visualization") }}
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-11">
+                  <label class="form-col-form-label"for="description">Anexo 1</label>
+                  <div class="custom2-input-file col"
+                    [ngStyle]="{'background-color': ideaForm.value.anexoOne !== '' ?  'green': 'purple'}">
+                    <input class="input-file" type="file" id="anexoOne" (change)="onFileSelect($event)">
+                    <p *ngIf="ideaForm.value.anexoOne === ''">Subir Archivo...</p>
+                    <p *ngIf="ideaForm.value.anexoOne !== ''">Archivo Subido!!!</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-11">
+                  <label class="form-col-form-label"for="description">Anexo 2</label>
+                  <div class="custom2-input-file col"
+                    [ngStyle]="{'background-color': ideaForm.value.anexoTwo !== '' ?  'green': 'purple'}">
+                    <input class="input-file" type="file" id="anexoTwo" (change)="onFileSelect($event)">
+                    <p *ngIf="ideaForm.value.anexoTwo === ''">Subir Archivo...</p>
+                    <p *ngIf="ideaForm.value.anexoTwo !== ''">Archivo Subido!!!</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-11">
+                  <label class="form-col-form-label"for="description">Anexo 3</label>
+                  <div class="custom2-input-file col"
+                    [ngStyle]="{'background-color': ideaForm.value.anexoThree !== '' ?  'green': 'purple'}">
+                    <input class="input-file" type="file" id="anexoThree" (change)="onFileSelect($event)">
+                    <p *ngIf="ideaForm.value.anexoThree === ''">Subir Archivo...</p>
+                    <p *ngIf="ideaForm.value.anexoThree !== ''">Archivo Subido!!!</p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
+            <button type="submit" (click)="createIdea()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Guardar</button>
+            <button type="submit" (click)="cleanDataEdit()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Limpiar</button>
+          </div>
+        </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+  </div>

@@ -1,0 +1,127 @@
+.textC {
+    margin-top: 3%;
+    text-align: center;
+}
+
+.navbar-toggler-2 {
+    padding: 0.25rem 0.75rem;
+    font-size: 1.09375rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.toogle {
+    left: 50px;
+    z-index: 100;
+    position: relative;
+    cursor: pointer;
+}
+
+.size-menu {
+    margin: 10px auto;
+    width: auto;
+    height: 290px;
+    display: flex;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+div.contenedor {
+    width: 125px;
+    min-width: 120px;
+    height: 220px;
+    display: inline-block;
+    transition: height .5s;
+    text-align: center;
+    cursor: pointer;
+}
+
+div#uno {
+    background-color: #629EB2;
+}
+
+div#dos {
+    background-color: #E95929;
+}
+
+div#tres {
+    background-color: #417158;
+}
+
+div#cuatro {
+    background-color: #E2DA7B;
+}
+
+div#cinco {
+    background-color: #F49830;
+}
+
+div#seis {
+    background-color: #35748E;
+}
+
+div#siete {
+    background-color: #D6AC86;
+}
+
+div#ocho {
+    background-color: #F3443C;
+}
+
+.icon {
+    margin: 40px auto;
+    background-color: rgba(255,255,255,.15);
+    font-size: 44px !important;
+    color: white;
+    width: 65% !important;
+    height: 35% !important;
+    opacity: .6;
+    border-radius: 50%;
+    box-shadow: 0px 0px 0px 30px rgba(255,255,255,0);
+    transition: opacity .9s, box-shadow .5s, font-size .5s;
+}
+
+p.texto {
+    font-size: 1.2em;
+    color: white;
+    text-align: center;
+    opacity: .6;
+    transition: padding-top .5s;
+}
+
+div.contenedor:hover {
+    height: 250px;
+}
+
+div.contenedor:hover p.texto {
+    padding-top: 30px;
+    opacity: 1;
+}
+
+div.contenedor:hover div.icon {
+    box-shadow: 0px 0px 0px 0px rgba(255,255,255,.5);
+    font-size: 55px !important;
+    height: 35%;
+    width: 70%;
+    opacity: 1;
+}
+
+.active {
+    height: 250px !important;
+}
+
+
+.active div.icon{
+    box-shadow: 0px 0px 0px 0px rgba(255,255,255,.6) !important;
+    font-size: 55px !important;
+    height: 35% !important;
+    width: 70% !important;
+    opacity: 1 !important;
+}
+
+.active p.texto {
+    padding-top: 15px !important;
+    opacity: 1 !important;
+}

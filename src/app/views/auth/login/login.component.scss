@@ -1,0 +1,27 @@
+.card-body {
+    width: 350px;
+}
+
+.bg-grey {
+    background-color: #f0f3f5;
+}
+
+.btn-grey {
+    color: black;
+    background-color: #f0f3f5;
+    border-color: #f0f3f5;
+}
+
+.bg-white {
+    background: white;
+}
+
+.app-body {
+    margin-top: 0;
+}
+
+.main::before {
+    z-index: 0; 
+    background: local;
+    animation: none;
+}

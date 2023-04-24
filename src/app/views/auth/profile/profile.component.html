@@ -1,1 +1,464 @@
-<p>profile works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="container">
+            <div class="card" *ngIf="!hasProfile">
+                <div class="card-header bg-primary">
+                  <strong>Perfil de Usuario</strong>
+                </div>
+                <form id="profileForm" [formGroup]="profileForm">
+                  <div class="card-body">
+                      <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label class="form-col-form-label"for="name">Nombre</label>
+                            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite su nombre" required minlength="4" >
+                            <div class="text-danger mt-2" *ngIf="invalidFieldCreate('name')">
+                              {{ getErrorMessageCreate("name") }}
+                            </div>
+                        </div>
+                      
+                        <div class="form-group col-sm-6">
+                            <label for="lastname">Apellido</label>
+                            <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Digite su apellido" required minlength="4" >
+                            <div class="text-danger mt-2" *ngIf="invalidFieldCreate('lastname')">
+                              {{ getErrorMessageCreate("lastname") }}
+                            </div>
+                        </div>
+                      </div><!--/.row-->
+
+                      <div class="row">
+                        <div class="form-group col-sm-6">
+                          <label for="phone">Teléfono</label>
+                          <input type="text" onkeypress="return event.charCode>=48 && event.charCode<=57" class="form-control" id="phone" formControlName="phone" placeholder="Digite su teléfono" required minlength="7" maxlength="10">
+                          <div class="text-danger mt-2" *ngIf="invalidFieldCreate('phone')">
+                            {{ getErrorMessageCreate("phone") }}
+                          </div>
+                        </div>
+
+                        <div class="form-group col-sm-6" (change)="checkRol($event)">
+                          <label for="rol">Roles</label>
+                          <select class="form-control back-pos-better" id="rol" formControlName="rol" required>
+                            <option value="" disabled selected> --- Selecciona una opción --- </option>
+                            <option *ngFor="let item of rolList" [value]="item._id">{{item.name}}</option> 
+                          </select>
+                          <div class="text-danger mt-2" *ngIf="invalidFieldCreate('rol')">
+                            {{ getErrorMessageCreate("rol") }}
+                          </div>
+                        </div>
+                      </div><!--/.row-->
+                  </div>
+                </form>
+
+                <!-- ROL UNIDAD DE NEGOCIOS -->
+                <div class="card-header" *ngIf="codeRol == 'userBusinessUnit'">
+                  <strong>Unidad de Negocios</strong>
+                </div>
+                <form [formGroup]="userBusinessUnitForm" id="userBusinessUnitForm" *ngIf="codeRol == 'userBusinessUnit'">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="sector">Sector</label>
+                        <input type="text" class="form-control" id="sector" formControlName="sector" placeholder="Digite su sector" required minlength="3" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('sector')">
+                          {{ getErrorMessageRol("sector") }}
+                        </div>
+                      </div>
+                    
+                      <div class="form-group col-sm-6">
+                          <label for="socialObject">Objeto Social</label>
+                          <input type="text" class="form-control" id="socialObject" formControlName="socialObject" placeholder="Digite su objeto social" required minlength="5" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('socialObject')">
+                            {{ getErrorMessageRol("socialObject") }}
+                          </div>
+                      </div>
+                    </div><!--/.row-->
+                    
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="levelStudy">Nivel de Estudio</label>
+                        <select class="form-control" id="levelStudy" formControlName="levelStudy" required>
+                          <option value="" disabled selected> --- Selecciona una opción --- </option>
+                          <option *ngFor="let item of levelStudyList" [value]="item">{{item}}</option> 
+                        </select>
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('levelStudy')">
+                          {{ getErrorMessageRol("levelStudy") }}
+                        </div>
+                      </div>
+                    </div><!--/.row-->
+                  </div>
+                </form>
+
+                <!-- ROL COMPAÑÍA -->
+                <div class="card-header" *ngIf="codeRol == 'userCompany'">
+                  <strong>Compañía</strong>
+                </div>
+                <form [formGroup]="userCompanyForm" id="userCompanyForm" *ngIf="codeRol == 'userCompany'">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                          <label for="address">Dirección</label>
+                          <input type="text" class="form-control" id="address" formControlName="address" placeholder="Digite su dirección" required minlength="8" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('address')">
+                            {{ getErrorMessageRol("address") }}
+                          </div>
+                        </div>
+                    
+                      <div class="form-group col-sm-6">
+                          <label for="sector">Sector</label>
+                          <input type="text" class="form-control" id="sector" formControlName="sector" placeholder="Digite su sector" required minlength="3" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('sector')">
+                            {{ getErrorMessageRol("sector") }}
+                          </div>
+                      </div>
+                    </div><!--/.row-->
+                    
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="socialObject">Objeto Social</label>
+                        <input type="text" class="form-control" id="socialObject" formControlName="socialObject" placeholder="Digite su objeto social" required minlength="5" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('socialObject')">
+                          {{ getErrorMessageRol("socialObject") }}
+                        </div>
+                      </div>
+
+                      <div class="form-group col-sm-6">
+                        <label for="companyName">Nombre de la Compañía</label>
+                        <input type="text" class="form-control" id="companyName" formControlName="companyName" placeholder="Digite su nombre de la compañía" required minlength="3" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('companyName')">
+                          {{ getErrorMessageRol("companyName") }}
+                        </div>
+                      </div>
+                    </div><!--/.row-->
+                  </div>
+                </form>
+
+                <!-- ROL ACADEMIA -->
+                <div class="card-header" *ngIf="codeRol == 'userExpert'">
+                  <strong>Academia</strong>
+                </div>
+                <form [formGroup]="userExpertForm" id="userExpertForm" *ngIf="codeRol == 'userExpert'">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                          <label for="position">Cargo</label>
+                          <input type="text" class="form-control" id="position" formControlName="position" placeholder="Digite su cargo" required minlength="3" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('position')">
+                            {{ getErrorMessageRol("position") }}
+                          </div>
+                      </div>
+                    
+                      <div class="form-group col-sm-6">
+                          <label for="profession">Profesión</label>
+                          <input type="text" class="form-control" id="profession" formControlName="profession" placeholder="Digite su profesión" required minlength="3" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('profession')">
+                            {{ getErrorMessageRol("profession") }}
+                          </div>
+                      </div>
+                    </div><!--/.row-->
+  
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="college">Universidad</label>
+                        <input type="text" class="form-control" id="college" formControlName="college" placeholder="Digite su universidad" required minlength="8" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('college')">
+                          {{ getErrorMessageRol("college") }}
+                        </div>
+                      </div>
+                    </div><!-- /. row -->
+                  </div>
+                </form>
+
+                <!-- ROL ENTIDAD GUBERNAMENTAL -->
+                <div class="card-header" *ngIf="codeRol == 'userGovernmentEntity'">
+                  <strong>Entidad Gubernamental</strong>
+                </div>
+                <form [formGroup]="userGovernmentEntityForm" id="userGovernmentEntityForm" *ngIf="codeRol == 'userGovernmentEntity'">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                          <label for="functions">Funciones</label>
+                          <input type="text" class="form-control" id="functions" formControlName="functions" placeholder="Digite sus funciones" required minlength="5" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('functions')">
+                            {{ getErrorMessageRol("functions") }}
+                          </div>
+                        </div>
+                    
+                      <div class="form-group col-sm-6">
+                          <label for="position">Cargo</label>
+                          <input type="text" class="form-control" id="position" formControlName="position" placeholder="Digite su cargo" required minlength="5" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('position')">
+                            {{ getErrorMessageRol("position") }}
+                          </div>
+                      </div>
+                    </div><!--/.row-->
+                    
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="profession">Profesión</label>
+                        <input type="text" class="form-control" id="profession" formControlName="profession" placeholder="Digite su profesión" required minlength="5" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('profession')">
+                          {{ getErrorMessageRol("profession") }}
+                        </div>
+                      </div>
+
+                      <div class="form-group col-sm-6">
+                        <label for="governorateMunicipality">Municipio de la Gobernación</label>
+                        <input type="text" class="form-control" id="governorateMunicipality" formControlName="governorateMunicipality" placeholder="Digite el Municipio de la Gobernación" required minlength="5" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('governorateMunicipality')">
+                          {{ getErrorMessageRol("governorateMunicipality") }}
+                        </div>
+                      </div>
+                    </div><!--/.row-->
+                  </div>
+                </form>
+
+                <div class="card-footer">
+                  <button type="submit" (click)="registerProfile()" class="btn btn-md size-l btn-primary"><i class="fa fa-dot-circle-o"></i> Crear</button>
+                  <button type="submit" (click)="cleanData()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Limpiar</button>
+                </div>
+            </div>
+
+            <div class="card" *ngIf="hasProfile">
+                <div class="card-header bg-success">
+                  <strong>Perfil de Usuario</strong>
+                </div>
+                <form id="editProfileForm" [formGroup]="editProfileForm">
+                  <div class="card-body">
+                      <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label class="form-col-form-label"for="name">Nombre</label>
+                            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite su nombre" required minlength="4" >
+                            <div class="text-danger mt-2" *ngIf="invalidFieldEdit('name')">
+                              {{ getErrorMessageEdit("name") }}
+                            </div>
+                        </div>
+                      
+                        <div class="form-group col-sm-6">
+                            <label for="lastname">Apellido</label>
+                            <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Digite su apellido" required minlength="4" >
+                            <div class="text-danger mt-2" *ngIf="invalidFieldEdit('lastname')">
+                              {{ getErrorMessageEdit("lastname") }}
+                            </div>
+                        </div>
+                      </div><!--/.row-->
+
+                      <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="phone">Teléfono</label>
+                            <input type="text" onkeypress="return event.charCode>=48 && event.charCode<=57" class="form-control" id="phone" formControlName="phone" placeholder="Digite su teléfono" required minlength="7" maxlength="10">
+                            <div class="text-danger mt-2" *ngIf="invalidFieldEdit('phone')">
+                              {{ getErrorMessageEdit("phone") }}
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-6" (change)="checkRolEdit($event)">
+                          <label for="rol">Roles</label>
+                          <select class="form-control back-pos-better" id="rol" formControlName="rol" required>
+                            <option value="" disabled selected> --- Selecciona una opción --- </option>
+                            <option *ngFor="let item of rolList" [value]="item._id">{{item.name}}</option> 
+                          </select>
+                          <div class="text-danger mt-2" *ngIf="invalidFieldEdit('rol')">
+                            {{ getErrorMessageEdit("rol") }}
+                          </div>
+                        </div>
+                      </div><!--/.row-->
+                      
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                          <div class="form-group">
+                            <label for="img">Foto de Perfil</label>
+                            <img [src]="tempImg" class="form-control img-profile-page">
+                            <div class="custom2-input-file col mt-2"
+                              [ngStyle]="{'background-color': editProfileForm.value.img !== '' ?  'green': 'purple'}">
+                              <input class="input-file " type="file" (change)="onFileSelect($event)">
+                              <p *ngIf="editProfileForm.value.img === ''">Subir Archivo...</p>
+                              <p *ngIf="editProfileForm.value.img !== ''">Archivo Subido!!!</p>
+                            </div>
+                          </div>
+                          <div class="text-danger mt-2" *ngIf="invalidFieldEdit('img')">
+                            {{ getErrorMessageEdit("img") }}
+                          </div>
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                          <label for="password">Contraseña</label>
+                          <input type="password" class="form-control" id="password" formControlName="password" placeholder="***************">
+                          <div class="text-danger mt-2" *ngIf="invalidFieldEdit('password')">
+                            {{ getErrorMessageEdit("password") }}
+                          </div>
+                        </div>
+                      </div>
+                      <!--/.row-->
+                  </div>
+                </form>
+
+                <!-- ROL UNIDAD DE NEGOCIOS -->
+                <div class="card-header" *ngIf="codeRol == 'userBusinessUnit'">
+                  <strong>Unidad de Negocios</strong>
+                </div>
+                <form [formGroup]="userBusinessUnitForm" id="userBusinessUnitForm" *ngIf="codeRol == 'userBusinessUnit'">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="sector">Sector</label>
+                        <input type="text" class="form-control" id="sector" formControlName="sector" placeholder="Digite su sector" required minlength="3" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('sector')">
+                          {{ getErrorMessageRol("sector") }}
+                        </div>
+                      </div>
+                    
+                      <div class="form-group col-sm-6">
+                          <label for="socialObject">Objeto Social</label>
+                          <input type="text" class="form-control" id="socialObject" formControlName="socialObject" placeholder="Digite su objeto social" required minlength="5" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('socialObject')">
+                            {{ getErrorMessageRol("socialObject") }}
+                          </div>
+                      </div>
+                    </div><!--/.row-->
+                    
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="levelStudy">Nivel de Estudio</label>
+                        <select class="form-control" id="levelStudy" formControlName="levelStudy" required>
+                          <option value="" disabled selected> --- Selecciona una opción --- </option>
+                          <option *ngFor="let item of levelStudyList" [value]="item">{{item}}</option> 
+                        </select>
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('levelStudy')">
+                          {{ getErrorMessageRol("levelStudy") }}
+                        </div>
+                      </div>
+                    </div><!--/.row-->
+                  </div>
+                </form>
+
+                <!-- ROL COMPAÑÍA -->
+                <div class="card-header" *ngIf="codeRol == 'userCompany'">
+                  <strong>Compañía</strong>
+                </div>
+                <form [formGroup]="userCompanyForm" id="userCompanyForm" *ngIf="codeRol == 'userCompany'">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                          <label for="address">Dirección</label>
+                          <input type="text" class="form-control" id="address" formControlName="address" placeholder="Digite su dirección" required minlength="8" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('address')">
+                            {{ getErrorMessageRol("address") }}
+                          </div>
+                        </div>
+                    
+                      <div class="form-group col-sm-6">
+                          <label for="sector">Sector</label>
+                          <input type="text" class="form-control" id="sector" formControlName="sector" placeholder="Digite su sector" required minlength="3" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('sector')">
+                            {{ getErrorMessageRol("sector") }}
+                          </div>
+                      </div>
+                    </div><!--/.row-->
+                    
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="socialObject">Objeto Social</label>
+                        <input type="text" class="form-control" id="socialObject" formControlName="socialObject" placeholder="Digite su objeto social" required minlength="5" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('socialObject')">
+                          {{ getErrorMessageRol("socialObject") }}
+                        </div>
+                      </div>
+
+                      <div class="form-group col-sm-6">
+                        <label for="companyName">Nombre de la Compañía</label>
+                        <input type="text" class="form-control" id="companyName" formControlName="companyName" placeholder="Digite su nombre de la compañía" required minlength="3" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('companyName')">
+                          {{ getErrorMessageRol("companyName") }}
+                        </div>
+                      </div>
+                    </div><!--/.row-->
+                  </div>
+                </form>
+
+                <!-- ROL ACADEMIA -->
+                <div class="card-header" *ngIf="codeRol == 'userExpert'">
+                  <strong>Academia</strong>
+                </div>
+                <form [formGroup]="userExpertForm" id="userExpertForm" *ngIf="codeRol == 'userExpert'">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                          <label for="position">Cargo</label>
+                          <input type="text" class="form-control" id="position" formControlName="position" placeholder="Digite su cargo" required minlength="3" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('position')">
+                            {{ getErrorMessageRol("position") }}
+                          </div>
+                      </div>
+                    
+                      <div class="form-group col-sm-6">
+                          <label for="profession">Profesión</label>
+                          <input type="text" class="form-control" id="profession" formControlName="profession" placeholder="Digite su profesión" required minlength="3" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('profession')">
+                            {{ getErrorMessageRol("profession") }}
+                          </div>
+                      </div>
+                    </div><!--/.row-->
+  
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="college">Universidad</label>
+                        <input type="text" class="form-control" id="college" formControlName="college" placeholder="Digite su universidad" required minlength="8" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('college')">
+                          {{ getErrorMessageRol("college") }}
+                        </div>
+                      </div>
+                    </div><!-- /. row -->
+                  </div>
+                </form>
+
+                <!-- ROL ENTIDAD GUBERNAMENTAL -->
+                <div class="card-header" *ngIf="codeRol == 'userGovernmentEntity'">
+                  <strong>Entidad Gubernamental</strong>
+                </div>
+                <form [formGroup]="userGovernmentEntityForm" id="userGovernmentEntityForm" *ngIf="codeRol == 'userGovernmentEntity'">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                          <label for="functions">Funciones</label>
+                          <input type="text" class="form-control" id="functions" formControlName="functions" placeholder="Digite sus funciones" required minlength="5" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('functions')">
+                            {{ getErrorMessageRol("functions") }}
+                          </div>
+                        </div>
+                    
+                      <div class="form-group col-sm-6">
+                          <label for="position">Cargo</label>
+                          <input type="text" class="form-control" id="position" formControlName="position" placeholder="Digite su cargo" required minlength="5" >
+                          <div class="text-danger mt-2" *ngIf="invalidFieldRol('position')">
+                            {{ getErrorMessageRol("position") }}
+                          </div>
+                      </div>
+                    </div><!--/.row-->
+                    
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                        <label for="profession">Profesión</label>
+                        <input type="text" class="form-control" id="profession" formControlName="profession" placeholder="Digite su profesión" required minlength="5" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('profession')">
+                          {{ getErrorMessageRol("profession") }}
+                        </div>
+                      </div>
+
+                      <div class="form-group col-sm-6">
+                        <label for="governorateMunicipality">Municipio de la Gobernación</label>
+                        <input type="text" class="form-control" id="governorateMunicipality" formControlName="governorateMunicipality" placeholder="Digite el Municipio de la Gobernación" required minlength="5" >
+                        <div class="text-danger mt-2" *ngIf="invalidFieldRol('governorateMunicipality')">
+                          {{ getErrorMessageRol("governorateMunicipality") }}
+                        </div>
+                      </div>
+                    </div><!--/.row-->
+                  </div>
+                </form>
+
+                <div class="card-footer">
+                  <button type="submit" (click)="updateProfile()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Actualizar</button>
+                  <button type="submit" (click)="cleanDataEdit()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Limpiar</button>
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
+</div>

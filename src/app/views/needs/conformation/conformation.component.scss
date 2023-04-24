@@ -1,0 +1,40 @@
+.lg {
+    font-size: large;
+}
+
+pagination {
+    display: inline-flex;
+}
+
+.responsive {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+}
+
+.truncate {
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: auto;
+    text-overflow: ellipsis;
+}
+
+.b-lg {
+    font-size: x-large;
+    cursor: pointer;
+}
+
+.btn-info {
+    color: white;
+}
+
+.d-center {
+    place-content: center;
+}
+
+.over {
+    overflow-y: auto;
+    max-height: 350px;
+}

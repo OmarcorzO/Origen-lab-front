@@ -13,7 +13,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'new-need'
+        redirectTo: 'new-need',
+        pathMatch: 'full'
       },
       {
         path: 'new-need',
