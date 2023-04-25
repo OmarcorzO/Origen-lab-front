@@ -2,7 +2,7 @@
   <div class="row">
     <div class="container">
       <c-card>
-        <div class="card-header bg-primary">
+        <c-card-header class="card-header bg-primary">
           <div class="row">
             <div class="col">
               <strong>Ideas</strong>
@@ -10,7 +10,8 @@
             <div class="mr-3">
               <button type="button" class="btn" (click)="ideasFilter('asc')"
                 [ngClass]="{black: orderView !== 'asc', like: orderView === 'asc'}">
-                <i class="cil-sort-ascending lg"></i>
+                <!-- <i class="cil-sort-ascending lg"></i> -->
+                <svg [cIcon]="icons.cilList" size="xl" title="List Icon"></svg>
               </button>
               <button type="button" class="btn" (click)="ideasFilter('desc')"
                 [ngClass]="{black: orderView !== 'desc', like: orderView === 'desc'}">
@@ -30,9 +31,33 @@
               </button>
             </div>
           </div>
-        </div>
+        </c-card-header>
 
         <c-card-body>
+
+          <c-row>
+            <c-col *ngFor="let widget of brandData; index as i" sm="6" xl="3">
+              <c-widget-stat-d
+                [color]="widget.color ?? ''"
+                [style]="widget.capBg ?? null"
+                [values]="widget.values"
+                class="mb-4"
+              >
+                <svg cIcon class="my-4 text-white" height="52"></svg>
+                <ng-container>
+                  <c-chart
+                    #chart="cChart"
+                    [data]="widget.data"
+                    [options]="chartOptions"
+                    class="position-absolute w-100 h-100"
+                    type="line"
+                  >{{ chart.id }}</c-chart
+                  >
+                </ng-container>
+              </c-widget-stat-d>
+            </c-col>
+          </c-row>
+
           <div class="row">
             <div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let idea of arrayPublicIdeas; let i = index">
               <div class="brand-card" (click)="showIdea(idea, ViewIdea)">
