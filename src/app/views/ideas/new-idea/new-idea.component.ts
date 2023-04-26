@@ -29,12 +29,12 @@ export class NewIdeaComponent implements OnInit {
     anexoTwo: [""],
     anexoThree: [""],
 
-    controlsIdea: this.fb.array([this.fb.control('')]),
+    // controlsIdea: this.fb.array([this.fb.control('')]),
   });
 
-  get controlsIdea() {
-    return this.ideaForm.get('controlsIdea') as FormArray;
-  }
+  // get controlsIdea() {
+  //   return this.ideaForm.get('controlsIdea') as FormArray;
+  // }
 
   ngOnInit(): void {
     if (localStorage.getItem("TOKEN") !== null) {
@@ -57,7 +57,7 @@ export class NewIdeaComponent implements OnInit {
     if (this.ideaForm.invalid) {
       this.swalServ.error("Datos erróneos");
     } else {
-      this.checkAnexos();
+      // this.checkAnexos();
       this.services.createIdea(this.ideaForm.value, this.tokensave).subscribe(
         (res) => {
           this.swalServ.confirmation("Idea creada exitosamente");
@@ -97,32 +97,32 @@ export class NewIdeaComponent implements OnInit {
     }
   }
 
-  checkAnexos(): void {
-    if (this.ideaForm.value.anexoOne === "") {
-      for (let index = 0; index < this.controlsIdea.length; index++) {
-        if (this.controlsIdea[index] === 'anexoOne') {
-          this.controlsIdea.removeAt(index);
-        }
-      }
-      // this.ideaForm.removeControl("anexoOne");
-    }
-    if (this.ideaForm.value.anexoTwo === "") {
-      for (let index = 0; index < this.controlsIdea.length; index++) {
-        if (this.controlsIdea[index] === 'anexoTwo') {
-          this.controlsIdea.removeAt(index);
-        }
-      }
-      // this.ideaForm.removeControl("anexoTwo");
-    }
-    if (this.ideaForm.value.anexoThree === "") {
-      for (let index = 0; index < this.controlsIdea.length; index++) {
-        if (this.controlsIdea[index] === 'anexoThree') {
-          this.controlsIdea.removeAt(index);
-        }
-      }
-      // this.ideaForm.removeControl("anexoThree");
-    }
-  }
+  // checkAnexos(): void {
+  //   if (this.ideaForm.value.anexoOne === "") {
+  //     for (let index = 0; index < this.controlsIdea.length; index++) {
+  //       if (this.controlsIdea[index] === 'anexoOne') {
+  //         this.controlsIdea.removeAt(index);
+  //       }
+  //     }
+  //     // this.ideaForm.removeControl("anexoOne");
+  //   }
+  //   if (this.ideaForm.value.anexoTwo === "") {
+  //     for (let index = 0; index < this.controlsIdea.length; index++) {
+  //       if (this.controlsIdea[index] === 'anexoTwo') {
+  //         this.controlsIdea.removeAt(index);
+  //       }
+  //     }
+  //     // this.ideaForm.removeControl("anexoTwo");
+  //   }
+  //   if (this.ideaForm.value.anexoThree === "") {
+  //     for (let index = 0; index < this.controlsIdea.length; index++) {
+  //       if (this.controlsIdea[index] === 'anexoThree') {
+  //         this.controlsIdea.removeAt(index);
+  //       }
+  //     }
+  //     // this.ideaForm.removeControl("anexoThree");
+  //   }
+  // }
 
   restaureForm(): void {
     this.ideaForm = this.fb.group({
@@ -133,7 +133,7 @@ export class NewIdeaComponent implements OnInit {
       anexoTwo: [""],
       anexoThree: [""],
   
-      controlsIdea: this.fb.array([this.fb.control('')]),
+      // controlsIdea: this.fb.array([this.fb.control('')]),
     });
 
     (<HTMLFormElement>document.getElementById("ideaForm")).classList.remove(

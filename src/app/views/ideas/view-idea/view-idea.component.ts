@@ -9,7 +9,7 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { SwalService } from "../../services/swal.service";
 import { ValidationMessagesService } from "../../services/validation-messages.service";
 import { ViewIdeaService } from "../services/view-idea.service";
-import { cilList, cilShieldAlt } from '@coreui/icons';
+import { cilList, cilShieldAlt, cilSortAscending, cilSortDescending, cilThumbUp, cilThumbDown, cilChatBubble } from '@coreui/icons';
 
 @Component({
   selector: "app-view-idea",
@@ -18,7 +18,7 @@ import { cilList, cilShieldAlt } from '@coreui/icons';
 })
 export class ViewIdeaComponent implements OnInit {
   // Icons
-  icons = { cilList, cilShieldAlt };
+  icons = { cilList, cilShieldAlt, cilSortAscending, cilSortDescending, cilThumbUp, cilThumbDown, cilChatBubble };
   
   // testing
   chartOptions = {
@@ -50,7 +50,7 @@ export class ViewIdeaComponent implements OnInit {
   };
   labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   datasets = {
-    borderWidth: 2,
+    borderWidth: 3,
     fill: true
   };
   colors = {
@@ -62,7 +62,7 @@ export class ViewIdeaComponent implements OnInit {
   brandData = [
     {
       icon: 'cibFacebook',
-      values: [{ title: 'friends', value: '89K' }, { title: 'feeds', value: '459' }],
+      values: [{ title: 'LIKES', value: '89K' }, { title: 'DISLIKES', value: '459' }, { title: 'COMMENTS', value: '400'}],
       capBg: { '--cui-card-cap-bg': '#3b5998' },
       labels: [...this.labels],
       data: {
@@ -72,7 +72,7 @@ export class ViewIdeaComponent implements OnInit {
     },
     {
       icon: 'cibTwitter',
-      values: [{ title: 'followers', value: '973k' }, { title: 'tweets', value: '1.792' }],
+      values: [{ title: 'LIKES', value: '89K' }, { title: 'DISLIKES', value: '459' }, { title: 'COMMENTS', value: '400'}],
       capBg: { '--cui-card-cap-bg': '#00aced' },
       data: {
         labels: [...this.labels],
@@ -81,7 +81,7 @@ export class ViewIdeaComponent implements OnInit {
     },
     {
       icon: 'cib-linkedin',
-      values: [{ title: 'contacts', value: '500' }, { title: 'feeds', value: '1.292' }],
+      values: [{ title: 'LIKES', value: '89K' }, { title: 'DISLIKES', value: '459' }, { title: 'COMMENTS', value: '400'}],
       capBg: { '--cui-card-cap-bg': '#4875b4' },
       data: {
         labels: [...this.labels],
@@ -90,7 +90,7 @@ export class ViewIdeaComponent implements OnInit {
     },
     {
       icon: 'cilCalendar',
-      values: [{ title: 'events', value: '12+' }, { title: 'meetings', value: '4' }],
+      values: [{ title: 'LIKES', value: '89K' }, { title: 'DISLIKES', value: '459' }, { title: 'COMMENTS', value: '400'}],
       color: 'warning',
       data: {
         labels: [...this.labels],
@@ -168,6 +168,9 @@ export class ViewIdeaComponent implements OnInit {
         (res: any) => {
           this.swalServ.close();
           this.arrayPublicIdeas = res.data.value;
+          // this.brandData = this.arrayPublicIdeas;
+          console.log(this.arrayPublicIdeas);
+          
         },
         (error) => {
           this.swalServ.checkError(error.status);

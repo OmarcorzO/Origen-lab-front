@@ -3,40 +3,45 @@
     <div class="container">
       <c-card>
         <c-card-header class="card-header bg-primary">
-          <div class="row">
-            <div class="col">
+          <c-row>
+            <c-col xl>
               <strong>Ideas</strong>
-            </div>
-            <div class="mr-3">
+            </c-col>
+            <c-col style="text-align: right;">
               <button type="button" class="btn" (click)="ideasFilter('asc')"
                 [ngClass]="{black: orderView !== 'asc', like: orderView === 'asc'}">
                 <!-- <i class="cil-sort-ascending lg"></i> -->
-                <svg [cIcon]="icons.cilList" size="xl" title="List Icon"></svg>
+                <svg [cIcon]="icons.cilSortAscending" size="xl" title="List Icon"></svg>
               </button>
               <button type="button" class="btn" (click)="ideasFilter('desc')"
                 [ngClass]="{black: orderView !== 'desc', like: orderView === 'desc'}">
                 <i class="cil-sort-descending lg"></i>
+                <svg [cIcon]="icons.cilSortDescending" size="xl" title="List Icon"></svg>
               </button>
               <button type="button" class="btn" (click)="ideasFilter('comment')"
                 [ngClass]="{black: fieldView !== 'comment', like: fieldView === 'comment'}">
                 <i class="cil-chat-bubble lg"></i>
+                <svg [cIcon]="icons.cilChatBubble" size="xl" title="List Icon"></svg>
               </button>
               <button type="button" class="btn" (click)="ideasFilter('dislikes')"
                 [ngClass]="{black: fieldView !== 'dislikes', like: fieldView === 'dislikes'}">
                 <i class="cil-thumb-down lg"></i>
+                <svg [cIcon]="icons.cilThumbDown" size="xl" title="List Icon"></svg>
               </button>
               <button type="button" class="btn" (click)="ideasFilter('likes')"
                 [ngClass]="{black: fieldView !== 'likes', like: fieldView === 'likes'}">
                 <i class="cil-thumb-up lg"></i>
+                <svg [cIcon]="icons.cilThumbUp" size="xl" title="List Icon"></svg>
               </button>
-            </div>
-          </div>
+            </c-col>
+          </c-row>
         </c-card-header>
 
         <c-card-body>
 
           <c-row>
             <c-col *ngFor="let widget of brandData; index as i" sm="6" xl="3">
+              
               <c-widget-stat-d
                 [color]="widget.color ?? ''"
                 [style]="widget.capBg ?? null"

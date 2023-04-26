@@ -2,8 +2,8 @@
     <main class="main d-flex align-items-center justify-content-center bg-white">
       <div class="card">
         <div class="card-header bg-grey">
-          <div>
-            <i class="fa fa-arrow-left fa-lg" style="color: green; cursor: pointer;" routerLink="/landing"></i>
+          <div routerLink="/landing" style="cursor: pointer;">
+            <svg [cIcon]="icons.cilArrowThickLeft" style="color: green;" size="10px" title="List Icon"></svg>
           </div>
           <div class="text-center">
             <img src="assets/img/logo_name_color.png" alt="logo_origen" height="30px">
@@ -12,21 +12,21 @@
   
         <div class="card-body p-4">
           <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="login()">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">@</span>
-              </div>
+            <c-input-group>
+              <span class="input-group-text">@</span>
               <input type="text" class="form-control" placeholder="Correo" formControlName="email" required>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="cil3d"></i></span>
-              </div>
+            </c-input-group>
+            
+            <c-input-group class="pt-2">
+              <span class="input-group-text">
+                <svg [cIcon]="icons.cilLockLocked" size="10px" title="List Icon"></svg>
+              </span>
               <input type="password" class="form-control" placeholder="Contraseña" formControlName="password" required>
-            </div>
-            <div class="row">
-              <div class="col">
-                <button type="button block" class="btn btn-grey btn-block">Iniciar Sesión</button>
+            </c-input-group>
+            
+            <div class="row pt-3">
+              <div class="col d-grid gap-2">
+                <button type="submit" cButton>Iniciar Sesión</button>
               </div>
             </div>
           </form>

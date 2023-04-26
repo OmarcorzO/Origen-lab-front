@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import Swal from "sweetalert2";
 import { AuthService } from "../services/auth.service";
 import {ValidationMessagesService } from '../../services/validation-messages.service'
+import { cilLockLocked, cilChevronDoubleLeft } from '@coreui/icons';
 
 @Component({
   selector: "app-dashboard",
@@ -11,6 +12,8 @@ import {ValidationMessagesService } from '../../services/validation-messages.ser
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  icons = { cilLockLocked, cilChevronDoubleLeft };
+
   public formSubmitted = false;
 
   public arrayUsers!: [

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { SwalService } from '../../services/swal.service';
 import Swal from 'sweetalert2';
+import { cilLockLocked, cilArrowThickLeft } from '@coreui/icons';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+
+  icons = { cilLockLocked, cilArrowThickLeft };
 
   public arrayLogins: any
 

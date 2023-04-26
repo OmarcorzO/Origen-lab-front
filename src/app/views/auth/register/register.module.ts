@@ -4,6 +4,8 @@ import { RegisterComponent } from './register.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 
 import { RegisterRoutingModule } from './register-routing.module';
+import { IconModule } from '@coreui/icons-angular';
+import { FormModule, ButtonModule } from '@coreui/angular';
 
 
 @NgModule({
@@ -11,7 +13,10 @@ import { RegisterRoutingModule } from './register-routing.module';
   imports: [
     CommonModule,
     ReactiveFormsModule, FormsModule,
-    RegisterRoutingModule
+    RegisterRoutingModule,
+    ButtonModule,
+    IconModule,
+    FormModule
   ]
 })
 export class RegisterModule { }

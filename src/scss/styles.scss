@@ -142,3 +142,13 @@ app-header {
   background-color: rgba(0, 0, 0, 0.7);
   animation: opacity 0.25s;
 }
+
+.app-body {
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding-top: 15%;
+}
