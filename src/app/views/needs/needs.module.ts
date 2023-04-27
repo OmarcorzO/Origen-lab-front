@@ -10,6 +10,7 @@ import { ModalModule, BsModalService  } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NeedPipe } from './pipes/need.pipe';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CardModule } from '@coreui/angular';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     ReactiveFormsModule,
     FormsModule,
     ModalModule,
+    CardModule,
     PaginationModule.forRoot(),
     TooltipModule.forRoot()
   ],

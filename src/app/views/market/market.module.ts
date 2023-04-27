@@ -8,6 +8,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MarketRoutingModule } from './market-routing.module';
 import { NewMarketingComponent } from './new-marketing/new-marketing.component';
+import { CardModule } from '@coreui/angular';
 
 @NgModule({
   declarations: [NewMarketingComponent],
@@ -16,6 +17,7 @@ import { NewMarketingComponent } from './new-marketing/new-marketing.component';
     MarketRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    CardModule,
     ModalModule,
     PaginationModule.forRoot(),
     TooltipModule.forRoot(),

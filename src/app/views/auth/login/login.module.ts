@@ -20,7 +20,6 @@ import {
     IconModule,
     FormModule,
     ButtonModule,
-    FormsModule,
   ],
 })
 export class LoginModule {}

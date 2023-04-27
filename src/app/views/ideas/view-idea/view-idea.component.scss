@@ -1,57 +1,66 @@
 thead {
-    color: white;
-    background-color: #20a8d8;
+  color: white;
+  background-color: #20a8d8;
 }
 
 .card-header {
-    font-size: large;
-    color: #fff;
+  font-size: large;
+  color: #fff;
 
-    strong {
-        vertical-align: sub;
-        font-size: larger;
-    }
+  strong {
+    vertical-align: sub;
+    font-size: larger;
+  }
 }
 
 .brand-card {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .btn {
-    border-radius: 2rem;
+  border-radius: 2rem;
 }
 
 pagination {
-    display: inline-flex;
+  display: inline-flex;
 }
 
-.form-group .form-group i {
+.form-group {
+  padding: 7.5px;
+  .form-group i {
     font-size: x-large;
+  }
 }
 
 .lg {
-    font-size: large;
+  font-size: large;
 }
 
 .like {
-    color: #fff;
-    background-color: green; 
-    border-color: green;
+  color: #fff;
+  background-color: green;
+  border-color: green;
+}
+
+.like2 {
+  color: #fff;
+  background-color: #2eb85c;
+  border-color: #2eb85c;
 }
 
 .dislike {
-    color: #fff;
-    background-color: red; 
-    border-color: red;
+  color: #fff;
+  background-color: red;
+  border-color: red;
 }
 
 .black {
-    color: #fff;
-    background-color: black; 
-    border-color: black;
+  color: #fff;
+  background-color: black;
+  border-color: black;
 }
 
 .files {
-    font-size: 45px; 
-    margin-right: 10px;
+  font-size: 45px;
+  margin-right: 10px;
 }

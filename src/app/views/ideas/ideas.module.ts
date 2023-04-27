@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule, BsModalService  } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { CardModule, GridModule, TableModule, WidgetModule } from '@coreui/angular';
+import { CardModule, FormModule, GridModule, TableModule, WidgetModule } from '@coreui/angular';
 import { ChartjsModule } from '@coreui/angular-chartjs';
 import { IconModule } from '@coreui/icons-angular';
 
@@ -29,6 +29,7 @@ import { IconModule } from '@coreui/icons-angular';
     GridModule,
     IconModule,
     ModalModule,
+    FormModule,
     PaginationModule.forRoot(),
     TooltipModule.forRoot()
   ],

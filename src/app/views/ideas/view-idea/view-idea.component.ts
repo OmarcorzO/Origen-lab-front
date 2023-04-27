@@ -1,106 +1,169 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
-import { SwalService } from "../../services/swal.service";
-import { ValidationMessagesService } from "../../services/validation-messages.service";
-import { ViewIdeaService } from "../services/view-idea.service";
-import { cilList, cilShieldAlt, cilSortAscending, cilSortDescending, cilThumbUp, cilThumbDown, cilChatBubble } from '@coreui/icons';
+} from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { SwalService } from '../../services/swal.service';
+import { ValidationMessagesService } from '../../services/validation-messages.service';
+import { ViewIdeaService } from '../services/view-idea.service';
+import {
+  cilList,
+  cilShieldAlt,
+  cilSortAscending,
+  cilSortDescending,
+  cilThumbUp,
+  cilThumbDown,
+  cilChatBubble,
+  cilX,
+  cibFacebook
+} from '@coreui/icons';
 
 @Component({
-  selector: "app-view-idea",
-  templateUrl: "./view-idea.component.html",
-  styleUrls: ["./view-idea.component.scss"],
+  selector: 'app-view-idea',
+  templateUrl: './view-idea.component.html',
+  styleUrls: ['./view-idea.component.scss'],
 })
 export class ViewIdeaComponent implements OnInit {
   // Icons
-  icons = { cilList, cilShieldAlt, cilSortAscending, cilSortDescending, cilThumbUp, cilThumbDown, cilChatBubble };
-  
+  icons = {
+    cilList,
+    cilShieldAlt,
+    cilSortAscending,
+    cilSortDescending,
+    cilThumbUp,
+    cilThumbDown,
+    cilChatBubble,
+    cilX,
+  };
+
   // testing
   chartOptions = {
     elements: {
       line: {
-        tension: 0.4
+        tension: 0.4,
       },
       point: {
         radius: 0,
         hitRadius: 10,
         hoverRadius: 4,
-        hoverBorderWidth: 3
-      }
+        hoverBorderWidth: 3,
+      },
     },
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false
-      }
+        display: false,
+      },
     },
     scales: {
       x: {
-        display: false
+        display: false,
       },
       y: {
-        display: false
-      }
-    }
+        display: false,
+      },
+    },
   };
   labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   datasets = {
     borderWidth: 3,
-    fill: true
+    fill: true,
   };
   colors = {
     backgroundColor: 'rgba(255,255,255,.1)',
     borderColor: 'rgba(255,255,255,.55)',
     pointHoverBackgroundColor: '#fff',
-    pointBackgroundColor: 'rgba(255,255,255,.55)'
+    pointBackgroundColor: 'rgba(255,255,255,.55)',
   };
   brandData = [
     {
-      icon: 'cibFacebook',
-      values: [{ title: 'LIKES', value: '89K' }, { title: 'DISLIKES', value: '459' }, { title: 'COMMENTS', value: '400'}],
+      title: 'cibFacebook',
+      values: [
+        { title: 'LIKES', value: '89K' },
+        { title: 'DISLIKES', value: '459' },
+        { title: 'COMMENTS', value: '400' },
+      ],
       capBg: { '--cui-card-cap-bg': '#3b5998' },
       labels: [...this.labels],
       data: {
         labels: [...this.labels],
-        datasets: [{ ...this.datasets, data: [65, 59, 84, 84, 51, 55, 40], label: 'Facebook', ...this.colors }]
-      }
+        datasets: [
+          {
+            ...this.datasets,
+            data: [65, 59, 84, 84, 51, 55, 40],
+            label: 'Facebook',
+            ...this.colors,
+          },
+        ],
+      },
     },
     {
-      icon: 'cibTwitter',
-      values: [{ title: 'LIKES', value: '89K' }, { title: 'DISLIKES', value: '459' }, { title: 'COMMENTS', value: '400'}],
+      title: 'cibTwitter',
+      values: [
+        { title: 'LIKES', value: '89K' },
+        { title: 'DISLIKES', value: '459' },
+        { title: 'COMMENTS', value: '400' },
+      ],
       capBg: { '--cui-card-cap-bg': '#00aced' },
       data: {
         labels: [...this.labels],
-        datasets: [{ ...this.datasets, data: [1, 13, 9, 17, 34, 41, 38], label: 'Twitter', ...this.colors }]
-      }
+        datasets: [
+          {
+            ...this.datasets,
+            data: [1, 13, 9, 17, 34, 41, 38],
+            label: 'Twitter',
+            ...this.colors,
+          },
+        ],
+      },
     },
     {
-      icon: 'cib-linkedin',
-      values: [{ title: 'LIKES', value: '89K' }, { title: 'DISLIKES', value: '459' }, { title: 'COMMENTS', value: '400'}],
+      title: 'cib-linkedin',
+      values: [
+        { title: 'LIKES', value: '89K' },
+        { title: 'DISLIKES', value: '459' },
+        { title: 'COMMENTS', value: '400' },
+      ],
       capBg: { '--cui-card-cap-bg': '#4875b4' },
       data: {
         labels: [...this.labels],
-        datasets: [{ ...this.datasets, data: [78, 81, 80, 45, 34, 12, 40], label: 'LinkedIn', ...this.colors }]
-      }
+        datasets: [
+          {
+            ...this.datasets,
+            data: [78, 81, 80, 45, 34, 12, 40],
+            label: 'LinkedIn',
+            ...this.colors,
+          },
+        ],
+      },
     },
     {
-      icon: 'cilCalendar',
-      values: [{ title: 'LIKES', value: '89K' }, { title: 'DISLIKES', value: '459' }, { title: 'COMMENTS', value: '400'}],
+      title: 'cilCalendar',
+      values: [
+        { title: 'LIKES', value: '89K' },
+        { title: 'DISLIKES', value: '459' },
+        { title: 'COMMENTS', value: '400' },
+      ],
       color: 'warning',
       data: {
         labels: [...this.labels],
-        datasets: [{ ...this.datasets, data: [35, 23, 56, 22, 97, 23, 64], label: 'Events', ...this.colors }]
-      }
-    }
+        datasets: [
+          {
+            ...this.datasets,
+            data: [35, 23, 56, 22, 97, 23, 64],
+            label: 'Events',
+            ...this.colors,
+          },
+        ],
+      },
+    },
   ];
 
   // Arrays de la visualización
-  public arrayPublicIdeas;
+  public arrayPublicIdeas!: any[];
   public arrayComments!: any[];
   public listCommentType;
   public listReactionType;
@@ -110,11 +173,11 @@ export class ViewIdeaComponent implements OnInit {
     name: string;
     number: number;
   } = {
-    name: "Hola",
+    name: 'Hola',
     number: 0,
   };
-  public ideaView: any = "";
-  public ideaIdSelect: string = "";
+  public ideaView: any = '';
+  public ideaIdSelect: string = '';
   public myReaction: string = '';
 
   // Variables Paginador
@@ -134,8 +197,8 @@ export class ViewIdeaComponent implements OnInit {
   public formSubmitted: boolean = false;
 
   // Ideas Filters
-  public orderView: string = "desc";
-  public fieldView: string = "";
+  public orderView: string = 'desc';
+  public fieldView: string = '';
 
   constructor(
     public service: ViewIdeaService,
@@ -145,39 +208,37 @@ export class ViewIdeaComponent implements OnInit {
     public validateService: ValidationMessagesService
   ) {
     this.formComments = this.fb.group({
-      ideaId: ["", [Validators.required]],
-      commentTypeId: ["", [Validators.required, Validators.minLength(10)]],
-      comment: ["", [Validators.required, Validators.minLength(10)]],
+      ideaId: ['', [Validators.required]],
+      commentTypeId: ['', [Validators.required, Validators.minLength(10)]],
+      comment: ['', [Validators.required, Validators.minLength(10)]],
     });
 
     this.formReaction = this.fb.group({
-      ideaId: ["", [Validators.required]],
-      typeReactionId: ["", [Validators.required]],
+      ideaId: ['', [Validators.required]],
+      typeReactionId: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
     this.swalServ.searching();
-    if (localStorage.getItem("TOKEN") !== null) {
-      this.tokensave = localStorage.getItem("TOKEN") ?? '';
+    if (localStorage.getItem('TOKEN') !== null) {
+      this.tokensave = localStorage.getItem('TOKEN') ?? '';
     }
 
     this.service
-      .listPublicIdea(this.tokensave, this.cont * 4, "desc")
+      .listPublicIdea(this.tokensave, this.cont * 4, 'desc')
       .subscribe(
         (res: any) => {
           this.swalServ.close();
           this.arrayPublicIdeas = res.data.value;
-          // this.brandData = this.arrayPublicIdeas;
-          console.log(this.arrayPublicIdeas);
-          
+          this.updateBrandInfo()
         },
         (error) => {
           this.swalServ.checkError(error.status);
         }
       );
 
-    this.service.listCommentType(this.tokensave, "desc").subscribe(
+    this.service.listCommentType(this.tokensave, 'desc').subscribe(
       (res: any) => {
         this.listCommentType = res.data.value;
       },
@@ -198,7 +259,7 @@ export class ViewIdeaComponent implements OnInit {
 
   moreIdeas() {
     this.cont++;
-    if (this.fieldView === "") {
+    if (this.fieldView === '') {
       this.service
         .listPublicIdea(this.tokensave, this.cont * 4, this.orderView)
         .subscribe(
@@ -229,12 +290,14 @@ export class ViewIdeaComponent implements OnInit {
     }
   }
 
+  // HERE
   getIdeasPublics() {
     this.service
       .listPublicIdea(this.tokensave, this.cont * 4, this.orderView)
       .subscribe(
         (res: any) => {
           this.arrayPublicIdeas = res.data.value;
+          this.updateBrandInfo()
         },
         (error) => {
           this.swalServ.checkError(error.status);
@@ -242,28 +305,51 @@ export class ViewIdeaComponent implements OnInit {
       );
   }
 
+  updateBrandInfo() {
+    this.arrayPublicIdeas.forEach((obj, i) => {
+      var {
+        name,
+        reacting_idea_dislikes,
+        reacting_idea_likes,
+        comment_idea,
+      } = obj;
+      
+      this.brandData[i].title = name;
+      this.brandData[i].values = [
+        { title: 'LIKES', value: reacting_idea_likes.length },
+        { title: 'DISLIKES', value: reacting_idea_dislikes.length },
+      ];
+
+      if (comment_idea[0] !== undefined) {
+        this.brandData[i].values.push({ title: 'COMMENTS', value: comment_idea[0].count },)
+      } else {
+        this.brandData[i].values.push({ title: 'COMMENTS', value: '0' },)
+      }
+    });
+  }
+
   ideasFilter(type) {
     switch (type) {
-      case "asc":
-        this.orderView = "asc";
-        this.fieldView = "";
-        this.callServiceOrder(this.orderView, "");
+      case 'asc':
+        this.orderView = 'asc';
+        this.fieldView = '';
+        this.callServiceOrder(this.orderView, '');
         break;
-      case "desc":
-        this.orderView = "desc";
-        this.fieldView = "";
-        this.callServiceOrder(this.orderView, "");
+      case 'desc':
+        this.orderView = 'desc';
+        this.fieldView = '';
+        this.callServiceOrder(this.orderView, '');
         break;
-      case "comment":
-        this.fieldView = "comment";
+      case 'comment':
+        this.fieldView = 'comment';
         this.callServiceOrder(this.orderView, this.fieldView);
         break;
-      case "likes":
-        this.fieldView = "likes";
+      case 'likes':
+        this.fieldView = 'likes';
         this.callServiceOrder(this.orderView, this.fieldView);
         break;
-      case "dislikes":
-        this.fieldView = "dislikes";
+      case 'dislikes':
+        this.fieldView = 'dislikes';
         this.callServiceOrder(this.orderView, this.fieldView);
         break;
 
@@ -278,31 +364,33 @@ export class ViewIdeaComponent implements OnInit {
     this.ideaIdSelect = idea._id;
     this.resetForms();
 
-    this.modalComment = this.modalService.show(template, {class: 'modal-dialog-centered'});
+    this.modalComment = this.modalService.show(template, {
+      class: 'modal-dialog-centered',
+    });
     this.getCommentsComplete(this.ideaIdSelect);
   }
 
   publicIdea(): void {
     this.formSubmitted = true;
-    this.formComments.get("ideaId")?.setValue(this.ideaIdSelect);
+    this.formComments.get('ideaId')?.setValue(this.ideaIdSelect);
 
     this.formComments.patchValue({
-      comment: this.formComments.value.comment.trim()
-    })
+      comment: this.formComments.value.comment.trim(),
+    });
 
     if (this.formComments.invalid) {
-      this.swalServ.error("Comentario inválido");
+      this.swalServ.error('Comentario inválido');
     } else {
       this.service
         .commentIdea(this.tokensave, this.formComments.value)
         .subscribe(
           (res) => {
-            this.swalServ.confirmation("Comentario publicado");
+            this.swalServ.confirmation('Comentario publicado');
             this.getCommentsComplete(this.ideaIdSelect);
             this.getIdeasPublics();
             this.resetForms();
-            this.orderView = "";
-            this.fieldView = "";
+            this.orderView = '';
+            this.fieldView = '';
           },
           (error) => {
             this.swalServ.error(error.error.data.error.details[0].message);
@@ -318,12 +406,16 @@ export class ViewIdeaComponent implements OnInit {
 
   // Validador de campos
   invalidField(field: string): boolean {
-    return this.validateService.invalidField(field, this.formComments, this.formSubmitted)
+    return this.validateService.invalidField(
+      field,
+      this.formComments,
+      this.formSubmitted
+    );
   }
 
   getCommentsComplete(idea): void {
     this.ideaView = {
-      idea_anexos: []
+      idea_anexos: [],
     };
     const ideaObject = {
       ideaId: idea,
@@ -351,11 +443,11 @@ export class ViewIdeaComponent implements OnInit {
 
           this.topUser.name =
             user.user_most_comment[0].profile.name +
-            " " +
+            ' ' +
             user.user_most_comment[0].profile.lastname;
           this.topUser.number = user.countCommentOfUser;
         } else {
-          this.topUser.name = "No hay registro";
+          this.topUser.name = 'No hay registro';
           this.topUser.number = 0;
         }
 
@@ -370,9 +462,9 @@ export class ViewIdeaComponent implements OnInit {
 
   resetForms(): void {
     this.formComments.patchValue({
-      ideaId: "",
-      commentTypeId: "",
-      comment: "",
+      ideaId: '',
+      commentTypeId: '',
+      comment: '',
     });
 
     this.formSubmitted = false;
@@ -380,27 +472,27 @@ export class ViewIdeaComponent implements OnInit {
 
   addReaction(opinion): void {
     let reaction;
-    if (opinion === "like") {
-      reaction = this.listReactionType.filter((react) => react.code === "like");
+    if (opinion === 'like') {
+      reaction = this.listReactionType.filter((react) => react.code === 'like');
       this.formReaction.patchValue({
         ideaId: this.ideaIdSelect,
         typeReactionId: reaction[0]._id,
       });
-      this.callServiceReacting(this.myReaction, "like");
+      this.callServiceReacting(this.myReaction, 'like');
     } else {
       reaction = this.listReactionType.filter(
-        (react) => react.code === "dislike"
+        (react) => react.code === 'dislike'
       );
       this.formReaction.patchValue({
         ideaId: this.ideaIdSelect,
         typeReactionId: reaction[0]._id,
       });
-      this.callServiceReacting(this.myReaction, "dislike");
+      this.callServiceReacting(this.myReaction, 'dislike');
     }
   }
 
   callServiceOrder(order, field) {
-    if (field === "") {
+    if (field === '') {
       this.service
         .listPublicIdea(this.tokensave, this.cont * 4, order)
         .subscribe(
@@ -440,7 +532,7 @@ export class ViewIdeaComponent implements OnInit {
         );
     } else {
       if (opinionOld === opinionNew) {
-        this.formReaction.removeControl("typeReactionId");
+        this.formReaction.removeControl('typeReactionId');
         this.service
           .deleteReactingIdeas(this.tokensave, this.formReaction.value)
           .subscribe(
@@ -448,8 +540,8 @@ export class ViewIdeaComponent implements OnInit {
               this.getIdeasPublics();
               this.myReaction = '';
               this.formReaction.addControl(
-                "typeReactionId",
-                new FormControl("")
+                'typeReactionId',
+                new FormControl('')
               );
             },
             (error) => {}

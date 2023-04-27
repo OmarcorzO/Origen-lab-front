@@ -9,6 +9,7 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CardModule } from '@coreui/angular';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     CommonModule,
     IdeationRoutingModule,
     BsDropdownModule,
+    CardModule,
     ButtonsModule.forRoot(),
     TooltipModule.forRoot(),
     PaginationModule,
