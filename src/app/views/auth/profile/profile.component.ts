@@ -42,6 +42,11 @@ export class ProfileComponent implements OnInit {
   public userExpertForm!: FormGroup;
   public userGovernmentEntityForm!: FormGroup;
 
+  // FORM USUALLY
+  public profileForm!: FormGroup;
+  public editProfileForm!: FormGroup;
+
+
   public levelStudyList = [
     'Primaria',
     'Bachillerato',
@@ -52,38 +57,7 @@ export class ProfileComponent implements OnInit {
     'Doctorado',
   ];
 
-  public profileForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required, Validators.minLength(4)]],
-    lastname: ['', [Validators.required, Validators.minLength(4)]],
-    phone: ['', [Validators.required, Validators.minLength(7)]],
-    rol: ['', [Validators.required]],
 
-    controlsProfile: this.fb.array([this.fb.control('')]),
-  });
-
-  public editProfileForm = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(4)]],
-    lastname: ['', [Validators.required, Validators.minLength(4)]],
-    phone: [
-      '',
-      [Validators.required, Validators.minLength(7), Validators.maxLength(10)],
-    ],
-    rol: ['', [Validators.required]],
-    administrator: [''],
-    password: [''],
-    img: [''],
-    imgCloud: [''],
-
-    controlsEdit: this.fb.array([this.fb.control('')]),
-  });
-
-  get controlsEdit() {
-    return this.editProfileForm.get('controlsEdit') as FormArray;
-  }
-
-  get controlsProfile() {
-    return this.profileForm.get('controlsProfile') as FormArray;
-  }
 
   initRolForms() {
     this.userBusinessUnitForm = this.fb.group({
@@ -121,7 +95,28 @@ export class ProfileComponent implements OnInit {
     private services: AuthService,
     private validateService: ValidationMessagesService,
     private swalService: SwalService
-  ) {}
+  ) {
+    this.profileForm = this.fb.nonNullable.group({
+      name: ['', [Validators.required, Validators.minLength(4)]],
+      lastname: ['', [Validators.required, Validators.minLength(4)]],
+      phone: ['', [Validators.required, Validators.minLength(7)]],
+      rol: ['', [Validators.required]],
+    });
+  
+    this.editProfileForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(4)]],
+      lastname: ['', [Validators.required, Validators.minLength(4)]],
+      phone: [
+        '',
+        [Validators.required, Validators.minLength(7), Validators.maxLength(10)],
+      ],
+      rol: ['', [Validators.required]],
+      administrator: [''],
+      password: [''],
+      img: [''],
+      imgCloud: [''],
+    });
+  }
 
   ngOnInit(): void {
     this.initRolForms();
@@ -296,15 +291,7 @@ export class ProfileComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           if (this.editProfileForm.value.password?.trim() === '') {
-            for (let index = 0; index < this.controlsEdit.length; index++) {
-              if (this.controlsProfile[index] === 'password') {
-                this.controlsProfile.removeAt(index);
-              }
-            }
-            // for(let index of this.controlsEdit.controls) {
-            //   console.log(index);
-            // this.controlsEdit.removeAt(index)
-            // }
+            this.editProfileForm.removeControl('password');
           }
           this.addRolEditProfile();
           this.services
@@ -554,114 +541,26 @@ export class ProfileComponent implements OnInit {
   addRolProfile(): void {
     switch (this.codeRol) {
       case 'userBusinessUnit':
-        this.controlsProfile.push(
-          this.fb.control(this.userBusinessUnitForm.value.sector.trim())
-        );
-        this.controlsProfile.push(
-          this.fb.control(this.userBusinessUnitForm.value.socialObject.trim())
-        );
-        this.controlsProfile.push(
-          this.fb.control(this.userBusinessUnitForm.value.levelStudy.trim())
-        );
-        // this.profileForm.addControl(
-        //   'sector',
-        //   this.fb.control(this.userBusinessUnitForm.value.sector.trim())
-        // );
-        // this.profileForm.addControl(
-        //   'socialObject',
-        //   this.fb.control(this.userBusinessUnitForm.value.socialObject.trim())
-        // );
-        // this.profileForm.addControl(
-        //   'levelStudy',
-        //   this.fb.control(this.userBusinessUnitForm.value.levelStudy.trim())
-        // );
+        this.profileForm.addControl('sector', this.fb.control(this.userBusinessUnitForm.value.sector.trim()));
+        this.profileForm.addControl('socialObject', this.fb.control(this.userBusinessUnitForm.value.socialObject.trim()));
+        this.profileForm.addControl('levelStudy', this.fb.control(this.userBusinessUnitForm.value.levelStudy.trim()));
         break;
       case 'userCompany':
-        this.controlsProfile.push(
-          this.fb.control(this.userCompanyForm.value.address.trim())
-        ),
-          this.controlsProfile.push(
-            this.fb.control(this.userCompanyForm.value.sector.trim())
-          ),
-          this.controlsProfile.push(
-            this.fb.control(this.userCompanyForm.value.socialObject.trim())
-          ),
-          this.controlsProfile.push(
-            this.fb.control(this.userCompanyForm.value.companyName.trim())
-          );
-        // this.profileForm.addControl(
-        //   'address',
-        //   this.fb.control(this.userCompanyForm.value.address.trim())
-        // );
-        // this.profileForm.addControl(
-        //   'sector',
-        //   this.fb.control(this.userCompanyForm.value.sector.trim())
-        // );
-        // this.profileForm.addControl(
-        //   'socialObject',
-        //   this.fb.control(this.userCompanyForm.value.socialObject.trim())
-        // );
-        // this.profileForm.addControl(
-        //   'companyName',
-        //   this.fb.control(this.userCompanyForm.value.companyName.trim())
-        // );
+        this.profileForm.addControl('address', this.fb.control(this.userCompanyForm.value.address.trim()));
+        this.profileForm.addControl('sector', this.fb.control(this.userCompanyForm.value.sector.trim()));
+        this.profileForm.addControl('socialObject', this.fb.control(this.userCompanyForm.value.socialObject.trim()));
+        this.profileForm.addControl('companyName', this.fb.control(this.userCompanyForm.value.companyName.trim()));
         break;
       case 'userExpert':
-        this.controlsProfile.push(
-          this.fb.control(this.userExpertForm.value.college.trim())
-        );
-        this.controlsProfile.push(
-          this.fb.control(this.userExpertForm.value.position.trim())
-        );
-        this.controlsProfile.push(
-          this.fb.control(this.userExpertForm.value.profession.trim())
-        );
-        // this.profileForm.addControl(
-        //   'college',
-        //   this.fb.control(this.userExpertForm.value.college.trim())
-        // );
-        // this.profileForm.addControl(
-        //   'position',
-        //   this.fb.control(this.userExpertForm.value.position.trim())
-        // );
-        // this.profileForm.addControl(
-        //   'profession',
-        //   this.fb.control(this.userExpertForm.value.profession.trim())
-        // );
+        this.profileForm.addControl('college', this.fb.control(this.userExpertForm.value.college.trim()));
+        this.profileForm.addControl('position', this.fb.control(this.userExpertForm.value.position.trim()));
+        this.profileForm.addControl('profession', this.fb.control(this.userExpertForm.value.profession.trim()));
         break;
       case 'userGovernmentEntity':
-        this.controlsProfile.push(
-          this.fb.control(this.userGovernmentEntityForm.value.functions.trim())
-        );
-        this.controlsProfile.push(
-          this.fb.control(this.userGovernmentEntityForm.value.position.trim())
-        );
-        this.controlsProfile.push(
-          this.fb.control(this.userGovernmentEntityForm.value.profession.trim())
-        );
-        this.controlsProfile.push(
-          this.fb.control(
-            this.userGovernmentEntityForm.value.governorateMunicipality.trim()
-          )
-        );
-        // this.profileForm.addControl(
-        //   'functions',
-        //   this.fb.control(this.userGovernmentEntityForm.value.functions.trim())
-        // );
-        // this.profileForm.addControl(
-        //   'position',
-        //   this.fb.control(this.userGovernmentEntityForm.value.position.trim())
-        // );
-        // this.profileForm.addControl(
-        //   'profession',
-        //   this.fb.control(this.userGovernmentEntityForm.value.profession.trim())
-        // );
-        // this.profileForm.addControl(
-        //   'governorateMunicipality',
-        //   this.fb.control(
-        //     this.userGovernmentEntityForm.value.governorateMunicipality.trim()
-        //   )
-        // );
+        this.profileForm.addControl('functions', this.fb.control(this.userGovernmentEntityForm.value.functions.trim()));
+        this.profileForm.addControl('position', this.fb.control(this.userGovernmentEntityForm.value.position.trim()));
+        this.profileForm.addControl('profession', this.fb.control(this.userGovernmentEntityForm.value.profession.trim()));
+        this.profileForm.addControl('governorateMunicipality', this.fb.control(this.userGovernmentEntityForm.value.governorateMunicipality.trim()));
         break;
       default:
         break;
@@ -671,50 +570,26 @@ export class ProfileComponent implements OnInit {
   removeRolProfile(): void {
     switch (this.codeRol) {
       case 'userBusinessUnit':
-        for (let index = 0; index < this.controlsProfile.length; index++) {
-          if (
-            this.controlsProfile[index] === 'sector' ||
-            this.controlsProfile[index] === 'socialObject' ||
-            this.controlsProfile[index] === 'levelStudy'
-          ) {
-            this.controlsProfile.removeAt(index);
-          }
-        }
+        this.profileForm.removeControl('sector');
+        this.profileForm.removeControl('socialObject');
+        this.profileForm.removeControl('levelStudy');
         break;
       case 'userCompany':
-        for (let index = 0; index < this.controlsProfile.length; index++) {
-          if (
-            this.controlsProfile[index] === 'address' ||
-            this.controlsProfile[index] === 'sector' ||
-            this.controlsProfile[index] === 'socialObject' ||
-            this.controlsProfile[index] === 'companyName'
-          ) {
-            this.controlsProfile.removeAt(index);
-          }
-        }
+        this.profileForm.removeControl('address');
+        this.profileForm.removeControl('sector');
+        this.profileForm.removeControl('socialObject');
+        this.profileForm.removeControl('companyName');
         break;
       case 'userExpert':
-        for (let index = 0; index < this.controlsProfile.length; index++) {
-          if (
-            this.controlsProfile[index] === 'college' ||
-            this.controlsProfile[index] === 'position' ||
-            this.controlsProfile[index] === 'profession'
-          ) {
-            this.controlsProfile.removeAt(index);
-          }
-        }
+        this.profileForm.removeControl('college');
+        this.profileForm.removeControl('position');
+        this.profileForm.removeControl('profession');
         break;
       case 'userGovernmentEntity':
-        for (let index = 0; index < this.controlsProfile.length; index++) {
-          if (
-            this.controlsProfile[index] === 'functions' ||
-            this.controlsProfile[index] === 'position' ||
-            this.controlsProfile[index] === 'profession' ||
-            this.controlsProfile[index] === 'governorateMunicipality'
-          ) {
-            this.controlsProfile.removeAt(index);
-          }
-        }
+        this.profileForm.removeControl('functions');
+        this.profileForm.removeControl('position');
+        this.profileForm.removeControl('profession');
+        this.profileForm.removeControl('governorateMunicipality');
         break;
       default:
         break;
@@ -724,112 +599,62 @@ export class ProfileComponent implements OnInit {
   addRolEditProfile(): void {
     switch (this.codeRol) {
       case 'userBusinessUnit':
-        this.controlsEdit.push(
-          this.fb.control(this.userBusinessUnitForm.value.sector.trim())
-        );
-        this.controlsEdit.push(
-          this.fb.control(this.userBusinessUnitForm.value.socialObject.trim())
-        );
-        this.controlsEdit.push(
-          this.fb.control(this.userBusinessUnitForm.value.levelStudy.trim())
-        );
+        this.editProfileForm.addControl('sector', this.fb.control(this.userBusinessUnitForm.value.sector.trim()));
+        this.editProfileForm.addControl('socialObject', this.fb.control(this.userBusinessUnitForm.value.socialObject.trim()));
+        this.editProfileForm.addControl('levelStudy', this.fb.control(this.userBusinessUnitForm.value.levelStudy.trim()));
         break;
       case 'userCompany':
-        this.controlsEdit.push(
-          this.fb.control(this.userCompanyForm.value.address.trim())
-        );
-        this.controlsEdit.push(
-          this.fb.control(this.userCompanyForm.value.sector.trim())
-        );
-        this.controlsEdit.push(
-          this.fb.control(this.userCompanyForm.value.socialObject.trim())
-        );
-        this.controlsEdit.push(
-          this.fb.control(this.userCompanyForm.value.companyName.trim())
-        );
+        this.editProfileForm.addControl('address', this.fb.control(this.userCompanyForm.value.address.trim()));
+        this.editProfileForm.addControl('sector', this.fb.control(this.userCompanyForm.value.sector.trim()));
+        this.editProfileForm.addControl('socialObject', this.fb.control(this.userCompanyForm.value.socialObject.trim()));
+        this.editProfileForm.addControl('companyName', this.fb.control(this.userCompanyForm.value.companyName.trim()));
         break;
       case 'userExpert':
-        this.controlsEdit.push(
-          this.fb.control(this.userExpertForm.value.college.trim())
-        );
-        this.controlsEdit.push(
-          this.fb.control(this.userExpertForm.value.position.trim())
-        );
-        this.controlsEdit.push(
-          this.fb.control(this.userExpertForm.value.profession.trim())
-        );
+        this.editProfileForm.addControl('college', this.fb.control(this.userExpertForm.value.college.trim()));
+        this.editProfileForm.addControl('position', this.fb.control(this.userExpertForm.value.position.trim()));
+        this.editProfileForm.addControl('profession', this.fb.control(this.userExpertForm.value.profession.trim()));
         break;
       case 'userGovernmentEntity':
-        this.controlsEdit.push(
-          this.fb.control(this.userGovernmentEntityForm.value.functions.trim())
-        );
-        this.controlsEdit.push(
-          this.fb.control(this.userGovernmentEntityForm.value.position.trim())
-        );
-        this.controlsEdit.push(
-          this.fb.control(this.userGovernmentEntityForm.value.profession.trim())
-        );
-        this.controlsEdit.push(
-          this.userGovernmentEntityForm.value.governorateMunicipality.trim()
-        );
+        this.editProfileForm.addControl('functions', this.fb.control(this.userGovernmentEntityForm.value.functions.trim()));
+        this.editProfileForm.addControl('position', this.fb.control(this.userGovernmentEntityForm.value.position.trim()));
+        this.editProfileForm.addControl('profession', this.fb.control(this.userGovernmentEntityForm.value.profession.trim()));
+        this.editProfileForm.addControl('governorateMunicipality', this.fb.control(this.userGovernmentEntityForm.value.governorateMunicipality.trim()));
         break;
       default:
         break;
     }
   }
 
+
   removeRolEditProfile(): void {
     switch (this.codeRol) {
       case 'userBusinessUnit':
-        for (let index = 0; index < this.controlsEdit.length; index++) {
-          if (
-            this.controlsEdit[index] === 'sector' ||
-            this.controlsEdit[index] === 'socialObject' ||
-            this.controlsEdit[index] === 'levelStudy'
-          ) {
-            this.controlsEdit.removeAt(index);
-          }
-        }
+        this.editProfileForm.removeControl('sector');
+        this.editProfileForm.removeControl('socialObject');
+        this.editProfileForm.removeControl('levelStudy');
         break;
       case 'userCompany':
-        for (let index = 0; index < this.controlsEdit.length; index++) {
-          if (
-            this.controlsEdit[index] === 'address' ||
-            this.controlsEdit[index] === 'sector' ||
-            this.controlsEdit[index] === 'socialObject' ||
-            this.controlsEdit[index] === 'companyName'
-          ) {
-            this.controlsEdit.removeAt(index);
-          }
-        }
+        this.editProfileForm.removeControl('address');
+        this.editProfileForm.removeControl('sector');
+        this.editProfileForm.removeControl('socialObject');
+        this.editProfileForm.removeControl('companyName');
         break;
       case 'userExpert':
-        for (let index = 0; index < this.controlsEdit.length; index++) {
-          if (
-            this.controlsEdit[index] === 'college' ||
-            this.controlsEdit[index] === 'position' ||
-            this.controlsEdit[index] === 'profession'
-          ) {
-            this.controlsEdit.removeAt(index);
-          }
-        }
+        this.editProfileForm.removeControl('college');
+        this.editProfileForm.removeControl('position');
+        this.editProfileForm.removeControl('profession');
         break;
       case 'userGovernmentEntity':
-        for (let index = 0; index < this.controlsEdit.length; index++) {
-          if (
-            this.controlsEdit[index] === 'functions' ||
-            this.controlsEdit[index] === 'position' ||
-            this.controlsEdit[index] === 'profession' ||
-            this.controlsEdit[index] === 'governorateMunicipality'
-          ) {
-            this.controlsEdit.removeAt(index);
-          }
-        }
+        this.editProfileForm.removeControl('functions');
+        this.editProfileForm.removeControl('position');
+        this.editProfileForm.removeControl('profession');
+        this.editProfileForm.removeControl('governorateMunicipality');
         break;
       default:
         break;
     }
   }
+
 
   chargeDataRoles(rol: string, info): void {
     switch (rol) {

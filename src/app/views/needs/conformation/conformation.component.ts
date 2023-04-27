@@ -12,6 +12,9 @@ import { ValidationMessagesService } from '../../services/validation-messages.se
 import { ConformationService } from '../services/conformation.service';
 import { NewNeedsService } from '../services/new-needs.service';
 import { Needs } from '../../interfaces/needsP';
+import {
+  cilPencil, cilPlus, cilX
+} from '@coreui/icons';
 
 @Component({
   selector: 'app-conformation',
@@ -19,6 +22,9 @@ import { Needs } from '../../interfaces/needsP';
   styleUrls: ['./conformation.component.scss']
 })
 export class ConformationComponent implements OnInit {
+  icons = {
+    cilPencil, cilPlus, cilX
+  }
   private tokensave: string = '';
   private idTemp: string = '';
   private processData: any = [];

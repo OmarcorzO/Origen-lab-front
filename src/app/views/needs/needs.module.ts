@@ -10,7 +10,8 @@ import { ModalModule, BsModalService  } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NeedPipe } from './pipes/need.pipe';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { CardModule } from '@coreui/angular';
+import { ButtonModule, CardModule, FormModule } from '@coreui/angular';
+import { IconModule } from '@coreui/icons-angular';
 
 @NgModule({
   imports: [
@@ -18,8 +19,11 @@ import { CardModule } from '@coreui/angular';
     NeedsRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    FormModule,
     ModalModule,
     CardModule,
+    IconModule,
+    ButtonModule,
     PaginationModule.forRoot(),
     TooltipModule.forRoot()
   ],

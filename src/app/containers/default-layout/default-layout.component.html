@@ -7,7 +7,7 @@
     <c-container breakpoint="lg" class="h-auto">
       <div *ngIf="navItems !== null" style="display: flex;">
         <div class="size-menu p-2" *ngIf="navItems.length > 6">
-          <div id="uno" class="contenedor" style="font-size: larger;" (click)="navigation(navItems[0]!.children[0].url)" [ngClass]="{active: state == navItems[0].children[0].url}">
+          <div id="uno" class="contenedor" (click)="navigation(navItems[0]!.children[0].url)" [ngClass]="{active: state == navItems[0].children[0].url}">
             <div class="icon">
               <span class="ori-idea"></span>
             </div>

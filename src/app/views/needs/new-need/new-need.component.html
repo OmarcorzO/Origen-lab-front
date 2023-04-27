@@ -1,300 +1,325 @@
 <div class="animated fadeIn">
-    <div class="row">
-      <div class="container">
-        <div class="card">
-          <c-card-header class="card-header-unique bg-primary">
-            <strong>Mis Necesidades</strong>
-          </c-card-header>
-          <div class="card-body">
-            <div class="row">
-              <!-- <div class="col">
+  <div class="row">
+    <div class="container">
+      <div class="card">
+        <c-card-header class="card-header-unique bg-primary">
+          <strong>Mis Necesidades</strong>
+        </c-card-header>
+        <div class="card-body">
+          <div class="row">
+            <!-- <div class="col">
                 <pagination [totalItems]="(totalItems / paginator.sizePage)" [(ngModel)]="paginator.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
               </div> -->
-  
-              <div class="mr-3">
-                <button class="btn btn-primary" (click)="openModalCreate(CreateNeed, 'need')">
-                  <i class="cil-plus"></i> Agregar
-                </button>
-              </div>
-            </div>
-  
-            
-            <div class="text-center" *ngIf="needsArray.length == 0">
-              <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
-            </div>
-            
-            <div class="row">
-              <table *ngIf="needsArray.length != 0" class="table table-responsive-sm table-hover col table-outline mb-0">
-                <thead class="thead-light">
-                  <tr>
-                    <th class="text-center">N°</th>
-                    <th>Título</th>
-                    <th>Descripción</th>
-                    <th>Meta</th>
-                    <th>Municipio</th>
-                    <th class="text-center">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let need of needsArray | slice: (paginatorNeed.currentPage-1) * paginatorNeed.sizePage : paginatorNeed.currentPage * paginatorNeed.sizePage; let i = index">
-                    <td class="text-center">
-                      {{(i+1) + ((paginatorNeed.currentPage-1) * paginatorNeed.sizePage)}}
-                    </td>
-                    <td>
-                      {{ need.title }}
-                    </td>
-                    <td>
-                      <div class="small text-muted">
-                        <span class="truncate"> {{need.description}} </span>
-                        <span> <strong>Creado:</strong> {{need.createdAt | date:"dd-MM-yyyy" }} </span> 
-                        <span> <strong>Actualizado:</strong> {{need.updatedAt | date:"dd-MM-yyyy" }} </span> 
-                      </div>
-                    </td>
-                    <td>
-                      {{ need.target }}
-                    </td>
-                    <td>
-                      {{ need.municipality }}
-                    </td>
-  
-                    <td class="text-center">
-                      <div class="row d-center">
-                        <a (click)="openModalEdit(EditNeed, need, 'need')" class="link mr-2" placement="top" tooltip="Editar">
-                          <i class="cil-pencil pencil"></i>
-                        </a>
-                        <a (click)="disableNeed(need)" class="link mr-2" placement="top" tooltip="Eliminar">
-                          <i class="cil-trash trash"></i>
-                        </a>
-                        <a (click)="openModalView(ListIndicators, need._id)" class="link mr-2" placement="top" tooltip="Indicadores">
-                          <i class="cil-speedometer indi"></i>
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+
+            <div class="mr-3">
+              <button class="btn btn-primary" (click)="openModalCreate(CreateNeed, 'need')">
+                <i class="cil-plus"></i> Agregar
+              </button>
             </div>
           </div>
+
+
+          <div class="text-center" *ngIf="needsArray.length == 0">
+            <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
+          </div>
+
+          <div class="row">
+            <table *ngIf="needsArray.length != 0" class="table table-responsive-sm table-hover col table-outline mb-0">
+              <thead class="thead-light">
+                <tr>
+                  <th class="text-center">N°</th>
+                  <th>Título</th>
+                  <th>Descripción</th>
+                  <th>Meta</th>
+                  <th>Municipio</th>
+                  <th class="text-center">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let need of needsArray | slice: (paginatorNeed.currentPage-1) * paginatorNeed.sizePage : paginatorNeed.currentPage * paginatorNeed.sizePage; let i = index">
+                  <td class="text-center">
+                    {{(i+1) + ((paginatorNeed.currentPage-1) * paginatorNeed.sizePage)}}
+                  </td>
+                  <td>
+                    {{ need.title }}
+                  </td>
+                  <td>
+                    <div class="small text-muted">
+                      <span class="truncate"> {{need.description}} </span> <br> 
+                      <span> <strong>Creado:</strong> {{need.createdAt | date:"dd-MM-yyyy" }} </span>
+                      <span> <strong>Actualizado:</strong> {{need.updatedAt | date:"dd-MM-yyyy" }} </span>
+                    </div>
+                  </td>
+                  <td>
+                    {{ need.target }}
+                  </td>
+                  <td>
+                    {{ need.municipality }}
+                  </td>
+
+                  <td class="text-center">
+                    <div class="row d-center">
+                      <a (click)="openModalEdit(EditNeed, need, 'need')" class="link mr-2" style="cursor: pointer;">
+                        <svg [cIcon]="icons.cilPencil" size="xl" title="Edit Icon"></svg>
+                      </a>
+                      <a (click)="disableNeed(need)" class="link mr-2" style="cursor: pointer;">
+                        <svg [cIcon]="icons.cilTrash" size="xl" title="Delete Icon"></svg>
+                      </a>
+                      <a (click)="openModalView(ListIndicators, need._id)" class="link mr-2" style="cursor: pointer;">
+                        <svg [cIcon]="icons.cilSpeedometer" size="xl" title="Speed Icon"></svg>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div><!--/.col-->
-    </div><!--/.row-->
+      </div>
+    </div><!--/.col-->
+  </div><!--/.row-->
+</div>
+
+<ng-template #ListIndicators>
+
+  <div class="modal-header bg-primary">
+    <h4 class="modal-title pull-left">Mis Indicadores</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalView!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
   </div>
-  
-  <ng-template #ListIndicators>
-    <div class="modal-header bg-primary">
-      <h4 class="modal-title pull-left">Mis Indicadores</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalView!.hide()">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-  
-    <div class="modal-body">
-      <div class="row">
-        <div class="col">
-          <pagination [totalItems]="(paginatorIndi.totalItems / paginatorIndi.sizePage)" [(ngModel)]="paginatorIndi.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
-        </div>
-  
-        <div class="mr-3">
-          <button class="btn btn-primary" (click)="openModalCreate(CreateIndi, 'indi')">
-            <i class="cil-plus"></i> Agregar
-          </button>
-        </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col">
+        <pagination [totalItems]="(paginatorIndi.totalItems / paginatorIndi.sizePage)"
+          [(ngModel)]="paginatorIndi.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente">
+        </pagination>
       </div>
-      
-      <div class="text-center" *ngIf="indiArray.length == 0">
-        <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
+
+      <div class="mr-3">
+        <button class="btn btn-primary" (click)="openModalCreate(CreateIndi, 'indi')">
+          <i class="cil-plus"></i> Agregar
+        </button>
       </div>
-  
-      <table *ngIf="indiArray.length != 0" class="table table-responsive-sm table-hover col table-outline mb-0">
-        <thead class="thead-light">
-          <tr>
-            <th class="text-center">N°</th>
-            <th>Necesidad</th>
-            <th>Descripción</th>
-            <th class="text-center">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let indi of indiArray | slice: (paginatorIndi.currentPage-1) * paginatorIndi.sizePage : paginatorIndi.currentPage * paginatorIndi.sizePage; let i = index">
-            <td class="text-center">
-              {{(i+1) + ((paginatorIndi.currentPage-1) * paginatorIndi.sizePage)}}
-            </td>
-            <td>
-              {{ indi.idNeed | needName: needsArray }}
-            </td>
-            <td>
-              <div class="small text-muted">
-                <span class="truncate"> {{indi.description}} </span>
-                <span> <strong>Creado:</strong> {{indi.createdAt | date:"dd-MM-yyyy" }} </span> 
-                <span> <strong>Actualizado:</strong> {{indi.updatedAt | date:"dd-MM-yyyy" }} </span> 
-              </div>
-            </td>
-  
-            <td class="text-center">
-              <div class="row d-center">
-                <a (click)="openModalEdit(EditIndi, indi, 'indi')" class="link mr-2" placement="top" tooltip="Editar">
-                  <i class="cil-pencil pencil"></i>
-                </a>
-                <a (click)="disableIndi(indi)" class="link mr-2" placement="top" tooltip="Eliminar">
-                  <i class="cil-trash trash"></i>
-                </a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-  </ng-template>
-  
-  <ng-template #CreateNeed>
-    <div class="modal-header bg-success">
-        <h4 class="modal-title pull-left">Crear Necesidad</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalCreate!.hide()">
-          <span aria-hidden="true">×</span>
-        </button>
+
+    <div class="text-center" *ngIf="indiArray.length == 0">
+      <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" width="400px">
     </div>
-    <div class="card-body">
-      <form id="formCreateNeed" [formGroup]="formCreateNeed">
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label"for="title">Título</label>
-              <input type="text" class="form-control" id="title" formControlName="title" placeholder="Título de la necesidad" required minlength="5" >
-              <div class="text-danger mt-2" *ngIf="invalidField('title', 'need')">
-                {{ getErrorMessage("title", 'need') }}
-              </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label"for="description">Descripción</label>
-              <textarea class="form-control" id="description" formControlName="description" placeholder="Descripción de la necesidad" required minlength="5" cols="30" rows="5"></textarea>
-              <div class="text-danger mt-2" *ngIf="invalidField('description', 'need')">
-                {{ getErrorMessage("description", 'need') }}
-              </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label"for="target">Meta</label>
-              <textarea class="form-control" id="target" formControlName="target" placeholder="Meta de la necesidad" required minlength="5" cols="30" rows="5"></textarea>
-              <div class="text-danger mt-2" *ngIf="invalidField('target', 'need')">
-                {{ getErrorMessage("target", 'need') }}
-              </div>
-          </div>
-        </div>
-      </form>  
-      
-    </div>
-    <div class="card-footer">
-      <button type="submit" (click)="createNeed()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Guardar</button>
-      <button type="button" (click)="modalCreate!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
-    </div>
-  </ng-template>
-  
-  <ng-template #EditNeed>
-    <div class="modal-header bg-success">
-        <h4 class="modal-title pull-left">Editar Necesidad</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalEdit!.hide()">
-          <span aria-hidden="true">×</span>
-        </button>
-    </div>
-    <div class="card-body">
-      <form id="formEditNeed" [formGroup]="formEditNeed">
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label"for="title">Título</label>
-              <input type="text" class="form-control" id="title" formControlName="title" placeholder="Título de la necesidad" required minlength="5" >
-              <div class="text-danger mt-2" *ngIf="invalidFieldE('title', 'need')">
-                {{ getErrorMessageE("title", 'need') }}
-              </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label"for="description">Descripción</label>
-              <textarea class="form-control" id="description" formControlName="description" placeholder="Descripción de la necesidad" required minlength="5" cols="30" rows="5"></textarea>
-              <div class="text-danger mt-2" *ngIf="invalidFieldE('description', 'need')">
-                {{ getErrorMessageE("description", 'need') }}
-              </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label"for="target">Meta</label>
-              <textarea class="form-control" id="target" formControlName="target" placeholder="Meta de la necesidad" required minlength="5" cols="30" rows="5"></textarea>
-              <div class="text-danger mt-2" *ngIf="invalidFieldE('target', 'need')">
-                {{ getErrorMessageE("target", 'need') }}
-              </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label"for="municipality">Municipio</label>
-              <input class="form-control" id="municipality" formControlName="municipality" placeholder="Municipio registrado" required minlength="5">
-              <div class="text-danger mt-2" *ngIf="invalidFieldE('municipality', 'need')">
-                {{ getErrorMessageE("municipality", 'need') }}
-              </div>
-          </div>
-        </div>
-      </form>  
-      
-    </div>
-    <div class="card-footer">
-      <button type="submit" (click)="updateNeed()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Actualizar</button>
-      <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
-    </div>
-  </ng-template>
-  
-  <ng-template #CreateIndi>
-    <div class="modal-header bg-success">
-        <h4 class="modal-title pull-left">Crear Indicador</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalCreate!.hide()">
-          <span aria-hidden="true">×</span>
-        </button>
-    </div>
-    <div class="card-body">
-      <form id="formCreateIndi" [formGroup]="formCreateIndi">
-        <div class="row">
-          <div class="form-group col-sm-12">
-            <label class="form-col-form-label"for="description">Descripción</label>
-            <textarea class="form-control" id="description" formControlName="description" placeholder="Descripción del indicador" required minlength="5" cols="30" rows="5"></textarea>
-            <div class="text-danger mt-2" *ngIf="invalidField('description', 'indi')">
-              {{ getErrorMessage("description", 'indi') }}
+
+    <table *ngIf="indiArray.length != 0" class="table table-responsive-sm table-hover col table-outline mb-0">
+      <thead class="thead-light">
+        <tr>
+          <th class="text-center">N°</th>
+          <th>Necesidad</th>
+          <th>Descripción</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let indi of indiArray | slice: (paginatorIndi.currentPage-1) * paginatorIndi.sizePage : paginatorIndi.currentPage * paginatorIndi.sizePage; let i = index">
+          <td class="text-center">
+            {{(i+1) + ((paginatorIndi.currentPage-1) * paginatorIndi.sizePage)}}
+          </td>
+          <td>
+            {{ indi.idNeed | needName: needsArray }}
+          </td>
+          <td>
+            <div class="small text-muted">
+              <span class="truncate"> {{indi.description}} </span>
+              <span> <strong>Creado:</strong> {{indi.createdAt | date:"dd-MM-yyyy" }} </span>
+              <span> <strong>Actualizado:</strong> {{indi.updatedAt | date:"dd-MM-yyyy" }} </span>
             </div>
+          </td>
+
+          <td class="text-center">
+            <div class="row d-center">
+              <a (click)="openModalEdit(EditIndi, indi, 'indi')" class="link mr-2" placement="top" tooltip="Editar">
+                <svg [cIcon]="icons.cilPencil" size="xl" title="Edit Icon"></svg>
+              </a>
+              <a (click)="disableIndi(indi)" class="link mr-2" placement="top" tooltip="Eliminar">
+                <svg [cIcon]="icons.cilTrash" size="xl" title="Delete Icon"></svg>
+              </a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+
+<ng-template #CreateNeed>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Crear Necesidad</h4>
+    <button type="button" class="btn like2" (click)="modalCreate!.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
+    </button>
+  </div>
+  <c-card-body>
+    <form cForm id="formCreateNeed" [formGroup]="formCreateNeed">
+
+      <div class="form-group col-sm-12">
+        <label class="form-col-form-label" for="title">Título</label>
+        <input type="text" class="form-control" id="title" formControlName="title" placeholder="Título de la necesidad"
+          required minlength="5">
+        <div class="text-danger mt-2" *ngIf="invalidField('title', 'need')">
+          {{ getErrorMessage("title", 'need') }}
+        </div>
+      </div>
+
+
+      <div class="form-group col-sm-12">
+        <label class="form-col-form-label" for="description">Descripción</label>
+        <textarea class="form-control" id="description" formControlName="description"
+          placeholder="Descripción de la necesidad" required minlength="5" cols="30" rows="5"></textarea>
+        <div class="text-danger mt-2" *ngIf="invalidField('description', 'need')">
+          {{ getErrorMessage("description", 'need') }}
+        </div>
+      </div>
+
+
+      <div class="form-group col-sm-12">
+        <label class="form-col-form-label" for="target">Meta</label>
+        <textarea class="form-control" id="target" formControlName="target" placeholder="Meta de la necesidad" required
+          minlength="5" cols="30" rows="5"></textarea>
+        <div class="text-danger mt-2" *ngIf="invalidField('target', 'need')">
+          {{ getErrorMessage("target", 'need') }}
+        </div>
+
+      </div>
+    </form>
+
+  </c-card-body>
+
+  <div class="modal-footer p-1">
+    <button type="submit" (click)="createNeed()" class="btn btn-md size-l btn-success">
+      <svg [cIcon]="icons.cilCheck" size="xl" title="List Icon"></svg>
+      Guardar</button>
+    <button type="button" (click)="modalCreate!.hide()" class="btn btn-md size-l btn-danger">
+      <svg [cIcon]="icons.cilBan" size="xl" title="List Icon"></svg>
+      Cerrar</button>
+  </div>
+</ng-template>
+
+<ng-template #EditNeed>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left">Editar Necesidad</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalEdit!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="card-body">
+    <form id="formEditNeed" [formGroup]="formEditNeed">
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <label class="form-col-form-label" for="title">Título</label>
+          <input type="text" class="form-control" id="title" formControlName="title"
+            placeholder="Título de la necesidad" required minlength="5">
+          <div class="text-danger mt-2" *ngIf="invalidFieldE('title', 'need')">
+            {{ getErrorMessageE("title", 'need') }}
           </div>
         </div>
-      </form>  
-      
-    </div>
-    <div class="card-footer">
-      <button type="submit" (click)="createIndi()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Guardar</button>
-      <button type="button" (click)="modalCreate!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
-    </div>
-  </ng-template>
-  
-  <ng-template #EditIndi>
-    <div class="modal-header bg-success">
-        <h4 class="modal-title pull-left">Editar Indicador</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalEdit!.hide()">
-          <span aria-hidden="true">×</span>
-        </button>
-    </div>
-    <div class="card-body">
-      <form id="formEditIndi" [formGroup]="formEditIndi">
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label"for="description">Descripción</label>
-              <textarea class="form-control" id="description" formControlName="description" placeholder="Descripción del indicador" required minlength="5" cols="30" rows="5"></textarea>
-              <div class="text-danger mt-2" *ngIf="invalidFieldE('description', 'indi')">
-                {{ getErrorMessageE("description", 'indi') }}
-              </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <label class="form-col-form-label" for="description">Descripción</label>
+          <textarea class="form-control" id="description" formControlName="description"
+            placeholder="Descripción de la necesidad" required minlength="5" cols="30" rows="5"></textarea>
+          <div class="text-danger mt-2" *ngIf="invalidFieldE('description', 'need')">
+            {{ getErrorMessageE("description", 'need') }}
           </div>
         </div>
-      </form>  
-      
-    </div>
-    <div class="card-footer">
-      <button type="submit" (click)="updateIndi()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Actualizar</button>
-      <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
-    </div>
-  </ng-template>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <label class="form-col-form-label" for="target">Meta</label>
+          <textarea class="form-control" id="target" formControlName="target" placeholder="Meta de la necesidad"
+            required minlength="5" cols="30" rows="5"></textarea>
+          <div class="text-danger mt-2" *ngIf="invalidFieldE('target', 'need')">
+            {{ getErrorMessageE("target", 'need') }}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <label class="form-col-form-label" for="municipality">Municipio</label>
+          <input class="form-control" id="municipality" formControlName="municipality"
+            placeholder="Municipio registrado" required minlength="5">
+          <div class="text-danger mt-2" *ngIf="invalidFieldE('municipality', 'need')">
+            {{ getErrorMessageE("municipality", 'need') }}
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="card-footer">
+    <button type="submit" (click)="updateNeed()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i>
+      Actualizar</button>
+    <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i>
+      Cerrar</button>
+  </div>
+</ng-template>
+
+<ng-template #CreateIndi>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left">Crear Indicador</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalCreate!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="card-body">
+    <form id="formCreateIndi" [formGroup]="formCreateIndi">
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <label class="form-col-form-label" for="description">Descripción</label>
+          <textarea class="form-control" id="description" formControlName="description"
+            placeholder="Descripción del indicador" required minlength="5" cols="30" rows="5"></textarea>
+          <div class="text-danger mt-2" *ngIf="invalidField('description', 'indi')">
+            {{ getErrorMessage("description", 'indi') }}
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="card-footer">
+    <button type="submit" (click)="createIndi()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i>
+      Guardar</button>
+    <button type="button" (click)="modalCreate!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i>
+      Cerrar</button>
+  </div>
+</ng-template>
+
+<ng-template #EditIndi>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left">Editar Indicador</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalEdit!.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="card-body">
+    <form id="formEditIndi" [formGroup]="formEditIndi">
+      <div class="row">
+        <div class="form-group col-sm-12">
+          <label class="form-col-form-label" for="description">Descripción</label>
+          <textarea class="form-control" id="description" formControlName="description"
+            placeholder="Descripción del indicador" required minlength="5" cols="30" rows="5"></textarea>
+          <div class="text-danger mt-2" *ngIf="invalidFieldE('description', 'indi')">
+            {{ getErrorMessageE("description", 'indi') }}
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="card-footer">
+    <button type="submit" (click)="updateIndi()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i>
+      Actualizar</button>
+    <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i>
+      Cerrar</button>
+  </div>
+</ng-template>

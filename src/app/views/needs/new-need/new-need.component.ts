@@ -10,6 +10,19 @@ import { IndicatorService } from '../services/indicator.service';
 import { NewNeedsService } from '../services/new-needs.service';
 import { Indicator } from './../../interfaces/indicatorP'
 import { Needs } from './../../interfaces/needsP'
+import {
+  cilList,
+  cilShieldAlt,
+  cilCheck,
+  cilBan,
+  cilThumbUp,
+  cilThumbDown,
+  cilChatBubble,
+  cilX,
+  cilPencil,
+  cilTrash,
+  cilSpeedometer
+} from '@coreui/icons';
 
 @Component({
   selector: 'app-new-need',
@@ -17,6 +30,19 @@ import { Needs } from './../../interfaces/needsP'
   styleUrls: ['./new-need.component.scss']
 })
 export class NewNeedComponent implements OnInit {
+  icons = {
+    cilList,
+    cilShieldAlt,
+    cilCheck,
+    cilBan,
+    cilThumbUp,
+    cilThumbDown,
+    cilChatBubble,
+    cilX,
+    cilPencil,
+    cilTrash,
+    cilSpeedometer
+  };
   private tokensave: string = '';
 
   // Configuración Array

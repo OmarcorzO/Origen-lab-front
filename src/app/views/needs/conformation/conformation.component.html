@@ -37,8 +37,8 @@
                                         {{ ideas.phase }}
                                       </td>
                                       <td class="text-center">
-                                        <button (click)="addTeam(AddUser, ideas._id)" class="btn-primary btn-pill" tooltip="Inscribirse" placement="top">
-                                          <i class="cil-plus b-lg"></i>
+                                        <button (click)="addTeam(AddUser, ideas._id)" class="btn">
+                                          <svg [cIcon]="icons.cilPlus" size="xl" title="Plus Icon"></svg>
                                         </button>
                                       </td>
                                     </tr>
@@ -53,7 +53,7 @@
                       <!-- Tabla de idea donde se unió -->
                       <div class="col-md-6">
                           <div class="card">
-                              <div class="card-header bg-warning lg">
+                              <div class="card-header bg-warning">
                                 <strong>Equipos inscritos</strong> 
                               </div>
                               <div class="card-body" *ngIf="teamUserArray.length > 0">
@@ -109,14 +109,13 @@
 </div>
 
 <ng-template #AddUser>
-  <div class="modal-header bg-primary">
-    <h3 class="modal-title pull-left">
-      Escoja las necesidades
-    </h3>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalAddUser!.hide()">
-      <span aria-hidden="true">×</span>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Escoja las necesidades</h4>
+    <button type="button" class="btn like2" (click)="modalAddUser!.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
     </button>
   </div>
+  
   <div class="modal-body">
     <div class="text-center" *ngIf="needsArray.length == 0">
       <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
@@ -162,10 +161,10 @@
             ¿Quiere postularse como administrador?
           </div>
           <div class="col">
-            <label class="switch switch-label switch-pill switch-outline-success-alt form-col-form-label">
-              <input type="checkbox" class="switch-input form-control" (click)="dataEnte(null, $event)">
-              <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
-            </label>
+            <c-form-check [switch]="true">
+              <input cFormCheckInput checked type="checkbox" (click)="dataEnte(null, $event)"/>
+              <!-- <label cFormCheckLabel>YES</label> -->
+            </c-form-check>
           </div>
         </div>
       </div>

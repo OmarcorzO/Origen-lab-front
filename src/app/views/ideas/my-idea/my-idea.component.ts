@@ -5,6 +5,9 @@ import { SwalService } from "../../services/swal.service";
 import { MyIdeaService } from "../services/my-idea.service";
 import { ValidationMessagesService } from "../../services/validation-messages.service";
 import Swal from "sweetalert2";
+import {
+  cilPencil, cilX
+} from '@coreui/icons';
 
 @Component({
   selector: "app-my-idea",
@@ -12,6 +15,10 @@ import Swal from "sweetalert2";
   styleUrls: ["./my-idea.component.scss"],
 })
 export class MyIdeaComponent implements OnInit {
+  icons = {
+    cilPencil, cilX
+  }
+
   public tokensave: string = '';
 
   // Paginator and Array

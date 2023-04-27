@@ -18,7 +18,6 @@ import {
   cilThumbDown,
   cilChatBubble,
   cilX,
-  cibFacebook
 } from '@coreui/icons';
 
 @Component({
@@ -520,7 +519,7 @@ export class ViewIdeaComponent implements OnInit {
   }
 
   callServiceReacting(opinionOld, opinionNew) {
-    if (opinionOld === null) {
+    if (opinionOld === '') {
       this.service
         .createReactingIdeas(this.tokensave, this.formReaction.value)
         .subscribe(

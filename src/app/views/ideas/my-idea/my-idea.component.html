@@ -48,8 +48,8 @@
                     {{idea.comment_idea.length == 0 ? 0 : idea.comment_idea[0].count}}
                   </td>
                   <td class="text-center">
-                    <a *ngIf="idea.phase === 'coocreacion'" (click)="openModalEditIdea(EditIdea, idea)" class="link mr-2" placement="top" tooltip="Editar">
-                      <i class="cil-pencil pencil"></i>
+                    <a *ngIf="idea.phase === 'coocreacion'" style="cursor: pointer;" (click)="openModalEditIdea(EditIdea, idea)" class="link mr-2" placement="top" tooltip="Editar">
+                      <svg [cIcon]="icons.cilPencil" size="xl" title="Pencil Icon"></svg>
                     </a>
                     <p *ngIf="idea.phase !== 'coocreacion'">
                       La idea pasó a otra fase
@@ -66,13 +66,13 @@
   
   <ng-template #EditIdea>
     <div class="modal-header bg-success">
-        <h4 class="modal-title pull-left">Editar Idea</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="modalEdit.hide()">
-          <span aria-hidden="true">×</span>
-        </button>
+      <h4 class="modal-title pull-left like2">Editar Idea</h4>
+      <button type="button" class="btn like2" (click)="modalEdit.hide()">
+        <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
+      </button>
     </div>
-    <div class="card-body">
-      <form id="formEditIdea" [formGroup]="formEditIdea">
+    <c-card-body>
+      <form cForm id="formEditIdea" [formGroup]="formEditIdea">
         <div class="row">
           <div class="form-group col-sm-12">
               <label class="form-col-form-label"for="name">Nombre</label>
@@ -154,9 +154,9 @@
         </div>
       </form>    
       
-    </div>
-    <div class="card-footer">
+    </c-card-body>
+    <c-card-footer>
       <button type="submit" (click)="updateIdea()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Guardar</button>
       <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
-    </div>
+    </c-card-footer>
   </ng-template>

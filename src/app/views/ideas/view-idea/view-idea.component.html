@@ -8,80 +8,35 @@
               <strong>Ideas</strong>
             </c-col>
             <c-col style="text-align: right">
-              <button
-                type="button"
-                class="btn"
-                (click)="ideasFilter('asc')"
-                [ngClass]="{
+              <button type="button" class="btn" (click)="ideasFilter('asc')" [ngClass]="{
                   black: orderView !== 'asc',
                   like: orderView === 'asc'
-                }"
-              >
-                <svg
-                  [cIcon]="icons.cilSortAscending"
-                  size="xl"
-                  title="List Icon"
-                ></svg>
+                }">
+                <svg [cIcon]="icons.cilSortAscending" size="xl" title="List Icon"></svg>
               </button>
-              <button
-                type="button"
-                class="btn"
-                (click)="ideasFilter('desc')"
-                [ngClass]="{
+              <button type="button" class="btn" (click)="ideasFilter('desc')" [ngClass]="{
                   black: orderView !== 'desc',
                   like: orderView === 'desc'
-                }"
-              >
-                <svg
-                  [cIcon]="icons.cilSortDescending"
-                  size="xl"
-                  title="List Icon"
-                ></svg>
+                }">
+                <svg [cIcon]="icons.cilSortDescending" size="xl" title="List Icon"></svg>
               </button>
-              <button
-                type="button"
-                class="btn"
-                (click)="ideasFilter('comment')"
-                [ngClass]="{
+              <button type="button" class="btn" (click)="ideasFilter('comment')" [ngClass]="{
                   black: fieldView !== 'comment',
                   like: fieldView === 'comment'
-                }"
-              >
-                <svg
-                  [cIcon]="icons.cilChatBubble"
-                  size="xl"
-                  title="List Icon"
-                ></svg>
+                }">
+                <svg [cIcon]="icons.cilChatBubble" size="xl" title="List Icon"></svg>
               </button>
-              <button
-                type="button"
-                class="btn"
-                (click)="ideasFilter('dislikes')"
-                [ngClass]="{
+              <button type="button" class="btn" (click)="ideasFilter('dislikes')" [ngClass]="{
                   black: fieldView !== 'dislikes',
                   like: fieldView === 'dislikes'
-                }"
-              >
-                <svg
-                  [cIcon]="icons.cilThumbDown"
-                  size="xl"
-                  title="List Icon"
-                ></svg>
+                }">
+                <svg [cIcon]="icons.cilThumbDown" size="xl" title="List Icon"></svg>
               </button>
-              <button
-                type="button"
-                class="btn"
-                (click)="ideasFilter('likes')"
-                [ngClass]="{
+              <button type="button" class="btn" (click)="ideasFilter('likes')" [ngClass]="{
                   black: fieldView !== 'likes',
                   like: fieldView === 'likes'
-                }"
-              >
-                <svg
-                  [cIcon]="icons.cilThumbUp"
-                  size="xl"
-                  title="List Icon"
-                ></svg>
+                }">
+                <svg [cIcon]="icons.cilThumbUp" size="xl" title="List Icon"></svg>
               </button>
             </c-col>
           </c-row>
@@ -90,12 +45,8 @@
         <c-card-body>
           <c-row>
             <c-col *ngFor="let widget of brandData; index as i" sm="6" xl="3">
-              <c-widget-stat-d
-                [color]="widget.color ?? ''"
-                [style]="widget.capBg ?? null"
-                [values]="widget.values"
-                class="mb-4"
-              >
+              <c-widget-stat-d [color]="widget.color ?? ''" [style]="widget.capBg ?? null" [values]="widget.values"
+                class="mb-4">
                 <p style="color: white; font-family: Verdana, Geneva, Tahoma, sans-serif;">
                   <i>
                     {{ widget.title }}
@@ -117,10 +68,7 @@
           </c-row>
 
           <div class="row">
-            <div
-              class="col-sm-4 col-md-4 col-lg-4"
-              *ngFor="let idea of arrayPublicIdeas; let i = index"
-            >
+            <div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let idea of arrayPublicIdeas; let i = index">
               <div class="brand-card" (click)="showIdea(idea, ViewIdea)">
                 <div class="brand-card-header bg-facebook">
                   <!-- <i class="fa fa-facebook"></i> -->
@@ -132,9 +80,9 @@
                   <div>
                     <div class="text-value">
                       {{
-                        idea.reacting_idea_likes.length == 0
-                          ? 0
-                          : idea.reacting_idea_likes[0].count
+                      idea.reacting_idea_likes.length == 0
+                      ? 0
+                      : idea.reacting_idea_likes[0].count
                       }}
                     </div>
                     <div class="text-uppercase text-muted small">Likes</div>
@@ -142,9 +90,9 @@
                   <div>
                     <div class="text-value">
                       {{
-                        idea.reacting_idea_dislikes.length == 0
-                          ? 0
-                          : idea.reacting_idea_dislikes[0].count
+                      idea.reacting_idea_dislikes.length == 0
+                      ? 0
+                      : idea.reacting_idea_dislikes[0].count
                       }}
                     </div>
                     <div class="text-uppercase text-muted small">Dislikes</div>
@@ -152,9 +100,9 @@
                   <div>
                     <div class="text-value">
                       {{
-                        idea.comment_idea.length == 0
-                          ? 0
-                          : idea.comment_idea[0].count
+                      idea.comment_idea.length == 0
+                      ? 0
+                      : idea.comment_idea[0].count
                       }}
                     </div>
                     <div class="text-uppercase text-muted small">Coments</div>
@@ -164,15 +112,10 @@
               <!--/.brand-card-->
             </div>
           </div>
-          <!--./row--> </c-card-body
-        ><!--/.card-body-->
+          <!--./row-->
+        </c-card-body><!--/.card-body-->
         <div class="card-footer text-center">
-          <button
-            type="button"
-            class="btn btn-outline-dark"
-            style="width: 75%"
-            (click)="moreIdeas()"
-          >
+          <button type="button" class="btn btn-outline-dark" style="width: 75%" (click)="moreIdeas()">
             Más Resultados
           </button>
         </div>
@@ -194,11 +137,11 @@
       <p>
         <strong>Top User:</strong> {{ topUser.name }}
         {{
-          topUser.number == 0
-            ? null
-            : "| " +
-              topUser.number +
-              "
+        topUser.number == 0
+        ? null
+        : "| " +
+        topUser.number +
+        "
         comentarios"
         }}
         <br />
@@ -211,14 +154,8 @@
       <div *ngIf="ideaView.idea_anexos.length > 0" style="display: flex">
         <div *ngFor="let item of ideaView.idea_anexos">
           <a [href]="item.link" target="_blank">
-            <i
-              class="fa fa-file-pdf-o files"
-              *ngIf="item.link.includes('.pdf')"
-            ></i>
-            <i
-              class="fa fa-file-image-o files"
-              *ngIf="item.link.includes('.jpg') || item.link.includes('.png')"
-            ></i>
+            <i class="fa fa-file-pdf-o files" *ngIf="item.link.includes('.pdf')"></i>
+            <i class="fa fa-file-image-o files" *ngIf="item.link.includes('.jpg') || item.link.includes('.png')"></i>
           </a>
         </div>
       </div>
@@ -227,31 +164,21 @@
     </div>
 
     <div class="text-center" *ngIf="arrayComments.length > 0">
-      <pagination
-        [totalItems]="totalItems / sizePage"
-        [(ngModel)]="currentPage"
-        [maxSize]="4"
-        previousText="&lsaquo;"
-        nextText="&rsaquo;"
-      ></pagination>
+      <pagination [totalItems]="totalItems / sizePage" [(ngModel)]="currentPage" [maxSize]="4" previousText="&lsaquo;"
+        nextText="&rsaquo;"></pagination>
     </div>
-    <table
-      class="table table-bordered table-striped table-sm"
-      *ngIf="arrayComments.length > 0"
-    >
+    <table class="table table-bordered table-striped table-sm" *ngIf="arrayComments.length > 0">
       <thead>
         <tr>
           <th class="lg">Comentarios</th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          *ngFor="
+        <tr *ngFor="
             let ideaC of arrayComments
               | slice : (currentPage - 1) * sizePage : currentPage * sizePage;
             let i = index
-          "
-        >
+          ">
           <td>
             {{ ideaC.comment }}
             <br />
@@ -259,7 +186,7 @@
             <br />
             <span class="badge badge-success">{{
               ideaC.type_comment_idea[0].name
-            }}</span>
+              }}</span>
           </td>
         </tr>
       </tbody>
@@ -267,19 +194,13 @@
 
     <!--/.form-->
   </c-card-body>
-  <c-card-footer class="card-footer">
+  <div class="modal-footer">
     <form id="formComments" [formGroup]="formComments">
       <div class="row">
         <div>
           <div class="input-group">
             <c-input-group style="padding: 5px">
-              <select
-                cSelect
-                class="form-control lg mr-2"
-                id="commentTypeId"
-                formControlName="commentTypeId"
-                required
-              >
+              <select cSelect class="form-control lg mr-2" id="commentTypeId" formControlName="commentTypeId" required>
                 <option value="" disabled selected>
                   <-- Tipo de comentario -->
                 </option>
@@ -287,27 +208,11 @@
                   {{ item.name }}
                 </option>
               </select>
-              <button
-                class="btn"
-                (click)="addReaction('dislike')"
-                [ngClass]="{ dislike: myReaction === 'dislike' }"
-              >
-                <svg
-                  [cIcon]="icons.cilThumbDown"
-                  size="xl"
-                  title="List Icon"
-                ></svg>
+              <button class="btn" (click)="addReaction('dislike')" [ngClass]="{ dislike: myReaction === 'dislike' }">
+                <svg [cIcon]="icons.cilThumbDown" size="xl" title="List Icon"></svg>
               </button>
-              <button
-                class="btn"
-                (click)="addReaction('like')"
-                [ngClass]="{ like: myReaction === 'like' }"
-              >
-                <svg
-                  [cIcon]="icons.cilThumbUp"
-                  size="xl"
-                  title="List Icon"
-                ></svg>
+              <button class="btn" (click)="addReaction('like')" [ngClass]="{ like: myReaction === 'like' }">
+                <svg [cIcon]="icons.cilThumbUp" size="xl" title="List Icon"></svg>
               </button>
             </c-input-group>
 
@@ -318,34 +223,21 @@
           </div>
         </div>
 
-        <div>
+        <div class="p-0">
           <c-input-group style="padding: 5px">
-            <input
-              class="form-control lg"
-              type="text"
-              id="comment"
-              formControlName="comment"
-              placeholder="Comenta ahora!!"
-            />
+            <input class="form-control lg" type="text" id="comment" formControlName="comment"
+              placeholder="Comenta ahora!!" />
             <span class="input-group-append">
-              <button
-                type="submit"
-                (click)="publicIdea()"
-                class="btn btn-primary lg"
-              >
-                <svg
-                  [cIcon]="icons.cilChatBubble"
-                  size="xl"
-                  title="List Icon"
-                ></svg>
+              <button type="submit" (click)="publicIdea()" class="btn btn-primary lg">
+                <svg [cIcon]="icons.cilChatBubble" size="xl" title="List Icon"></svg>
               </button>
             </span>
+            <div class="text-danger mt-2" *ngIf="invalidField('comment')">
+              {{ getErrorMessage("comment") }}
+            </div>
           </c-input-group>
-          <div class="text-danger mt-2" *ngIf="invalidField('comment')">
-            {{ getErrorMessage("comment") }}
-          </div>
         </div>
       </div>
     </form>
-  </c-card-footer>
+  </div>
 </ng-template>
