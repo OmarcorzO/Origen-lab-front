@@ -7,6 +7,17 @@ import { ProcessIdeaService } from '../../services/process-idea.service';
 import { SwalService } from '../../services/swal.service';
 import { ValidationMessagesService } from '../../services/validation-messages.service';
 import { IdeationService } from '../services/ideation.service';
+import {
+  cilBookmark,
+  cilInfo,
+  cilArrowThickToRight,
+  cilSearch,
+  cilX,
+  cilPlus,
+  cilLoopCircular,
+  cilPencil,
+  cilViewStream
+} from '@coreui/icons';
 
 @Component({
   selector: 'app-new-ideation',
@@ -14,6 +25,12 @@ import { IdeationService } from '../services/ideation.service';
   styleUrls: ['./new-ideation.component.scss']
 })
 export class NewIdeationComponent implements OnInit {
+  icons = {
+    cilBookmark, cilInfo, cilArrowThickToRight, cilSearch, cilX, cilPlus,
+    cilLoopCircular, cilPencil, cilViewStream
+  }
+  // cib-tripadvisor, cib-openstreetmap, cib-json, cil-browser, cil-file, cil-folder-open, cil-magnifying-glass cil-scrubber, cil-search
+
   public tokensave: string = '';
   public selected: boolean = false;
   public userIdG: string = '';

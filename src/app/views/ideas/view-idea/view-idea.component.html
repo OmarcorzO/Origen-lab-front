@@ -209,10 +209,10 @@
                 </option>
               </select>
               <button class="btn" (click)="addReaction('dislike')" [ngClass]="{ dislike: myReaction === 'dislike' }">
-                <svg [cIcon]="icons.cilThumbDown" size="xl" title="List Icon"></svg>
+                <svg [cIcon]="icons.cilThumbDown" size="xl" title="Dislike Icon"></svg>
               </button>
               <button class="btn" (click)="addReaction('like')" [ngClass]="{ like: myReaction === 'like' }">
-                <svg [cIcon]="icons.cilThumbUp" size="xl" title="List Icon"></svg>
+                <svg [cIcon]="icons.cilThumbUp" size="xl" title="Like Icon"></svg>
               </button>
             </c-input-group>
 
