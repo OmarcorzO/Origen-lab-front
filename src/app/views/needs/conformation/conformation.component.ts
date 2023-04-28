@@ -13,7 +13,7 @@ import { ConformationService } from '../services/conformation.service';
 import { NewNeedsService } from '../services/new-needs.service';
 import { Needs } from '../../interfaces/needsP';
 import {
-  cilPencil, cilPlus, cilX
+  cilPencil, cilPlus, cilX, cilBookmark, cilMinus, cilArrowThickToRight
 } from '@coreui/icons';
 
 @Component({
@@ -23,7 +23,7 @@ import {
 })
 export class ConformationComponent implements OnInit {
   icons = {
-    cilPencil, cilPlus, cilX
+    cilPencil, cilPlus, cilX, cilBookmark, cilMinus, cilArrowThickToRight
   }
   private tokensave: string = '';
   private idTemp: string = '';

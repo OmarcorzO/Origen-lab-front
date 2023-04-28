@@ -7,9 +7,9 @@
         </c-card-header>
         <div class="card-body">
           <div class="row">
-            <!-- <div class="col">
-                <pagination [totalItems]="(totalItems / paginator.sizePage)" [(ngModel)]="paginator.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
-              </div> -->
+            <div class="col">
+                <pagination [totalItems]="(paginatorNeed.totalItems / paginatorNeed.sizePage)" [(ngModel)]="paginatorNeed.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
+              </div>
 
             <div class="mr-3">
               <button class="btn btn-primary" (click)="openModalCreate(CreateNeed, 'need')">
@@ -83,10 +83,10 @@
 
 <ng-template #ListIndicators>
 
-  <div class="modal-header bg-primary">
-    <h4 class="modal-title pull-left">Mis Indicadores</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalView!.hide()">
-      <span aria-hidden="true">×</span>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Mis Indicadores</h4>
+    <button type="button" class="btn like2" (click)="modalView!.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
     </button>
   </div>
 
@@ -137,10 +137,10 @@
 
           <td class="text-center">
             <div class="row d-center">
-              <a (click)="openModalEdit(EditIndi, indi, 'indi')" class="link mr-2" placement="top" tooltip="Editar">
+              <a (click)="openModalEdit(EditIndi, indi, 'indi')" class="link mr-2" style="cursor: pointer;">
                 <svg [cIcon]="icons.cilPencil" size="xl" title="Edit Icon"></svg>
               </a>
-              <a (click)="disableIndi(indi)" class="link mr-2" placement="top" tooltip="Eliminar">
+              <a (click)="disableIndi(indi)" class="link mr-2" style="cursor: pointer;">
                 <svg [cIcon]="icons.cilTrash" size="xl" title="Delete Icon"></svg>
               </a>
             </div>
@@ -206,14 +206,15 @@
 
 <ng-template #EditNeed>
   <div class="modal-header bg-success">
-    <h4 class="modal-title pull-left">Editar Necesidad</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalEdit!.hide()">
-      <span aria-hidden="true">×</span>
+    <h4 class="modal-title pull-left like2">Editar Necesidad</h4>
+    <button type="button" class="btn like2" (click)="modalEdit!.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
     </button>
   </div>
-  <div class="card-body">
+
+  <c-card-body>
     <form id="formEditNeed" [formGroup]="formEditNeed">
-      <div class="row">
+      
         <div class="form-group col-sm-12">
           <label class="form-col-form-label" for="title">Título</label>
           <input type="text" class="form-control" id="title" formControlName="title"
@@ -222,8 +223,7 @@
             {{ getErrorMessageE("title", 'need') }}
           </div>
         </div>
-      </div>
-      <div class="row">
+      
         <div class="form-group col-sm-12">
           <label class="form-col-form-label" for="description">Descripción</label>
           <textarea class="form-control" id="description" formControlName="description"
@@ -232,8 +232,7 @@
             {{ getErrorMessageE("description", 'need') }}
           </div>
         </div>
-      </div>
-      <div class="row">
+      
         <div class="form-group col-sm-12">
           <label class="form-col-form-label" for="target">Meta</label>
           <textarea class="form-control" id="target" formControlName="target" placeholder="Meta de la necesidad"
@@ -242,8 +241,7 @@
             {{ getErrorMessageE("target", 'need') }}
           </div>
         </div>
-      </div>
-      <div class="row">
+      
         <div class="form-group col-sm-12">
           <label class="form-col-form-label" for="municipality">Municipio</label>
           <input class="form-control" id="municipality" formControlName="municipality"
@@ -252,28 +250,30 @@
             {{ getErrorMessageE("municipality", 'need') }}
           </div>
         </div>
-      </div>
     </form>
+  </c-card-body>
 
-  </div>
-  <div class="card-footer">
-    <button type="submit" (click)="updateNeed()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i>
+  <div class="modal-footer p-1">
+    <button type="submit" (click)="updateNeed()" class="btn btn-md size-l btn-success">
+      <svg [cIcon]="icons.cilCheck" size="xl" title="Update Icon"></svg>
       Actualizar</button>
-    <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i>
+    <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger">
+      <svg [cIcon]="icons.cilBan" size="xl" title="Cancel Icon"></svg>
       Cerrar</button>
   </div>
 </ng-template>
 
 <ng-template #CreateIndi>
   <div class="modal-header bg-success">
-    <h4 class="modal-title pull-left">Crear Indicador</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalCreate!.hide()">
-      <span aria-hidden="true">×</span>
+    <h4 class="modal-title pull-left like2">Crear Indicador</h4>
+    <button type="button" class="btn like2" (click)="modalCreate!.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
     </button>
   </div>
-  <div class="card-body">
+
+  <c-card-body>
     <form id="formCreateIndi" [formGroup]="formCreateIndi">
-      <div class="row">
+      
         <div class="form-group col-sm-12">
           <label class="form-col-form-label" for="description">Descripción</label>
           <textarea class="form-control" id="description" formControlName="description"
@@ -282,28 +282,32 @@
             {{ getErrorMessage("description", 'indi') }}
           </div>
         </div>
-      </div>
+      
     </form>
 
-  </div>
-  <div class="card-footer">
-    <button type="submit" (click)="createIndi()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i>
+  </c-card-body>
+
+  <div class="modal-footer p-1">
+    <button type="submit" (click)="createIndi()" class="btn btn-md size-l btn-success">
+      <svg [cIcon]="icons.cilCheck" size="xl" title="Create Icon"></svg>
       Guardar</button>
-    <button type="button" (click)="modalCreate!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i>
+    <button type="button" (click)="modalCreate!.hide()" class="btn btn-md size-l btn-danger">
+      <svg [cIcon]="icons.cilBan" size="xl" title="Cancel Icon"></svg>
       Cerrar</button>
   </div>
 </ng-template>
 
 <ng-template #EditIndi>
   <div class="modal-header bg-success">
-    <h4 class="modal-title pull-left">Editar Indicador</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalEdit!.hide()">
-      <span aria-hidden="true">×</span>
+    <h4 class="modal-title pull-left like2">Editar Indicador</h4>
+    <button type="button" class="btn like2" (click)="modalEdit!.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
     </button>
   </div>
-  <div class="card-body">
+
+  <c-card-body>
     <form id="formEditIndi" [formGroup]="formEditIndi">
-      <div class="row">
+    
         <div class="form-group col-sm-12">
           <label class="form-col-form-label" for="description">Descripción</label>
           <textarea class="form-control" id="description" formControlName="description"
@@ -312,14 +316,17 @@
             {{ getErrorMessageE("description", 'indi') }}
           </div>
         </div>
-      </div>
     </form>
 
-  </div>
-  <div class="card-footer">
-    <button type="submit" (click)="updateIndi()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i>
+  </c-card-body>
+
+  <div class="modal-footer p-1">
+    <button type="submit" (click)="updateIndi()" class="btn btn-md size-l btn-success">
+      <svg [cIcon]="icons.cilCheck" size="xl" title="Update Icon"></svg>
       Actualizar</button>
-    <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i>
+    <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger">
+      <svg [cIcon]="icons.cilBan" size="xl" title="Cancel Icon"></svg>
       Cerrar</button>
   </div>
+
 </ng-template>

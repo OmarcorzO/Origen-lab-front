@@ -81,14 +81,17 @@
                                               {{ teamU.ideaId.phase }}
                                             </td>
                                             <td>
-                                              <button (click)="processIdea(teamU.ideaId._id, teamU.ideaId.phase)" class="btn-info btn-pill" tooltip="Estado" placement="top">
-                                                <i class="cil-bookmark b-lg"></i>
+                                              <button (click)="processIdea(teamU.ideaId._id, teamU.ideaId.phase)" style="cursor: pointer;" class="btn bg-info" >
+                                                <!-- tooltip="Estado" placement="top" -->
+                                                <svg [cIcon]="icons.cilBookmark" size="xl" title="List Icon"></svg>
                                               </button>
-                                              <button (click)="removeTeam(teamU.ideaId._id)" class="btn-danger btn-pill" tooltip="Retirarse" placement="top">
-                                                <i class="cil-minus b-lg"></i>
+                                              <button (click)="removeTeam(teamU.ideaId._id)" style="cursor: pointer;" class="btn bg-danger">
+                                                <!-- tooltip="Retirarse" placement="top" -->
+                                                <svg [cIcon]="icons.cilMinus" size="xl" title="List Icon"></svg>
                                               </button>
-                                              <button *ngIf="teamU.rol == 'administrator' && teamU.ideaId.phase == 'teamBuilding'" (click)="changePhase(teamU.ideaId._id)" class="btn-info btn-pill" tooltip="Cambiar de fase" placement="top">
-                                                <i class="cil-arrow-thick-to-right b-lg"></i>
+                                              <button *ngIf="teamU.rol == 'administrator' && teamU.ideaId.phase == 'teamBuilding'" (click)="changePhase(teamU.ideaId._id)" style="cursor: pointer;" class="btn btn-info">
+                                                <!-- tooltip="Cambiar de fase" placement="top" -->
+                                                <svg [cIcon]="icons.cilArrowThickToRight" size="xl" title="List Icon"></svg>
                                               </button>
                                             </td>
                                         </tr>

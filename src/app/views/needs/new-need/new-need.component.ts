@@ -46,7 +46,6 @@ export class NewNeedComponent implements OnInit {
   private tokensave: string = '';
 
   // Configuración Array
-  paginator = new Paginator();
   paginatorNeed = new Paginator() ;
   paginatorIndi = new Paginator();
 
@@ -111,10 +110,8 @@ export class NewNeedComponent implements OnInit {
       description: ["", [Validators.required, Validators.minLength(5)]],
     })
     // Paginadores
-    this.paginator.currentPage = 1;
     this.paginatorNeed.currentPage = 1;
     this.paginatorIndi.currentPage = 1;
-    this.paginator.sizePage = 5;
     this.paginatorIndi.sizePage = 5;
     this.paginatorNeed.sizePage = 5;
   }
