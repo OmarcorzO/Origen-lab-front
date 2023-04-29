@@ -61,8 +61,7 @@
                   </table>
                 </div>
                 <div class="card-body text-center" *ngIf="teamArray.length == 0">
-                  <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados"
-                    height="100px">
+                  <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" height="300px">
                 </div>
               </div>
             </div>
@@ -77,10 +76,12 @@
                       <form class="pt-1" id="linkMeetForm" [formGroup]="linkMeetForm">
                         <div class="row">
                           <div class="form-group col-sm-12">
-                            <label class="form-col-form-label" for="link">Link del Meet</label>
-                            <button (click)="processIdea(ideaIdG, 1, '')" class="btn bg-info">
-                              <svg [cIcon]="icons.cilBookmark" size="xl" title="Bookmark Icon"></svg>
-                            </button>
+                            <div class="py-2">
+                              <label class="form-col-form-label" for="link">Link del Meet</label>
+                              <button (click)="processIdea(ideaIdG, 1, '')" class="btn bg-info">
+                                <svg [cIcon]="icons.cilBookmark" size="xl" title="Bookmark Icon"></svg>
+                              </button>
+                            </div>
                             <div class="input-group">
 
                               <input type="text" class="form-control" id="link" formControlName="link"
@@ -95,7 +96,7 @@
                             </div>
                           </div>
                         </div>
-                        <div>
+                        <div class="py-1">
                           <button type="submit" *ngIf="!existLink" (click)="create('link')" class="btn bg-info">
                             <svg [cIcon]="icons.cilPlus" size="xl" title="Upload Icon"></svg> Subir</button>
                           <button type="submit" *ngIf="existLink" (click)="update('link')"
@@ -136,7 +137,7 @@
                             </td>
                             <td class="text-center">
                               <a (click)="openModal(ViewTeamContri, 'view', contri)" class="link mr-2 pointer">
-                                <svg [cIcon]="icons.cilViewStream" size="xl" title="Eyes Icon"></svg>
+                                <svg [cIcon]="icons.cilMagnifyingGlass" size="xl" title="Eyes Icon"></svg>
                               </a>
                             </td>
                           </tr>
@@ -213,8 +214,7 @@
                           </div>
 
                         </div>
-                        <br>
-                        <div class="tp-1">
+                        <div class="pt-1">
                           <button type="submit" *ngIf="!existDesc" (click)="create('desc')"
                             class="btn btn-md size-l btn-info"><svg [cIcon]="icons.cilPlus" size="xl"
                               title="Upload Icon"></svg> Agregar</button>

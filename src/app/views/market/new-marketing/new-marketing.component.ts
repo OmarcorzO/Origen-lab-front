@@ -7,6 +7,22 @@ import { ProcessIdeaService } from '../../services/process-idea.service';
 import { SwalService } from '../../services/swal.service';
 import { ValidationMessagesService } from '../../services/validation-messages.service';
 import { MarketService } from '../services/market.service';
+import {
+  cilBookmark,
+  cilInfo,
+  cilArrowThickToRight,
+  cilSearch,
+  cilX,
+  cilPlus,
+  cilLoopCircular,
+  cilPencil,
+  cilMagnifyingGlass,
+  cilViewStream,
+  cilCheck,
+  cilCloudUpload,
+  cilBan,
+  cilCheckCircle,
+} from '@coreui/icons';
 
 @Component({
   selector: 'app-new-marketing',
@@ -14,6 +30,12 @@ import { MarketService } from '../services/market.service';
   styleUrls: ['./new-marketing.component.scss']
 })
 export class NewMarketingComponent implements OnInit {
+  icons = {
+    cilBookmark, cilInfo, cilArrowThickToRight, cilSearch, cilX, cilPlus,
+    cilLoopCircular, cilPencil, cilViewStream, cilMagnifyingGlass, cilCheck,
+    cilCloudUpload, cilBan, cilCheckCircle,
+  }
+
   public tokensave = '';
   public ideaIdG: string = '';
   public marketIdG: string = '';

@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
     <div class="row">
-      <div class="container">
+        <div class="container">
             <div class="card">
                 <c-card-header class="card-header-unique bg-primary">
                     <strong>Marketing</strong>
@@ -14,10 +14,13 @@
                                 </div>
                                 <div class="card-body" *ngIf="teamArray.length > 0">
                                     <div class="text-center">
-                                      <pagination [totalItems]="(pagMyTeam.totalItems / pagMyTeam.sizePage)" [(ngModel)]="pagMyTeam.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
+                                        <pagination [totalItems]="(pagMyTeam.totalItems / pagMyTeam.sizePage)"
+                                            [(ngModel)]="pagMyTeam.currentPage" [maxSize]="5" previousText="Anterior"
+                                            nextText="Siguiente"></pagination>
                                     </div>
-                                  
-                                    <table class="table table-responsive-md table-hover table-striped table-outline table-align-middle mb-0">
+
+                                    <table
+                                        class="table table-responsive-md table-hover table-striped table-outline table-align-middle mb-0">
                                         <thead>
                                             <tr>
                                                 <th>N°</th>
@@ -28,7 +31,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let team of teamArray | slice: (pagMyTeam.currentPage-1) * pagMyTeam.sizePage : pagMyTeam.currentPage * pagMyTeam.sizePage; let i = index">
+                                            <tr
+                                                *ngFor="let team of teamArray | slice: (pagMyTeam.currentPage-1) * pagMyTeam.sizePage : pagMyTeam.currentPage * pagMyTeam.sizePage; let i = index">
                                                 <td>
                                                     {{(i+1) + ((pagMyTeam.currentPage-1) * pagMyTeam.sizePage)}}
                                                 </td>
@@ -42,16 +46,23 @@
                                                     {{team.ideaId.userId.email}}
                                                 </td>
                                                 <td class="text-center">
-                                                    <button (click)="processIdea(team.ideaId._id, team.ideaId.phase)" *ngIf="team.ideaId.phase == 'finalized'" class="btn-info btn-pill b-lg" tooltip="Estado" placement="top">
-                                                        <i class="cil-bookmark b-lg"></i>
+                                                    <button (click)="processIdea(team.ideaId._id, team.ideaId.phase)"
+                                                        *ngIf="team.ideaId.phase == 'finalized'" class="btn bg-info">
+                                                        <svg [cIcon]="icons.cilBookmark" size="xl"
+                                                            title="Bookmark Icon"></svg>
                                                     </button>
 
-                                                    <button (click)="searchData(team.ideaId._id, team.rol)" class="btn-primary btn-pill b-lg" tooltip="Detalles" placement="top">
-                                                        <i class="fa fa-info px-2"></i>
+                                                    <button (click)="searchData(team.ideaId._id, team.rol)"
+                                                        class="btn bg-primary">
+                                                        <svg [cIcon]="icons.cilInfo" size="xl" title="Info Icon"
+                                                            style="color: white;"></svg>
                                                     </button>
 
-                                                    <button *ngIf="team.rol == 'administrator' && team.ideaId.phase == 'marketing'" (click)="finalizedIdea(team.ideaId._id)" class="btn-info btn-pill b-lg" tooltip="Finalizar Idea" placement="top">
-                                                        <i class="cil-arrow-thick-to-right px-1"></i>
+                                                    <button
+                                                        *ngIf="team.rol == 'administrator' && team.ideaId.phase == 'marketing'"
+                                                        (click)="finalizedIdea(team.ideaId._id)" class="btn bg-info">
+                                                        <svg [cIcon]="icons.cilArrowThickToRight" size="xl"
+                                                            title="Arrow Icon"></svg>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -59,7 +70,8 @@
                                     </table>
                                 </div>
                                 <div class="card-body text-center" *ngIf="teamArray.length === 0">
-                                    <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" height="130px">
+                                    <img class="responsive2" src="../../../../assets/img/nothing_search.png"
+                                        alt="No hay resultados" height="300px">
                                 </div>
                             </div>
                         </div>
@@ -72,65 +84,92 @@
                                     <tabset>
                                         <tab heading="Mercado">
                                             <form id="marketForm" [formGroup]="marketForm">
-                                                <div class="row">
+                                                
                                                     <div class="form-group col-sm-12">
                                                         <label class="form-col-form-label" for="country">País</label>
-                                                        <input type="text" class="form-control" id="country" formControlName="country" placeholder="Digite el país" required minlength="5">
-                                                        <div class="text-danger mt-2" *ngIf="invalidField('country', 'market')">
-                                                          {{ getErrorMessage("country", "market") }}
+                                                        <input type="text" class="form-control" id="country"
+                                                            formControlName="country" placeholder="Digite el país"
+                                                            required minlength="5">
+                                                        <div class="text-danger mt-2"
+                                                            *ngIf="invalidField('country', 'market')">
+                                                            {{ getErrorMessage("country", "market") }}
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
+                                                
+                                                    
                                                     <div class="form-group col-sm-12">
-                                                        <label class="form-col-form-label" for="department">Departamento</label>
-                                                        <input type="text" class="form-control" id="department" formControlName="department" placeholder="Digite el departamento" required minlength="5" >
-                                                        <div class="text-danger mt-2" *ngIf="invalidField('department', 'market')">
-                                                          {{ getErrorMessage("department", "market") }}
+                                                        <label class="form-col-form-label"
+                                                            for="department">Departamento</label>
+                                                        <input type="text" class="form-control" id="department"
+                                                            formControlName="department"
+                                                            placeholder="Digite el departamento" required minlength="5">
+                                                        <div class="text-danger mt-2"
+                                                            *ngIf="invalidField('department', 'market')">
+                                                            {{ getErrorMessage("department", "market") }}
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
+                                                
+                                                    
                                                     <div class="form-group col-sm-12">
                                                         <label class="form-col-form-label" for="city">Ciudad</label>
-                                                        <input type="text" class="form-control" id="city" formControlName="city" placeholder="Digite la ciudad" required minlength="5" >
-                                                        <div class="text-danger mt-2" *ngIf="invalidField('city', 'market')">
-                                                          {{ getErrorMessage("city", "market") }}
+                                                        <input type="text" class="form-control" id="city"
+                                                            formControlName="city" placeholder="Digite la ciudad"
+                                                            required minlength="5">
+                                                        <div class="text-danger mt-2"
+                                                            *ngIf="invalidField('city', 'market')">
+                                                            {{ getErrorMessage("city", "market") }}
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
+                                                
+                                                
                                                     <div class="form-group col-sm-12">
                                                         <label class="form-col-form-label" for="zone">Zona</label>
-                                                        <input type="text" class="form-control" id="zone" formControlName="zone" placeholder="Digite la zona" required minlength="5" >
-                                                        <div class="text-danger mt-2" *ngIf="invalidField('zone', 'market')">
-                                                          {{ getErrorMessage("zone", "market") }}
+                                                        <input type="text" class="form-control" id="zone"
+                                                            formControlName="zone" placeholder="Digite la zona" required
+                                                            minlength="5">
+                                                        <div class="text-danger mt-2"
+                                                            *ngIf="invalidField('zone', 'market')">
+                                                            {{ getErrorMessage("zone", "market") }}
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
+                                                
+                                                
                                                     <div class="form-group col-sm-12">
-                                                        <label class="form-col-form-label" for="address">Dirección</label>
-                                                        <input type="text" class="form-control" id="address" formControlName="address" placeholder="Digite la direccción" required minlength="5" >
-                                                        <div class="text-danger mt-2" *ngIf="invalidField('address', 'market')">
-                                                          {{ getErrorMessage("address", "market") }}
+                                                        <label class="form-col-form-label"
+                                                            for="address">Dirección</label>
+                                                        <input type="text" class="form-control" id="address"
+                                                            formControlName="address" placeholder="Digite la direccción"
+                                                            required minlength="5">
+                                                        <div class="text-danger mt-2"
+                                                            *ngIf="invalidField('address', 'market')">
+                                                            {{ getErrorMessage("address", "market") }}
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
+                                                
+                                                
                                                     <div class="form-group col-sm-12">
-                                                        <label class="form-col-form-label" for="population">Población objetivo</label>
-                                                        <input type="text" class="form-control" id="population" formControlName="population" placeholder="Digite la población objetivo" required minlength="5" >
-                                                        <div class="text-danger mt-2" *ngIf="invalidField('population', 'market')">
-                                                          {{ getErrorMessage("population", "market") }}
+                                                        <label class="form-col-form-label" for="population">Población
+                                                            objetivo</label>
+                                                        <input type="text" class="form-control" id="population"
+                                                            formControlName="population"
+                                                            placeholder="Digite la población objetivo" required
+                                                            minlength="5">
+                                                        <div class="text-danger mt-2"
+                                                            *ngIf="invalidField('population', 'market')">
+                                                            {{ getErrorMessage("population", "market") }}
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </form>
+                                                
+                                                </form>
                                             <div>
-                                                <button type="submit" *ngIf="!existMarket" (click)="createMarket()" class="btn btn-md size-l btn-info"><i class="cil-check-circle"></i> Crear</button>
-                                                <button type="submit" *ngIf="existMarket" (click)="updateMarket()" class="btn btn-md size-l btn-success"><i class="cil-loop-circular"></i> Actualizar</button>
-                                                <button (click)="processIdea(ideaIdG, 'marketing')" class="btn-info btn-pill b-lg" tooltip="Estado" placement="top">
+                                                <button type="submit" *ngIf="!existMarket" (click)="createMarket()"
+                                                    class="btn btn-md size-l btn-info"><i class="cil-check-circle"></i>
+                                                    Crear</button>
+                                                <button type="submit" *ngIf="existMarket" (click)="updateMarket()"
+                                                    class="btn btn-md size-l btn-success"><i
+                                                        class="cil-loop-circular"></i> Actualizar</button>
+                                                <button (click)="processIdea(ideaIdG, 'marketing')"
+                                                    class="btn-info btn-pill b-lg" tooltip="Estado" placement="top">
                                                     <i class="cil-bookmark b-lg"></i>
                                                 </button>
                                             </div>
@@ -138,20 +177,27 @@
                                         <tab heading="Retos de Mercado">
                                             <div *ngIf="existMarket">
                                                 <div>
-                                                    <button class="btn btn-info" (click)="openModal(CreateMarketC, 'create')">
+                                                    <button class="btn btn-info"
+                                                        (click)="openModal(CreateMarketC, 'create')">
                                                         <i class="cil-plus"></i> Crear Retos
                                                     </button>
                                                 </div>
-    
+
                                                 <div class="text-center" *ngIf="marketChallArray.length == 0">
-                                                    <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
+                                                    <img class="responsive"
+                                                        src="../../../../assets/img/nothing_search.png"
+                                                        alt="No hay resultados">
                                                 </div>
-    
+
                                                 <br>
                                                 <div class="col text-center" *ngIf="marketChallArray.length > 0">
-                                                    <pagination [totalItems]="(pagMarketChall.totalItems / pagMarketChall.sizePage)" [(ngModel)]="pagMarketChall.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
-                                                </div> 
-                                                <table *ngIf="marketChallArray.length > 0" class="table table-responsive-lg table-hover col table-outline mb-0">
+                                                    <pagination
+                                                        [totalItems]="(pagMarketChall.totalItems / pagMarketChall.sizePage)"
+                                                        [(ngModel)]="pagMarketChall.currentPage" [maxSize]="5"
+                                                        previousText="Anterior" nextText="Siguiente"></pagination>
+                                                </div>
+                                                <table *ngIf="marketChallArray.length > 0"
+                                                    class="table table-responsive-lg table-hover col table-outline mb-0">
                                                     <thead class="thead-light">
                                                         <tr>
                                                             <th class="text-center">N°</th>
@@ -163,42 +209,63 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let marketC of marketChallArray | slice: (pagMarketChall.currentPage-1) * pagMarketChall.sizePage : pagMarketChall.currentPage * pagMarketChall.sizePage; let i = index">
+                                                        <tr
+                                                            *ngFor="let marketC of marketChallArray | slice: (pagMarketChall.currentPage-1) * pagMarketChall.sizePage : pagMarketChall.currentPage * pagMarketChall.sizePage; let i = index">
                                                             <td class="text-center">
-                                                                {{(i+1) + ((pagMarketChall.currentPage-1) * pagMarketChall.sizePage)}}
+                                                                {{(i+1) + ((pagMarketChall.currentPage-1) *
+                                                                pagMarketChall.sizePage)}}
                                                             </td>
                                                             <td class="text-center">
                                                                 {{marketC.title}}
                                                             </td>
                                                             <td>
-                                                                <span class="truncate"> {{marketC.description}} </span> <br>
+                                                                <span class="truncate"> {{marketC.description}} </span>
+                                                                <br>
                                                                 <div class="small text-muted">
-                                                                    <span> <strong>Creado:</strong> {{marketC.createdAt | date:"dd-MM-yyyy" }} </span> 
-                                                                    <span> <strong>Actualizado:</strong> {{marketC.updatedAt | date:"dd-MM-yyyy" }} </span> 
+                                                                    <span> <strong>Creado:</strong> {{marketC.createdAt
+                                                                        | date:"dd-MM-yyyy" }} </span>
+                                                                    <span> <strong>Actualizado:</strong>
+                                                                        {{marketC.updatedAt | date:"dd-MM-yyyy" }}
+                                                                    </span>
                                                                 </div>
                                                             </td>
                                                             <td class="text-center">
-                                                                {{marketC.finishDate.split('T')[0] | date: 'dd-MM-yyyy'}}
+                                                                {{marketC.finishDate.split('T')[0] | date:
+                                                                'dd-MM-yyyy'}}
                                                             </td>
-                                                            <td class="text-center">    
-                                                                <i *ngIf="marketC.state === 'inProcess'" class="cil-loop end" placement="top" tooltip="En proceso"></i>
-                                                                <i *ngIf="marketC.state === 'success'" class="cil-check-circle resp" placement="top" tooltip="Aprobado"></i>
-                                                                <i *ngIf="marketC.state === 'failed'" class="cil-x-circle trash" placement="top" tooltip="Fallido"></i>
+                                                            <td class="text-center">
+                                                                <i *ngIf="marketC.state === 'inProcess'"
+                                                                    class="cil-loop end" placement="top"
+                                                                    tooltip="En proceso"></i>
+                                                                <i *ngIf="marketC.state === 'success'"
+                                                                    class="cil-check-circle resp" placement="top"
+                                                                    tooltip="Aprobado"></i>
+                                                                <i *ngIf="marketC.state === 'failed'"
+                                                                    class="cil-x-circle trash" placement="top"
+                                                                    tooltip="Fallido"></i>
                                                             </td>
-                                                            <td class="text-center" colspan="2">   
-                                                                <a (click)="openModal(EditMarketC, 'edit', marketC)" class="link mr-2" placement="top" tooltip="Editar">
+                                                            <td class="text-center" colspan="2">
+                                                                <a (click)="openModal(EditMarketC, 'edit', marketC)"
+                                                                    class="link mr-2" placement="top" tooltip="Editar">
                                                                     <i class="cil-pencil pencil"></i>
                                                                 </a>
-                    
-                                                                <a (click)="openModal(EvidencePanel, 'evidence', marketC)" class="link mr-2" placement="top" tooltip="Evidencia">
+
+                                                                <a (click)="openModal(EvidencePanel, 'evidence', marketC)"
+                                                                    class="link mr-2" placement="top"
+                                                                    tooltip="Evidencia">
                                                                     <i class="cil-newspaper view"></i>
                                                                 </a>
-    
-                                                                <a (click)="disableMarketC(marketC._id)" class="link mr-2" placement="top" tooltip="Eliminar">
+
+                                                                <a (click)="disableMarketC(marketC._id)"
+                                                                    class="link mr-2" placement="top"
+                                                                    tooltip="Eliminar">
                                                                     <i class="cil-trash trash"></i>
                                                                 </a>
-    
-                                                                <a (click)="endMarketC(marketC._id)" *ngIf="marketC.state == 'inProcess' && rolIdG == 'administrator'" class="link mr-2" placement="top" tooltip="Finalizar">
+
+                                                                <a (click)="endMarketC(marketC._id)"
+                                                                    *ngIf="marketC.state == 'inProcess' && rolIdG == 'administrator'"
+                                                                    class="link mr-2" placement="top"
+                                                                    tooltip="Finalizar">
                                                                     <i class="icon-action-redo end"></i>
                                                                 </a>
                                                             </td>
@@ -211,10 +278,11 @@
                                             </div>
                                         </tab>
                                     </tabset>
-                                    
+
                                 </div>
-                                <div class="card-body" *ngIf="!selected">
-                                    <img class="responsive2" src="../../../../assets/img/marketing_background.png" alt="No hay resultados" height="300px">
+                                <div class="card-body text-center" *ngIf="!selected">
+                                    <img class="responsive2" src="../../../../assets/img/marketing_background.png"
+                                        alt="No hay resultados" height="300px">
                                 </div>
                             </div>
                         </div>
@@ -226,111 +294,113 @@
 </div>
 
 <ng-template #CreateMarketC>
-    <div class="modal-header bg-primary">
-      <h3 class="modal-title pull-left">
-        Agregar reto de mercado
-      </h3>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form id="marketChallForm" [formGroup]="marketChallForm">
-        <div class="form-group col">
-            <label class="form-col-form-label" for="title">Título</label>
-            <input type="text" class="form-control" id="title" formControlName="title" placeholder="Escriba el título del reto" required minlength="5">
-            <div class="text-danger mt-2" *ngIf="invalidField('title', 'chall')">
-              {{ getErrorMessage("title", 'chall') }}
-            </div>
-        </div>
-        <div class="form-group col">
-            <label class="form-col-form-label" for="description">Descripción</label>
-            <textarea class="form-control" id="description" formControlName="description" placeholder="Describa el reto" rows="4" required minlength="7"></textarea>
-            <div class="text-danger mt-2" *ngIf="invalidField('description', 'chall')">
-              {{ getErrorMessage("description", 'chall') }}
-            </div>
-        </div>
-        <div class="form-group col">
-            <label class="form-col-form-label" for="title">Fecha limite</label>
-            <input type="date" class="form-control" id="finishDate" formControlName="finishDate" required>
-            <div class="text-danger mt-2" *ngIf="invalidField('finishDate', 'chall')">
-              {{ getErrorMessage("finishDate", 'chall') }}
-            </div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" (click)="createMarketChallenge()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Agregar</button>
-    </div>
-</ng-template>
-  
-<ng-template #EditMarketC>
     <div class="modal-header bg-success">
-      <h3 class="modal-title pull-left">
-        Editar reto de mercado
-      </h3>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
-        <span aria-hidden="true">×</span>
-      </button>
+        <h4 class="modal-title pull-left like2">Agregar reto de mercado</h4>
+        <button type="button" class="btn like2" (click)="modal.hide()">
+            <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
+        </button>
     </div>
     <div class="modal-body">
         <form id="marketChallForm" [formGroup]="marketChallForm">
             <div class="form-group col">
                 <label class="form-col-form-label" for="title">Título</label>
-                <input type="text" class="form-control" id="title" formControlName="title" placeholder="Escriba el título del reto" required minlength="5">
+                <input type="text" class="form-control" id="title" formControlName="title"
+                    placeholder="Escriba el título del reto" required minlength="5">
                 <div class="text-danger mt-2" *ngIf="invalidField('title', 'chall')">
-                  {{ getErrorMessage("title", 'chall') }}
+                    {{ getErrorMessage("title", 'chall') }}
                 </div>
             </div>
             <div class="form-group col">
                 <label class="form-col-form-label" for="description">Descripción</label>
-                <textarea class="form-control" id="description" formControlName="description" placeholder="Describa el reto" rows="4" required minlength="7"></textarea>
+                <textarea class="form-control" id="description" formControlName="description"
+                    placeholder="Describa el reto" rows="4" required minlength="7"></textarea>
                 <div class="text-danger mt-2" *ngIf="invalidField('description', 'chall')">
-                  {{ getErrorMessage("description", 'chall') }}
+                    {{ getErrorMessage("description", 'chall') }}
                 </div>
             </div>
             <div class="form-group col">
                 <label class="form-col-form-label" for="title">Fecha limite</label>
                 <input type="date" class="form-control" id="finishDate" formControlName="finishDate" required>
                 <div class="text-danger mt-2" *ngIf="invalidField('finishDate', 'chall')">
-                  {{ getErrorMessage("finishDate", 'chall') }}
+                    {{ getErrorMessage("finishDate", 'chall') }}
                 </div>
             </div>
-          </form>
+        </form>
     </div>
     <div class="modal-footer">
-      <button type="submit" (click)="updateMarketChallenge()" class="btn btn-md size-l btn-info"><i class="cil-loop-circular"></i> Editar</button>
+        <button type="submit" (click)="createMarketChallenge()" class="btn btn-md size-l btn-success"><svg
+                [cIcon]="icons.cilCheck" size="xl" title="Check Icon"></svg>Agregar</button>
+    </div>
+</ng-template>
+
+<ng-template #EditMarketC>
+    <div class="modal-header bg-success">
+        <h4 class="modal-title pull-left like2">Editar reto de mercado</h4>
+        <button type="button" class="btn like2" (click)="modal.hide()">
+            <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form id="marketChallForm" [formGroup]="marketChallForm">
+            <div class="form-group col">
+                <label class="form-col-form-label" for="title">Título</label>
+                <input type="text" class="form-control" id="title" formControlName="title"
+                    placeholder="Escriba el título del reto" required minlength="5">
+                <div class="text-danger mt-2" *ngIf="invalidField('title', 'chall')">
+                    {{ getErrorMessage("title", 'chall') }}
+                </div>
+            </div>
+            <div class="form-group col">
+                <label class="form-col-form-label" for="description">Descripción</label>
+                <textarea class="form-control" id="description" formControlName="description"
+                    placeholder="Describa el reto" rows="4" required minlength="7"></textarea>
+                <div class="text-danger mt-2" *ngIf="invalidField('description', 'chall')">
+                    {{ getErrorMessage("description", 'chall') }}
+                </div>
+            </div>
+            <div class="form-group col">
+                <label class="form-col-form-label" for="title">Fecha limite</label>
+                <input type="date" class="form-control" id="finishDate" formControlName="finishDate" required>
+                <div class="text-danger mt-2" *ngIf="invalidField('finishDate', 'chall')">
+                    {{ getErrorMessage("finishDate", 'chall') }}
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" (click)="updateMarketChallenge()" class="btn btn-md size-l btn-info"><svg [cIcon]="icons.cilLoopCircular" size="xl" title="Loop Icon"></svg> Editar</button>
     </div>
 </ng-template>
 
 <ng-template #EvidencePanel>
-    <div class="modal-header bg-primary">
-      <h3 class="modal-title pull-left">
-        Panel de Evidencias
-      </h3>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
+    <div class="modal-header bg-success">
+        <h4 class="modal-title pull-left like2">Panel de Evidencias</h4>
+        <button type="button" class="btn like2" (click)="modal.hide()">
+          <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
+        </button>
+      </div>
     <div class="modal-body">
-      <form id="evidenceForm" [formGroup]="evidenceForm">
-        <div class="text-center">
-          <label class="form-col-form-label">Anexo de la evidencia</label>
-          <div>
-            <div class="custom2-input-file mx-auto"
-              [ngStyle]="{'background-color': evidenceForm!.value.evidence !== '' ?  'green': 'purple'}">
-              <input type="file" class="input-file" id="evidence" (change)="onFileSelect($event)" [disabled]="sizeEvidence">
-              <p *ngIf="evidenceForm!.value.evidence === ''">Subir Archivo...</p>
-              <p *ngIf="evidenceForm!.value.evidence !== ''">Archivo Escogido!!!</p>
+        <form id="evidenceForm" [formGroup]="evidenceForm">
+            <div class="text-center">
+                <label class="form-col-form-label">Anexo de la evidencia</label>
+                <div>
+                    <div class="custom2-input-file mx-auto"
+                        [ngStyle]="{'background-color': evidenceForm!.value.evidence !== '' ?  'green': 'purple'}">
+                        <input type="file" class="input-file" id="evidence" (change)="onFileSelect($event)"
+                            [disabled]="sizeEvidence">
+                        <p *ngIf="evidenceForm!.value.evidence === ''">Subir Archivo...</p>
+                        <p *ngIf="evidenceForm!.value.evidence !== ''">Archivo Escogido!!!</p>
+                    </div>
+                </div>
+                <p class="bottom" *ngIf="sizeEvidence"> <a [href]="evidenceForm!.value.evidence" target="_blank"
+                        style="font-size: 18px;">Evidencia_cargada</a> <i class="cil-trash trash"
+                        (click)="deleteEvidence()" placement="top" tooltip="Eliminar"></i> </p>
+                <p class="bottom" *ngIf="!sizeEvidence" style="color: red;"> Evidencia no Adjuntada </p>
             </div>
-          </div>
-          <p class="bottom" *ngIf="sizeEvidence"> <a [href]="evidenceForm!.value.evidence" target="_blank" style="font-size: 18px;">Evidencia_cargada</a> <i class="cil-trash trash" (click)="deleteEvidence()" placement="top" tooltip="Eliminar"></i> </p>
-          <p class="bottom" *ngIf="!sizeEvidence" style="color: red;"> Evidencia no Adjuntada </p> 
-        </div>
-      </form>
+        </form>
     </div>
     <div class="modal-footer">
-      <button type="submit" *ngIf="!sizeEvidence" (click)="uploadEvidence()" class="btn btn-md size-l btn-success"><i class="fa fa-cloud-upload"></i> Subir Evidencia</button>
-      <button type="submit" *ngIf="sizeEvidence" (click)="modal!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
+        <button type="submit" *ngIf="!sizeEvidence" (click)="uploadEvidence()" class="btn btn-md size-l btn-success"><svg [cIcon]="icons.cilCloudUpload" size="xl" title="Cloud Upload Icon"></svg> Subir Evidencia</button>
+        <button type="submit" *ngIf="sizeEvidence" (click)="modal!.hide()" class="btn btn-md size-l btn-danger"><svg [cIcon]="icons.cilBan" size="xl" title="Ban Icon"></svg> Cerrar</button>
     </div>
 </ng-template>

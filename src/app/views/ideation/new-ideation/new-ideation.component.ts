@@ -16,7 +16,8 @@ import {
   cilPlus,
   cilLoopCircular,
   cilPencil,
-  cilViewStream
+  cilMagnifyingGlass,
+  cilViewStream,
 } from '@coreui/icons';
 
 @Component({
@@ -27,9 +28,8 @@ import {
 export class NewIdeationComponent implements OnInit {
   icons = {
     cilBookmark, cilInfo, cilArrowThickToRight, cilSearch, cilX, cilPlus,
-    cilLoopCircular, cilPencil, cilViewStream
+    cilLoopCircular, cilPencil, cilViewStream, cilMagnifyingGlass
   }
-  // cib-tripadvisor, cib-openstreetmap, cib-json, cil-browser, cil-file, cil-folder-open, cil-magnifying-glass cil-scrubber, cil-search
 
   public tokensave: string = '';
   public selected: boolean = false;

@@ -1,0 +1,121 @@
+.lg {
+    font-size: large;
+}
+
+pagination {
+    display: inline-flex;
+}
+
+.responsive {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+}
+
+.responsive2 {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+}
+
+.truncate {
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: auto;
+    text-overflow: ellipsis;
+}
+
+.b-lg {
+    font-size: large;
+    cursor: pointer;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+.btn-info {
+    color: white;
+}
+
+.mean {
+    color: #0033ff;
+    font-size: x-large;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.pencil {
+    color: #20a8d8;
+    font-size: x-large;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.view {
+    color: #9820d8;
+    font-size: x-large;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.resp {
+    color: #20d84e;
+    font-size: x-large;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.end {
+    color: #273991;
+    font-size: x-large;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.trash {
+    color: #d82020;
+    font-size: x-large;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.over {
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+.p-relative {
+    margin-left: 10px;
+    position: relative;
+}
+
+.custom2-input-file {
+    background-color: purple;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+    min-height: 15px;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    width: 80%;
+    border-radius: 10px;
+}
+  
+.custom2-input-file .input-file {
+    border: 7px solid transparent;
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 578px;
+}
+
+.pointer {
+    cursor: pointer;
+}

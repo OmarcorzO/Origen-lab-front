@@ -7,6 +7,29 @@ import { SwalService } from '../../services/swal.service';
 import { ValidationMessagesService } from '../../services/validation-messages.service';
 import { ActivityService } from '../services/activity.service';
 import { MeanService } from '../services/mean.service';
+import {
+  cilBookmark,
+  cilInfo,
+  cilArrowThickToRight,
+  cilSearch,
+  cilX,
+  cilPlus,
+  cilLoopCircular,
+  cilMagnifyingGlass,
+  cilViewStream,
+  cilFolder,
+  cilNewspaper,
+  cilPencil,
+  cilPeople,
+  cilTrash,
+  cilActionRedo,
+  cilCheckCircle,
+  cilXCircle,
+  cilCheck,
+  cilSave,
+  cilCloudUpload,
+  cilBan,
+} from '@coreui/icons';
 
 @Component({
   selector: 'app-activity',
@@ -14,6 +37,16 @@ import { MeanService } from '../services/mean.service';
   styleUrls: ['./new-activity.component.scss'],
 })
 export class NewActivityComponent implements OnInit {
+  icons = {
+    cilBookmark, cilInfo, cilArrowThickToRight, cilSearch, cilX, cilPlus,
+    cilLoopCircular, cilPencil, cilViewStream, cilMagnifyingGlass,
+
+    cilFolder, cilNewspaper, cilPeople, cilTrash, cilActionRedo, cilCheckCircle, cilXCircle, cilCheck,
+    cilSave,
+    cilCloudUpload,
+    cilBan,
+  }
+
   public tokensave: string = '';
   public ideaIdG: string = '';
   public activityIdG: string = '';

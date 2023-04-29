@@ -7,7 +7,8 @@ import { ModalModule, BsModalService  } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NewActivityComponent } from './new-activity/new-activity.component';
-import { CardModule } from '@coreui/angular';
+import { ButtonModule, CardModule } from '@coreui/angular';
+import { IconModule } from '@coreui/icons-angular';
 
 @NgModule({
   imports: [
@@ -16,6 +17,8 @@ import { CardModule } from '@coreui/angular';
     ReactiveFormsModule,
     FormsModule,
     ModalModule,
+    IconModule,
+    ButtonModule,
     CardModule,
     PaginationModule.forRoot(),
     TooltipModule.forRoot()

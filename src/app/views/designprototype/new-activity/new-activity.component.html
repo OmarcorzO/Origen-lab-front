@@ -43,20 +43,20 @@
                                                   {{ team.ideaId.userId.email }}
                                                 </td>
                                                 <td class="text-center">
-                                                    <button (click)="searchData(team.ideaId._id, team.rol)" class="btn-primary btn-pill b-lg" tooltip="Detalles" placement="top">
-                                                        <i class="fa fa-info px-2"></i>
+                                                    <button (click)="searchData(team.ideaId._id, team.rol)" class="btn bg-info">
+                                                      <svg [cIcon]="icons.cilBookmark" size="xl" title="Bookmark Icon"></svg>
                                                     </button>
 
                                                     <button *ngIf="team.rol == 'administrator' && team.ideaId.phase == 'design/prototyping'" (click)="changePhase(team.ideaId._id)" class="btn-info btn-pill b-lg" tooltip="Cambiar de fase" placement="top">
-                                                        <i class="cil-arrow-thick-to-right px-1"></i>
+                                                      <svg [cIcon]="icons.cilArrowThickToRight" size="xl" title="Bookmark Icon"></svg>  
                                                     </button>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="card-body" *ngIf="teamArray.length === 0">
-                                    <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" height="130px">
+                                <div class="card-body text-center" *ngIf="teamArray.length === 0">
+                                    <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" height="300px">
                                 </div>
                             </div>
                         </div>
@@ -68,12 +68,12 @@
                                 <div class="card-body" *ngIf="selected">
                                     <div>
                                         <button class="btn btn-info" (click)="openModal(AddActivity, 'create', '')">
-                                          <i class="cil-plus"></i> Agregar actividad
+                                          <svg [cIcon]="icons.cilPlus" size="xl" title="Bookmark Icon"></svg> Agregar actividad
                                         </button>
                                     </div>
 
                                     <div class="text-center" *ngIf="activityArray.length == 0">
-                                        <img class="responsive" src="../../../../assets/img/activity_background.png" alt="No hay resultados">
+                                        <img class="responsive" src="../../../../assets/img/activity_background.png" height="300px" alt="No hay resultados">
                                     </div>
 
                                     <br>
@@ -110,32 +110,32 @@
                                                     {{activity.finishDate.split('T')[0] | date: 'dd-MM-yyyy'}}
                                                 </td>
                                                 <td class="text-center">
-                                                  <i *ngIf="activity.finalized" class="cil-check-circle resp"></i>
-                                                  <i *ngIf="!activity.finalized" class="cil-x-circle trash"></i>
+                                                  <svg *ngIf="activity.finalized" class="resp" [cIcon]="icons.cilCheckCircle" size="xl" title="Close Icon"></svg>
+                                                  <svg *ngIf="!activity.finalized" class="trash" [cIcon]="icons.cilXCircle" size="xl" title="Close Icon"></svg>
                                                 </td>
                                                 <td class="text-center" colspan="2">
-                                                    <a (click)="openModal(ListMean, 'mean', activity._id)" class="link mr-2" placement="top" tooltip="Recursos">
-                                                        <i class="icon-folder-alt mean"></i>
+                                                    <a (click)="openModal(ListMean, 'mean', activity._id)" class="link mr-2 pointer">
+                                                      <svg [cIcon]="icons.cilFolder" size="xl" title="Close Icon"></svg>
                                                     </a>
 
-                                                    <a (click)="openModal(EditActivity, 'edit', activity)" class="link mr-2" placement="top" tooltip="Editar">
-                                                        <i class="cil-pencil pencil"></i>
+                                                    <a (click)="openModal(EditActivity, 'edit', activity)" class="link mr-2 pointer">
+                                                      <svg [cIcon]="icons.cilPencil" size="xl" title="Close Icon"></svg>
                                                     </a>
         
-                                                    <a (click)="openModalEvidence(EvidencePanel, activity._id)" class="link mr-2" placement="top" tooltip="Evidencia">
-                                                        <i class="cil-newspaper view"></i>
+                                                    <a (click)="openModalEvidence(EvidencePanel, activity._id)" class="link mr-2 pointer">
+                                                      <svg [cIcon]="icons.cilNewspaper" size="xl" title="Close Icon"></svg>
                                                     </a>
 
-                                                    <a (click)="openModal(ResponsiblesPanel, 'resp', activity._id)" class="link mr-2" placement="top" tooltip="Responsables">
-                                                        <i class="icon-people resp"></i>
+                                                    <a (click)="openModal(ResponsiblesPanel, 'resp', activity._id)" class="link mr-2 pointer">
+                                                      <svg [cIcon]="icons.cilPeople" size="xl" title="Close Icon"></svg>
                                                     </a>
 
-                                                    <a (click)="changeStateActivity(activity._id)" *ngIf="rolIdG == 'administrator'" class="link mr-2" placement="top" tooltip="Eliminar">
-                                                        <i class="cil-trash trash"></i>
+                                                    <a (click)="changeStateActivity(activity._id)" *ngIf="rolIdG == 'administrator'" class="link mr-2 pointer">
+                                                      <svg [cIcon]="icons.cilTrash" size="xl" title="Close Icon"></svg>
                                                     </a>
 
-                                                    <a (click)="endActivity(activity._id)" *ngIf="!activity.finalized && rolIdG == 'administrator'" class="link mr-2" placement="top" tooltip="Finalizar">
-                                                        <i class="icon-action-redo end"></i>
+                                                    <a (click)="endActivity(activity._id)" *ngIf="!activity.finalized && rolIdG == 'administrator'" class="link mr-2 pointer">
+                                                      <svg [cIcon]="icons.cilActionRedo" size="xl" title="Close Icon"></svg>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -155,14 +155,13 @@
 </div>
 
 <ng-template #AddActivity>
-  <div class="modal-header bg-primary">
-    <h3 class="modal-title pull-left">
-      Agregar actividad
-    </h3>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
-      <span aria-hidden="true">×</span>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Agregar actividad</h4>
+    <button type="button" class="btn like2" (click)="modal!.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
     </button>
   </div>
+
   <div class="modal-body">
     <form id="activityForm" [formGroup]="activityForm">
         <div class="form-group col">
@@ -189,17 +188,15 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" (click)="addActivity()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Agregar</button>
+    <button type="submit" (click)="addActivity()" class="btn btn-md size-l btn-success"><svg [cIcon]="icons.cilPlus" size="xl" title="Save Icon"></svg> Agregar</button>
   </div>
 </ng-template>
 
 <ng-template #EditActivity>
-  <div class="modal-header bg-primary">
-    <h3 class="modal-title pull-left">
-      Editar actividad
-    </h3>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
-      <span aria-hidden="true">×</span>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Editar actividad</h4>
+    <button type="button" class="btn like2" (click)="modal.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
     </button>
   </div>
   <div class="modal-body">
@@ -228,17 +225,15 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" (click)="updateActivity()" class="btn btn-md size-l btn-success"><i class="fa fa-pencil"></i> Editar</button>
+    <button type="submit" (click)="updateActivity()" class="btn btn-md size-l btn-success"><svg [cIcon]="icons.cilPencil" size="xl" title="Pencil Icon"></svg> Editar</button>
   </div>
 </ng-template>
 
 <ng-template #ResponsiblesPanel>
-  <div class="modal-header bg-primary">
-    <h3 class="modal-title pull-left">
-      Panel de Responsables
-    </h3>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
-      <span aria-hidden="true">×</span>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Panel de Responsables</h4>
+    <button type="button" class="btn like2" (click)="modal.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
     </button>
   </div>
   <div class="modal-body">
@@ -286,18 +281,16 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" *ngIf="respListButton && rolIdG == 'administrator'" (click)="saveRespon('activity')" class="btn btn-md size-l btn-success"><i class="cil-save"></i> Guardar</button>
-    <button type="submit" *ngIf="!respListButton && rolIdG == 'administrator'" (click)="removeRespon('activity')" class="btn btn-md size-l btn-danger"><i class="cil-trash"></i> Eliminar</button>
+    <button type="submit" *ngIf="respListButton && rolIdG == 'administrator'" (click)="saveRespon('activity')" class="btn btn-md size-l btn-success"><svg [cIcon]="icons.cilSave" size="xl" title="Save Icon"></svg> Guardar</button>
+    <button type="submit" *ngIf="!respListButton && rolIdG == 'administrator'" (click)="removeRespon('activity')" class="btn btn-md size-l btn-danger"><svg [cIcon]="icons.cilTrash" size="xl" title="Trash Icon"></svg> Eliminar</button>
   </div>
 </ng-template>
 
 <ng-template #EvidencePanel>
-  <div class="modal-header bg-primary">
-    <h3 class="modal-title pull-left">
-      Panel de Evidencias
-    </h3>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
-      <span aria-hidden="true">×</span>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Panel de Evidencias</h4>
+    <button type="button" class="btn like2" (click)="modal.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
     </button>
   </div>
   <div class="modal-body">
@@ -318,23 +311,24 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" *ngIf="!sizeEvidence" (click)="uploadEvidence('activity')" class="btn btn-md size-l btn-success"><i class="fa fa-cloud-upload"></i> Subir Evidencia</button>
-    <button type="submit" *ngIf="sizeEvidence" (click)="modal!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
+    <button type="submit" *ngIf="!sizeEvidence" (click)="uploadEvidence('activity')" class="btn btn-md size-l btn-success"><svg [cIcon]="icons.cilCloudUpload" size="xl" title="Cloud Upload Icon"></svg> Subir Evidencia</button>
+    <button type="submit" *ngIf="sizeEvidence" (click)="modal!.hide()" class="btn btn-md size-l btn-danger"><svg [cIcon]="icons.cilBan" size="xl" title="Ban Icon"></svg> Cerrar</button>
   </div>
 </ng-template>
 
 <!-- RESOURCES -->
 <ng-template #ListMean>
-  <div class="modal-header bg-primary">
-    <h4 class="modal-title pull-left">Información de Recursos</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modal!.hide()">
-      <span aria-hidden="true">×</span>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Información de Recursos</h4>
+    <button type="button" class="btn like2" (click)="modal.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
     </button>
   </div>
   <div class="modal-body">
     <div>
         <button class="btn btn-info" (click)="openSecondModal(AddMean, 'create')">
-          <i class="cil-plus"></i> Agregar Recurso
+          <svg [cIcon]="icons.cilPlus" size="xl" title="Plus Icon"></svg>
+          Agregar Recurso
         </button>
     </div>
 
@@ -371,20 +365,20 @@
                     </div>
                 </td>
                 <td class="text-center">
-                    <!-- <a (click)="openSecondModal(EditMean, 'edit', mean)" class="link mr-2" placement="top" tooltip="Editar">
-                        <i class="cil-pencil pencil"></i>
+                    <!-- <a (click)="openSecondModal(EditMean, 'edit', mean)" class="link mr-2">
+                      <svg [cIcon]="icons.cilPencil" size="xl" title="Pencil Icon"></svg>                      
                     </a> -->
 
-                    <a (click)="openSecondModalEvidence(EvidencePanelTwo, mean._id)" class="link mr-2" placement="top" tooltip="Evidencia">
-                        <i class="cil-newspaper view"></i>
+                    <a (click)="openSecondModalEvidence(EvidencePanelTwo, mean._id)" class="link mr-2">
+                      <svg [cIcon]="icons.cilNewspaper" size="xl" title="Newspaper Icon"></svg>
                     </a>
 
-                    <a (click)="openSecondModal(ResponsiblesPanelTwo, 'resp', mean._id)" class="link mr-2" placement="top" tooltip="Responsables">
-                        <i class="icon-people resp"></i>
+                    <a (click)="openSecondModal(ResponsiblesPanelTwo, 'resp', mean._id)" class="link mr-2">
+                      <svg [cIcon]="icons.cilPeople" size="xl" title="People Icon"></svg>
                     </a>
 
-                    <a (click)="changeStateMean(mean._id)" *ngIf="rolIdG == 'administrator'" class="link mr-2" placement="top" tooltip="Eliminar">
-                        <i class="cil-trash trash"></i>
+                    <a (click)="changeStateMean(mean._id)" *ngIf="rolIdG == 'administrator'" class="link mr-2">
+                      <svg [cIcon]="icons.cilTrash" size="xl" title="Trash Icon"></svg>
                     </a>
                 </td>
             </tr>
@@ -394,12 +388,10 @@
 </ng-template>
 
 <ng-template #AddMean>
-  <div class="modal-header bg-primary">
-    <h3 class="modal-title pull-left">
-      Agregar Recurso
-    </h3>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalTwo!.hide()">
-      <span aria-hidden="true">×</span>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Agregar Recurso</h4>
+    <button type="button" class="btn like2" (click)="modalTwo.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
     </button>
   </div>
   <div class="modal-body">
@@ -421,17 +413,15 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" (click)="addMean()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Agregar</button>
+    <button type="submit" (click)="addMean()" class="btn btn-md size-l btn-success"><svg [cIcon]="icons.cilCheck" size="xl" title="Check Icon"></svg> Agregar</button>
   </div>
 </ng-template>
 
 <ng-template #ResponsiblesPanelTwo>
-  <div class="modal-header bg-primary">
-    <h3 class="modal-title pull-left">
-      Responsables del Recurso
-    </h3>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalTwo!.hide()">
-      <span aria-hidden="true">×</span>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Responsables del Recursod</h4>
+    <button type="button" class="btn like2" (click)="modalTwo.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
     </button>
   </div>
   <div class="modal-body">
@@ -479,18 +469,16 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" *ngIf="respListButton && rolIdG == 'administrator'" (click)="saveRespon('mean')" class="btn btn-md size-l btn-success"><i class="cil-save"></i> Guardar</button>
-    <button type="submit" *ngIf="!respListButton && rolIdG == 'administrator'" (click)="removeRespon('mean')" class="btn btn-md size-l btn-danger"><i class="cil-trash"></i> Eliminar</button>
+    <button type="submit" *ngIf="respListButton && rolIdG == 'administrator'" (click)="saveRespon('mean')" class="btn btn-md size-l btn-success"><svg [cIcon]="icons.cilSave" size="xl" title="Save Icon"></svg> Guardar</button>
+    <button type="submit" *ngIf="!respListButton && rolIdG == 'administrator'" (click)="removeRespon('mean')" class="btn btn-md size-l btn-danger"><svg [cIcon]="icons.cilTrash" size="xl" title="Trash Icon"></svg> Eliminar</button>
   </div>
 </ng-template>
 
 <ng-template #EvidencePanelTwo>
-  <div class="modal-header bg-primary">
-    <h3 class="modal-title pull-left">
-      Evidencias de Recursos
-    </h3>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalTwo!.hide()">
-      <span aria-hidden="true">×</span>
+  <div class="modal-header bg-success">
+    <h4 class="modal-title pull-left like2">Evidencias de Recursos</h4>
+    <button type="button" class="btn like2" (click)="modalTwo.hide()">
+      <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
     </button>
   </div>
   <div class="modal-body">
@@ -511,7 +499,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" *ngIf="!sizeEvidence" (click)="uploadEvidence('mean')" class="btn btn-md size-l btn-success"><i class="fa fa-cloud-upload"></i> Subir Evidencia</button>
-    <button type="submit" *ngIf="sizeEvidence" (click)="modalTwo!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
+    <button type="submit" *ngIf="!sizeEvidence" (click)="uploadEvidence('mean')" class="btn btn-md size-l btn-success"><svg [cIcon]="icons.cilCloudUpload" size="xl" title="Cloud Upload Icon"></svg> Subir Evidencia</button>
+    <button type="submit" *ngIf="sizeEvidence" (click)="modalTwo!.hide()" class="btn btn-md size-l btn-danger"><svg [cIcon]="icons.cilBan" size="xl" title="Ban Icon"></svg> Cerrar</button>
   </div>
 </ng-template>
