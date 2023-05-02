@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="card">
-                                <div class="card-header lg bg-info">
+                                <div class="card-header lg bg-info text-light">
                                     <strong>Lista de equipos</strong>
                                 </div>
                                 <div class="card-body" *ngIf="teamArray.length > 0">
@@ -55,14 +55,15 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="card-body text-center" *ngIf="teamArray.length === 0">
-                                    <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" height="300px">
+                                <div class="card-body text-center" *ngIf="teamArray.length == 0">
+                                  <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados"
+                                    height="300px">
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card">
-                                <div class="card-header lg bg-warning">
+                                <div class="card-header lg bg-warning text-light">
                                     <strong>Información de actividades</strong>
                                 </div>
                                 <div class="card-body" *ngIf="selected">
@@ -73,7 +74,7 @@
                                     </div>
 
                                     <div class="text-center" *ngIf="activityArray.length == 0">
-                                        <img class="responsive" src="../../../../assets/img/activity_background.png" height="300px" alt="No hay resultados">
+                                        <img class="responsive2" src="../../../../assets/img/activity_background.png" height="150px" alt="No hay resultados">
                                     </div>
 
                                     <br>
@@ -143,7 +144,8 @@
                                     </table>
                                 </div>
                                 <div class="card-body text-center" *ngIf="!selected">
-                                    <img class="responsive2" src="../../../../assets/img/design_prototype_background.png" alt="No hay resultados" height="300px">
+                                  <img class="responsive2" src="../../../../assets/img/design_prototype_background.png" alt="No hay resultados"
+                                    height="300px">
                                 </div>
                             </div>
                         </div>
@@ -333,7 +335,7 @@
     </div>
 
     <div class="text-center" *ngIf="meanArray.length == 0">
-        <img class="responsive" src="../../../../assets/img/resources_background.png" alt="No hay resultados">
+        <img class="responsive2" src="../../../../assets/img/resources_background.png" height="150px" alt="No hay resultados">
     </div>
 
     <br>

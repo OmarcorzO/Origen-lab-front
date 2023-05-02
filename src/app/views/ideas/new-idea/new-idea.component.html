@@ -7,17 +7,17 @@
           </c-card-header>
           <div class="card-body">
             <form id="ideaForm" [formGroup]="ideaForm">
-              <div class="row">
-                <div class="form-group col-sm-11">
+
+                <div class="form-group">
                     <label class="form-col-form-label"for="name">Nombre</label>
                     <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite su nombre" required minlength="10" >
                     <div class="text-danger mt-2" *ngIf="invalidField('name')">
                       {{ getErrorMessage("name") }}
                     </div>
                 </div>
-              </div>
+
               <div class="row">
-                <div class="form-group col-sm-11">
+                <div class="form-group">
                     <label class="form-col-form-label"for="description">Descripción</label>
                     <textarea class="form-control" id="description" formControlName="description" placeholder="Digite la descripción" required minlength="20" cols="30" rows="5"></textarea>
                     <div class="text-danger mt-2" *ngIf="invalidField('description')">
@@ -26,20 +26,19 @@
                 </div>
               </div>
               <div class="row">
-                <div class="form-group col-sm-11">
+                <div class="form-group">
                     <label class="form-col-form-label" for="visualization">Visualizar en mural</label>
                     <br>
-                    <label class="switch switch-3d switch-primary" >
-                      <input type="checkbox" class="switch-input" formControlName="visualization" id="visualization" (click)="checkVi($event.target)">
-                      <span class="switch-slider"></span>
-                    </label>
+                    <c-form-check [switch]="true">
+                      <input cFormCheckInput type="checkbox" (click)="checkVi($event.target)"/>
+                    </c-form-check>
                     <div class="text-danger mt-2" *ngIf="invalidField('visualization')">
                       {{ getErrorMessage("visualization") }}
                     </div>
                 </div>
               </div>
               <div class="row">
-                <div class="form-group col-sm-11">
+                <div class="form-group">
                   <label class="form-col-form-label"for="description">Anexo 1</label>
                   <div class="custom2-input-file col"
                     [ngStyle]="{'background-color': ideaForm.value.anexoOne !== '' ?  'green': 'purple'}">
@@ -50,7 +49,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="form-group col-sm-11">
+                <div class="form-group">
                   <label class="form-col-form-label"for="description">Anexo 2</label>
                   <div class="custom2-input-file col"
                     [ngStyle]="{'background-color': ideaForm.value.anexoTwo !== '' ?  'green': 'purple'}">
@@ -61,7 +60,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="form-group col-sm-11">
+                <div class="form-group">
                   <label class="form-col-form-label"for="description">Anexo 3</label>
                   <div class="custom2-input-file col"
                     [ngStyle]="{'background-color': ideaForm.value.anexoThree !== '' ?  'green': 'purple'}">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
 import { Paginator } from '../../interfaces/paginator';
@@ -13,6 +13,7 @@ import {
   cilArrowThickToRight,
   cilSearch,
   cilX,
+  cilXCircle,
   cilPlus,
   cilLoopCircular,
   cilPencil,
@@ -21,7 +22,10 @@ import {
   cilCheck,
   cilCloudUpload,
   cilBan,
+  cilTrash,
+  cilActionRedo,
   cilCheckCircle,
+  cilNewspaper
 } from '@coreui/icons';
 
 @Component({
@@ -32,8 +36,8 @@ import {
 export class NewMarketingComponent implements OnInit {
   icons = {
     cilBookmark, cilInfo, cilArrowThickToRight, cilSearch, cilX, cilPlus,
-    cilLoopCircular, cilPencil, cilViewStream, cilMagnifyingGlass, cilCheck,
-    cilCloudUpload, cilBan, cilCheckCircle,
+    cilLoopCircular, cilPencil, cilViewStream, cilMagnifyingGlass, cilCheck, cilTrash,
+    cilCloudUpload, cilBan, cilCheckCircle, cilXCircle, cilNewspaper, cilActionRedo
   }
 
   public tokensave = '';

@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col">
               <div class="card">
-                <div class="card-header lg bg-info">
+                <div class="card-header lg bg-info text-light">
                   <strong>Lista de equipos</strong>
                 </div>
                 <div class="card-body" *ngIf="teamArray.length > 0">
@@ -45,29 +45,32 @@
                           {{ teamU.ideaId.userId.email }}
                         </td>
                         <td class="text-center">
-                          <button (click)="processIdea(teamU.ideaId._id, 0, ShowNeeds)" class="btn bg-info">
-                            <svg [cIcon]="icons.cilBookmark" size="xl" title="Bookmark Icon"></svg>
-                          </button>
-                          <button (click)="searchData(teamU.ideaId._id)" class="btn bg-info">
-                            <svg [cIcon]="icons.cilInfo" size="xl" title="Info Icon"></svg>
-                          </button>
-                          <button *ngIf="teamU.rol == 'administrator' && teamU.ideaId.phase == 'ideation'"
-                            (click)="changePhase(teamU.ideaId._id)" class="btn bg-info">
-                            <svg [cIcon]="icons.cilArrowThickToRight" size="xl" title="Change Phase Icon"></svg>
-                          </button>
+                          <div style="display: inline-flex;">
+                            <button (click)="processIdea(teamU.ideaId._id, 0, ShowNeeds)" class="btn bg-info">
+                              <svg [cIcon]="icons.cilBookmark" size="xl" title="Bookmark Icon"></svg>
+                            </button>
+                            <button (click)="searchData(teamU.ideaId._id)" class="btn bg-info">
+                              <svg [cIcon]="icons.cilInfo" size="xl" title="Info Icon"></svg>
+                            </button>
+                            <button *ngIf="teamU.rol == 'administrator' && teamU.ideaId.phase == 'ideation'"
+                              (click)="changePhase(teamU.ideaId._id)" class="btn bg-info">
+                              <svg [cIcon]="icons.cilArrowThickToRight" size="xl" title="Change Phase Icon"></svg>
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
                 <div class="card-body text-center" *ngIf="teamArray.length == 0">
-                  <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" height="300px">
+                  <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados"
+                    height="300px">
                 </div>
               </div>
             </div>
             <div class="col">
               <div class="card">
-                <div class="card-header lg bg-warning">
+                <div class="card-header lg bg-warning text-light">
                   <strong>Información del Equipo</strong>
                 </div>
                 <div class="card-body" *ngIf="selected">
@@ -225,7 +228,7 @@
                     </tab>
                   </tabset>
                 </div>
-                <div class="card-body" *ngIf="!selected" style="align-self: center;">
+                <div class="card-body text-center" *ngIf="!selected">
                   <img class="responsive2" src="../../../../assets/img/ideation_background.jpg" alt="No hay resultados"
                     height="300px">
                 </div>

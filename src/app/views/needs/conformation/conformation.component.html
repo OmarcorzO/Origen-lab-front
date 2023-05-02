@@ -1,114 +1,126 @@
 <div class="animated fadeIn">
-    <div class="row">
-      <div class="container">
-          <div class="card">
-              <c-card-header class="card-header-unique bg-primary">
-                  <strong> Conformación de equipo</strong>
-              </c-card-header>
-              <div class="card-body">
-                  <div class="row">
-                      <div class="col-md-6">
-                          <div class="card">
-                              <div class="card-header bg-info lg">
-                                <strong>Ideas disponibles para unirse</strong> 
-                              </div>
-                              <div class="card-body" *ngIf="ideasTBArray.length > 0">
-                                <div class="col text-center">
-                                  <pagination [totalItems]="(paginatorTeam.totalItems / paginatorTeam.sizePage)" [(ngModel)]="paginatorTeam.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
-                                </div> 
-                                <table class="table table-responsive-xl table-hover table-striped table-outline table-align-middle mb-0">
-                                  <thead>
-                                    <tr>
-                                      <th>Nombre</th>
-                                      <th>Descripción</th>
-                                      <th>Fase</th>
-                                      <th class="text-center">Acciones</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr *ngFor="let ideas of ideasTBArray | slice: (paginatorTeam.currentPage-1) * paginatorTeam.sizePage : paginatorTeam.currentPage * paginatorTeam.sizePage; let i = index">
-                                      <td>
-                                        {{ ideas.name }}
-                                      </td>
-                                      <td>
-                                        <span class="truncate">{{ ideas.description }}</span>
-                                      </td>
-                                      <td>
-                                        {{ ideas.phase }}
-                                      </td>
-                                      <td class="text-center">
-                                        <button (click)="addTeam(AddUser, ideas._id)" class="btn">
-                                          <svg [cIcon]="icons.cilPlus" size="xl" title="Plus Icon"></svg>
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                              <div class="card-body text-center" *ngIf="ideasTBArray.length == 0">
-                                <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados" height="150px">
-                              </div>
-                          </div>
-                      </div>
-                      <!-- Tabla de idea donde se unió -->
-                      <div class="col-md-6">
-                          <div class="card">
-                              <div class="card-header bg-warning">
-                                <strong>Equipos inscritos</strong> 
-                              </div>
-                              <div class="card-body" *ngIf="teamUserArray.length > 0">
-                                <div class="col text-center">
-                                  <pagination [totalItems]="(paginatorTeamUser.totalItems / paginatorTeamUser.sizePage)" [(ngModel)]="paginatorTeamUser.currentPage" [maxSize]="5" previousText="Anterior" nextText="Siguiente"></pagination>
-                                </div> 
-                                <table class="table table-responsive-xl table-hover table-striped table-align-middle table-outline mb-0" >
-                                    <thead class="text-center">
-                                      <tr>
-                                        <th>Idea</th>
-                                        <th>Rol</th>
-                                        <th>Fase</th>
-                                        <th>Acciones</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="text-center" *ngFor="let teamU of teamUserArray | slice: (paginatorTeamUser.currentPage-1) * paginatorTeamUser.sizePage : paginatorTeamUser.currentPage * paginatorTeamUser.sizePage; let i = index">
-                                            <td>
-                                              {{ teamU.ideaId.name }}
-                                            </td>
-                                            <td>
-                                              {{ teamU.rol }}
-                                            </td>
-                                            <td>
-                                              {{ teamU.ideaId.phase }}
-                                            </td>
-                                            <td>
-                                              <button (click)="processIdea(teamU.ideaId._id, teamU.ideaId.phase)" style="cursor: pointer;" class="btn bg-info" >
-                                                <!-- tooltip="Estado" placement="top" -->
-                                                <svg [cIcon]="icons.cilBookmark" size="xl" title="List Icon"></svg>
-                                              </button>
-                                              <button (click)="removeTeam(teamU.ideaId._id)" style="cursor: pointer;" class="btn bg-danger">
-                                                <!-- tooltip="Retirarse" placement="top" -->
-                                                <svg [cIcon]="icons.cilMinus" size="xl" title="List Icon"></svg>
-                                              </button>
-                                              <button *ngIf="teamU.rol == 'administrator' && teamU.ideaId.phase == 'teamBuilding'" (click)="changePhase(teamU.ideaId._id)" style="cursor: pointer;" class="btn btn-info">
-                                                <!-- tooltip="Cambiar de fase" placement="top" -->
-                                                <svg [cIcon]="icons.cilArrowThickToRight" size="xl" title="List Icon"></svg>
-                                              </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                              </div>
-                              <div class="card-body text-center" *ngIf="teamUserArray.length == 0">
-                                <img class="responsive" src="../../../../assets/img/team_goal_background.png" alt="No hay resultados" height="150px">
-                              </div>
-                          </div>
-                      </div>
+  <div class="row">
+    <div class="container">
+      <div class="card">
+        <c-card-header class="card-header-unique bg-primary">
+          <strong> Conformación de equipo</strong>
+        </c-card-header>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-header bg-info text-light">
+                  <strong>Ideas disponibles para unirse</strong>
+                </div>
+                <div class="card-body" *ngIf="ideasTBArray.length > 0">
+                  <div class="col text-center">
+                    <pagination [totalItems]="(paginatorTeam.totalItems / paginatorTeam.sizePage)"
+                      [(ngModel)]="paginatorTeam.currentPage" [maxSize]="5" previousText="Anterior"
+                      nextText="Siguiente"></pagination>
                   </div>
+                  <table
+                    class="table table-responsive-xl table-hover table-striped table-outline table-align-middle mb-0">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Fase</th>
+                        <th class="text-center">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let ideas of ideasTBArray | slice: (paginatorTeam.currentPage-1) * paginatorTeam.sizePage : paginatorTeam.currentPage * paginatorTeam.sizePage; let i = index">
+                        <td>
+                          {{ ideas.name }}
+                        </td>
+                        <td>
+                          <span class="truncate">{{ ideas.description }}</span>
+                        </td>
+                        <td>
+                          {{ ideas.phase }}
+                        </td>
+                        <td class="text-center">
+                          <button (click)="addTeam(AddUser, ideas._id)" class="btn">
+                            <svg [cIcon]="icons.cilPlus" size="xl" title="Plus Icon"></svg>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-body text-center" *ngIf="ideasTBArray.length == 0">
+                  <img class="responsive2" src="../../../../assets/img/nothing_search.png" alt="No hay resultados"
+                    height="300px">
+                </div>
               </div>
+            </div>
+            <!-- Tabla de idea donde se unió -->
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header bg-warning text-light">
+                  <strong>Equipos inscritos</strong>
+                </div>
+                <div class="card-body" *ngIf="teamUserArray.length > 0">
+                  <div class="col text-center">
+                    <pagination [totalItems]="(paginatorTeamUser.totalItems / paginatorTeamUser.sizePage)"
+                      [(ngModel)]="paginatorTeamUser.currentPage" [maxSize]="5" previousText="Anterior"
+                      nextText="Siguiente"></pagination>
+                  </div>
+                  <table
+                    class="table table-responsive-xl table-hover table-striped table-align-middle table-outline mb-0">
+                    <thead class="text-center">
+                      <tr>
+                        <th>Idea</th>
+                        <th>Rol</th>
+                        <th>Fase</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="text-center"
+                        *ngFor="let teamU of teamUserArray | slice: (paginatorTeamUser.currentPage-1) * paginatorTeamUser.sizePage : paginatorTeamUser.currentPage * paginatorTeamUser.sizePage; let i = index">
+                        <td>
+                          {{ teamU.ideaId.name }}
+                        </td>
+                        <td>
+                          {{ teamU.rol }}
+                        </td>
+                        <td>
+                          {{ teamU.ideaId.phase }}
+                        </td>
+                        <td>
+                          <div style="display: inline-flex;">
+                            <button (click)="processIdea(teamU.ideaId._id, teamU.ideaId.phase)" style="cursor: pointer;"
+                              class="btn bg-info">
+                              <svg [cIcon]="icons.cilBookmark" size="xl" title="List Icon"></svg>
+                            </button>
+                            <button (click)="removeTeam(teamU.ideaId._id)" style="cursor: pointer;"
+                              class="btn bg-danger">
+                              <svg [cIcon]="icons.cilMinus" size="xl" title="List Icon"></svg>
+                            </button>
+                            <button *ngIf="teamU.rol == 'administrator' && teamU.ideaId.phase == 'teamBuilding'"
+                              (click)="changePhase(teamU.ideaId._id)" style="cursor: pointer;" class="btn btn-info">
+                              <svg [cIcon]="icons.cilArrowThickToRight" size="xl" title="List Icon"></svg>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-body text-center" *ngIf="teamUserArray.length == 0">
+                  <img class="responsive2" src="../../../../assets/img/team_goal_background.png" alt="No hay resultados"
+                    height="300px">
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
     </div>
-    <!--/.row-->
+  </div>
+  <!--/.row-->
 </div>
 
 <ng-template #AddUser>
@@ -118,7 +130,7 @@
       <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
     </button>
   </div>
-  
+
   <div class="modal-body">
     <div class="text-center" *ngIf="needsArray.length == 0">
       <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
@@ -142,22 +154,25 @@
               <td>
                 <div class="small text-muted">
                   <span class="truncate"> {{need.description}} </span>
-                  <span> <strong>Creado:</strong> {{need.createdAt | date:"dd-MM-yyyy" }} </span> 
-                  <span> <strong>Actualizado:</strong> {{need.updatedAt | date:"dd-MM-yyyy" }} </span> 
+                  <span> <strong>Creado:</strong> {{need.createdAt | date:"dd-MM-yyyy" }} </span>
+                  <span> <strong>Actualizado:</strong> {{need.updatedAt | date:"dd-MM-yyyy" }} </span>
                 </div>
               </td>
-  
+
               <td class="text-center">
-                <label class="switch switch-label switch-pill switch-outline-success-alt">
+                <c-form-check [switch]="true">
+                  <input cFormCheckInput type="checkbox" (click)="dataEnte(need, $event)" />
+                </c-form-check>
+                <!-- <label class="switch switch-label switch-pill switch-outline-success-alt">
                   <input type="checkbox" class="switch-input" (click)="dataEnte(need, $event)">
                   <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
-                </label>
+                </label> -->
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      
+
       <div class="col-12 mt-2">
         <div class="row">
           <div class="col-12">
@@ -165,8 +180,7 @@
           </div>
           <div class="col">
             <c-form-check [switch]="true">
-              <input cFormCheckInput checked type="checkbox" (click)="dataEnte(null, $event)"/>
-              <!-- <label cFormCheckLabel>YES</label> -->
+              <input cFormCheckInput checked type="checkbox" (click)="dataEnte(null, $event)" />
             </c-form-check>
           </div>
         </div>
@@ -174,6 +188,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" (click)="sendEnte()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Unirse</button>
+    <button type="submit" (click)="sendEnte()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i>
+      Unirse</button>
   </div>
 </ng-template>

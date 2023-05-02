@@ -38,129 +38,6 @@ export class ViewIdeaComponent implements OnInit {
     cilX,
   };
 
-  // testing
-  chartOptions = {
-    elements: {
-      line: {
-        tension: 0.4,
-      },
-      point: {
-        radius: 0,
-        hitRadius: 10,
-        hoverRadius: 4,
-        hoverBorderWidth: 3,
-      },
-    },
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-    scales: {
-      x: {
-        display: false,
-      },
-      y: {
-        display: false,
-      },
-    },
-  };
-  labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  datasets = {
-    borderWidth: 3,
-    fill: true,
-  };
-  colors = {
-    backgroundColor: 'rgba(255,255,255,.1)',
-    borderColor: 'rgba(255,255,255,.55)',
-    pointHoverBackgroundColor: '#fff',
-    pointBackgroundColor: 'rgba(255,255,255,.55)',
-  };
-  brandData = [
-    {
-      title: 'cibFacebook',
-      values: [
-        { title: 'LIKES', value: '89K' },
-        { title: 'DISLIKES', value: '459' },
-        { title: 'COMMENTS', value: '400' },
-      ],
-      capBg: { '--cui-card-cap-bg': '#3b5998' },
-      labels: [...this.labels],
-      data: {
-        labels: [...this.labels],
-        datasets: [
-          {
-            ...this.datasets,
-            data: [65, 59, 84, 84, 51, 55, 40],
-            label: 'Facebook',
-            ...this.colors,
-          },
-        ],
-      },
-    },
-    {
-      title: 'cibTwitter',
-      values: [
-        { title: 'LIKES', value: '89K' },
-        { title: 'DISLIKES', value: '459' },
-        { title: 'COMMENTS', value: '400' },
-      ],
-      capBg: { '--cui-card-cap-bg': '#00aced' },
-      data: {
-        labels: [...this.labels],
-        datasets: [
-          {
-            ...this.datasets,
-            data: [1, 13, 9, 17, 34, 41, 38],
-            label: 'Twitter',
-            ...this.colors,
-          },
-        ],
-      },
-    },
-    {
-      title: 'cib-linkedin',
-      values: [
-        { title: 'LIKES', value: '89K' },
-        { title: 'DISLIKES', value: '459' },
-        { title: 'COMMENTS', value: '400' },
-      ],
-      capBg: { '--cui-card-cap-bg': '#4875b4' },
-      data: {
-        labels: [...this.labels],
-        datasets: [
-          {
-            ...this.datasets,
-            data: [78, 81, 80, 45, 34, 12, 40],
-            label: 'LinkedIn',
-            ...this.colors,
-          },
-        ],
-      },
-    },
-    {
-      title: 'cilCalendar',
-      values: [
-        { title: 'LIKES', value: '89K' },
-        { title: 'DISLIKES', value: '459' },
-        { title: 'COMMENTS', value: '400' },
-      ],
-      color: 'warning',
-      data: {
-        labels: [...this.labels],
-        datasets: [
-          {
-            ...this.datasets,
-            data: [35, 23, 56, 22, 97, 23, 64],
-            label: 'Events',
-            ...this.colors,
-          },
-        ],
-      },
-    },
-  ];
-
   // Arrays de la visualización
   public arrayPublicIdeas!: any[];
   public arrayComments!: any[];
@@ -181,7 +58,7 @@ export class ViewIdeaComponent implements OnInit {
 
   // Variables Paginador
   currentPage: number = 1;
-  sizePage: number = 3;
+  sizePage: number = 2;
   totalItems: number = 0;
 
   // Forms
@@ -230,7 +107,6 @@ export class ViewIdeaComponent implements OnInit {
         (res: any) => {
           this.swalServ.close();
           this.arrayPublicIdeas = res.data.value;
-          this.updateBrandInfo()
         },
         (error) => {
           this.swalServ.checkError(error.status);
@@ -296,7 +172,6 @@ export class ViewIdeaComponent implements OnInit {
       .subscribe(
         (res: any) => {
           this.arrayPublicIdeas = res.data.value;
-          this.updateBrandInfo()
         },
         (error) => {
           this.swalServ.checkError(error.status);
@@ -304,28 +179,6 @@ export class ViewIdeaComponent implements OnInit {
       );
   }
 
-  updateBrandInfo() {
-    this.arrayPublicIdeas.forEach((obj, i) => {
-      var {
-        name,
-        reacting_idea_dislikes,
-        reacting_idea_likes,
-        comment_idea,
-      } = obj;
-      
-      this.brandData[i].title = name;
-      this.brandData[i].values = [
-        { title: 'LIKES', value: reacting_idea_likes.length },
-        { title: 'DISLIKES', value: reacting_idea_dislikes.length },
-      ];
-
-      if (comment_idea[0] !== undefined) {
-        this.brandData[i].values.push({ title: 'COMMENTS', value: comment_idea[0].count },)
-      } else {
-        this.brandData[i].values.push({ title: 'COMMENTS', value: '0' },)
-      }
-    });
-  }
 
   ideasFilter(type) {
     switch (type) {

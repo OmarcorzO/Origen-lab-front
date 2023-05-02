@@ -43,72 +43,48 @@
         </c-card-header>
 
         <c-card-body>
-          <c-row>
-            <c-col *ngFor="let widget of brandData; index as i" sm="6" xl="3">
-              <c-widget-stat-d [color]="widget.color ?? ''" [style]="widget.capBg ?? null" [values]="widget.values"
-                class="mb-4">
-                <p style="color: white; font-family: Verdana, Geneva, Tahoma, sans-serif;">
-                  <i>
-                    {{ widget.title }}
-                  </i>
-                </p>
-                <svg cIcon class="my-4 text-white" height="52"></svg>
-                <ng-container>
-                  <!-- <c-chart
-                    #chart="cChart"
-                    [data]="widget.data"
-                    [options]="chartOptions"
-                    class="position-absolute w-100 h-100"
-                    type="line"
-                    >{{ chart.id }}</c-chart
-                  > -->
-                </ng-container>
-              </c-widget-stat-d>
-            </c-col>
-          </c-row>
-
           <div class="row">
             <div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let idea of arrayPublicIdeas; let i = index">
-              <div class="brand-card" (click)="showIdea(idea, ViewIdea)">
-                <div class="brand-card-header bg-facebook">
-                  <!-- <i class="fa fa-facebook"></i> -->
-                  <h5 style="color: white; margin: 30px">
-                    {{ idea.name }}
+              <c-card class="brand-card mt-2" (click)="showIdea(idea, ViewIdea)">
+                <c-card-header style="color: black;">
+                  <h5 style="margin: 20px; height: 60px; overflow: auto;">
+                    <i>
+                      {{ idea.name }}
+                    </i>
                   </h5>
-                </div>
-                <div class="brand-card-body">
-                  <div>
-                    <div class="text-value">
-                      {{
-                      idea.reacting_idea_likes.length == 0
-                      ? 0
-                      : idea.reacting_idea_likes[0].count
-                      }}
-                    </div>
+                </c-card-header>
+                <c-card-body style="display: inline-flex; justify-content: center;">
+                  <div class="div-brand">
+
+                    {{
+                    idea.reacting_idea_likes.length == 0
+                    ? 0
+                    : idea.reacting_idea_likes[0].count
+                    }}
+
                     <div class="text-uppercase text-muted small">Likes</div>
                   </div>
-                  <div>
-                    <div class="text-value">
-                      {{
-                      idea.reacting_idea_dislikes.length == 0
-                      ? 0
-                      : idea.reacting_idea_dislikes[0].count
-                      }}
-                    </div>
+                  <div class="div-brand">
+
+                    {{
+                    idea.reacting_idea_dislikes.length == 0
+                    ? 0
+                    : idea.reacting_idea_dislikes[0].count
+                    }}
+
                     <div class="text-uppercase text-muted small">Dislikes</div>
                   </div>
-                  <div>
-                    <div class="text-value">
-                      {{
-                      idea.comment_idea.length == 0
-                      ? 0
-                      : idea.comment_idea[0].count
-                      }}
-                    </div>
+
+                  <div class="div-brand">
+                    {{
+                    idea.comment_idea.length == 0
+                    ? 0
+                    : idea.comment_idea[0].count
+                    }}
                     <div class="text-uppercase text-muted small">Coments</div>
                   </div>
-                </div>
-              </div>
+                </c-card-body>
+              </c-card>
               <!--/.brand-card-->
             </div>
           </div>
@@ -133,7 +109,9 @@
   </div>
   <c-card-body>
     <div class="form-group">
-      <h2>{{ ideaView.name }}</h2>
+      <h2 style="overflow: auto; max-height: 125px;">
+        {{ ideaView.name }}
+      </h2>
       <p>
         <strong>Top User:</strong> {{ topUser.name }}
         {{

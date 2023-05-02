@@ -2,7 +2,7 @@
     <div class="row">
         <div class="container">
             <div class="card" *ngIf="!hasProfile">
-                <div class="card-header bg-primary">
+                <div class="card-header bg-primary text-light">
                   <strong>Perfil de Usuario</strong>
                 </div>
                 <form id="profileForm" [formGroup]="profileForm">
@@ -75,10 +75,7 @@
                     <div class="row">
                       <div class="form-group col-sm-6">
                         <label for="levelStudy">Nivel de Estudio</label>
-                        <select class="form-control" id="levelStudy" formControlName="levelStudy" required>
-                          <option value="" disabled selected> --- Selecciona una opción --- </option>
-                          <option *ngFor="let item of levelStudyList" [value]="item">{{item}}</option> 
-                        </select>
+                        <input type="text" class="form-control" id="levelStudy" formControlName="levelStudy" placeholder="Digite su nivel de estudio" required minlength="5">
                         <div class="text-danger mt-2" *ngIf="invalidFieldRol('levelStudy')">
                           {{ getErrorMessageRol("levelStudy") }}
                         </div>
@@ -212,13 +209,13 @@
                 </form>
 
                 <div class="card-footer">
-                  <button type="submit" (click)="registerProfile()" class="btn btn-md size-l btn-primary"><i class="fa fa-dot-circle-o"></i> Crear</button>
-                  <button type="submit" (click)="cleanData()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Limpiar</button>
+                  <button type="submit" (click)="registerProfile()" class="btn btn-md size-l btn-primary"><svg cIcon name="cilAsteriskCircle" size="xl" title="Asterisk Icon"></svg> Crear</button>
+                  <button type="submit" (click)="cleanData()" class="btn btn-md size-l btn-danger" style="margin-left: 10px;" ><svg cIcon name="cilBan" size="xl" title="Ban Icon"></svg> Limpiar</button>
                 </div>
             </div>
 
             <div class="card" *ngIf="hasProfile">
-                <div class="card-header bg-success">
+                <div class="card-header bg-success text-light">
                   <strong>Perfil de Usuario</strong>
                 </div>
                 <form id="editProfileForm" [formGroup]="editProfileForm">
@@ -266,7 +263,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                           <div class="form-group">
                             <label for="img">Foto de Perfil</label>
-                            <img [src]="tempImg" class="form-control img-profile-page">
+                            <img [src]="tempImg" class="form-control img-profile-page" style="width: 70%;">
                             <div class="custom2-input-file col mt-2"
                               [ngStyle]="{'background-color': editProfileForm.value.img !== '' ?  'green': 'purple'}">
                               <input class="input-file " type="file" (change)="onFileSelect($event)">
@@ -318,10 +315,7 @@
                     <div class="row">
                       <div class="form-group col-sm-6">
                         <label for="levelStudy">Nivel de Estudio</label>
-                        <select class="form-control" id="levelStudy" formControlName="levelStudy" required>
-                          <option value="" disabled selected> --- Selecciona una opción --- </option>
-                          <option *ngFor="let item of levelStudyList" [value]="item">{{item}}</option> 
-                        </select>
+                        <input type="text" class="form-control" id="levelStudy" formControlName="levelStudy" placeholder="Digite su nivel de estudio" required minlength="5">
                         <div class="text-danger mt-2" *ngIf="invalidFieldRol('levelStudy')">
                           {{ getErrorMessageRol("levelStudy") }}
                         </div>
@@ -455,8 +449,14 @@
                 </form>
 
                 <div class="card-footer">
-                  <button type="submit" (click)="updateProfile()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Actualizar</button>
-                  <button type="submit" (click)="cleanDataEdit()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Limpiar</button>
+                  <button type="submit" (click)="updateProfile()" class="btn btn-md size-l btn-success">
+                    <i class="fa fa-check"></i> 
+                    <svg cIcon name="cilCheck" size="xl" title="Numbered List Icon"></svg>
+                    Actualizar
+                  </button>
+                  <button type="submit" (click)="cleanDataEdit()" class="btn btn-md size-l btn-danger">
+                    <svg cIcon name="cilBan" size="xl" title="Numbered List Icon"></svg>
+                    Limpiar</button>
                 </div>
             </div>
         </div>

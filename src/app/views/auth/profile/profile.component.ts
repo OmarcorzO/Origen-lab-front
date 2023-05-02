@@ -480,21 +480,21 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  checkRol(e: Event): void {
-    var valPos;
+  checkRol(e: any): void {
+    var valPos;    
 
     this.formSubmitted = false;
     (<HTMLFormElement>document.getElementById('profileForm')).classList.remove(
       'was-validated'
     );
 
-    valPos = this.rolList.filter((formArray: any) => formArray._id === e);
+    valPos = this.rolList.filter((formArray: any) => formArray._id === e.target.value);
     this.codeRol = valPos[0].code;
 
     this.initRolForms();
   }
 
-  checkRolEdit(e: Event): void {
+  checkRolEdit(e: any): void {
     var valPos;
 
     this.formSubmitted = false;
@@ -502,7 +502,7 @@ export class ProfileComponent implements OnInit {
       document.getElementById('editProfileForm')
     )).classList.remove('was-validated');
 
-    valPos = this.rolList.filter((formArray: any) => formArray._id === e);
+    valPos = this.rolList.filter((formArray: any) => formArray._id === e.target.value);
     this.codeRol = valPos[0].code;
 
     this.initRolForms();

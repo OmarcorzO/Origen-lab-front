@@ -1,0 +1,33 @@
+.pointer {
+    cursor: pointer;
+}
+
+.size-l {
+    font-size: large;
+}
+
+.custom2-input-file {
+    background-color: purple;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+    min-height: 15px;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    width: 400px;
+    border-radius: 10px;
+}
+  
+.custom2-input-file .input-file {
+    border: 7px solid transparent;
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 578px;
+}
