@@ -2,14 +2,14 @@
     <div class="row">
         <div class="container">
             <div class="card">
-                <c-card-header class="card-header-unique bg-primary">
+                <c-card-header class="card-header-unique color-modal">
                     <strong>Marketing</strong>
                 </c-card-header>
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="card">
-                                <div class="card-header lg bg-info text-light">
+                                <div class="card-header lg color-modal-two text-light">
                                     <strong>Lista de equipos</strong>
                                 </div>
                                 <div class="card-body" *ngIf="teamArray.length > 0">
@@ -48,20 +48,20 @@
                                                 <td class="text-center">
                                                     <div style="display: inline-flex;">
                                                         <button (click)="processIdea(team.ideaId._id, team.ideaId.phase)"
-                                                            *ngIf="team.ideaId.phase == 'finalized'" class="btn bg-info">
+                                                            *ngIf="team.ideaId.phase == 'finalized'" class="btn color-modal-two">
                                                             <svg [cIcon]="icons.cilBookmark" size="xl"
                                                                 title="Bookmark Icon"></svg>
                                                         </button>
     
                                                         <button (click)="searchData(team.ideaId._id, team.rol)"
-                                                            class="btn bg-primary">
+                                                            class="btn color-modal">
                                                             <svg [cIcon]="icons.cilInfo" size="xl" title="Info Icon"
                                                                 style="color: white;"></svg>
                                                         </button>
     
                                                         <button
                                                             *ngIf="team.rol == 'administrator' && team.ideaId.phase == 'marketing'"
-                                                            (click)="finalizedIdea(team.ideaId._id)" class="btn bg-info">
+                                                            (click)="finalizedIdea(team.ideaId._id)" class="btn color-modal-two">
                                                             <svg [cIcon]="icons.cilArrowThickToRight" size="xl"
                                                                 title="Arrow Icon"></svg>
                                                         </button>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="col">
                             <div class="card">
-                                <div class="card-header lg bg-warning text-light">
+                                <div class="card-header lg color-modal-three text-light">
                                     <strong>Información del Mercado</strong>
                                 </div>
                                 <div class="card-body" *ngIf="selected">
@@ -169,12 +169,12 @@
                                                         title="Create Icon"></svg>
                                                     Crear</button>
                                                 <button type="submit" *ngIf="existMarket" (click)="updateMarket()"
-                                                    class="btn btn-md size-l btn-success"><svg
+                                                    class="btn btn-md size-l color-modal"><svg
                                                         [cIcon]="icons.cilLoopCircular" size="xl"
                                                         title="Loop Icon"></svg> Actualizar</button>
                                                 <!-- <div class="pl-2"> -->
                                                     <button (click)="processIdea(ideaIdG, 'marketing')"
-                                                        class="btn bg-success" style="margin-left: 5px;">
+                                                        class="btn color-modal" style="margin-left: 5px;">
                                                         <svg [cIcon]="icons.cilBookmark" size="xl"
                                                             title="Bookmark Icon"></svg>
                                                     </button>
@@ -312,7 +312,7 @@
 </div>
 
 <ng-template #CreateMarketC>
-    <div class="modal-header bg-success">
+    <div class="modal-header color-modal">
         <h4 class="modal-title pull-left like2">Agregar reto de mercado</h4>
         <button type="button" class="btn like2" (click)="modal.hide()">
             <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
@@ -346,13 +346,13 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="submit" (click)="createMarketChallenge()" class="btn btn-md size-l btn-success"><svg
+        <button type="submit" (click)="createMarketChallenge()" class="btn btn-md size-l color-modal"><svg
                 [cIcon]="icons.cilCheck" size="xl" title="Check Icon"></svg>Agregar</button>
     </div>
 </ng-template>
 
 <ng-template #EditMarketC>
-    <div class="modal-header bg-success">
+    <div class="modal-header color-modal">
         <h4 class="modal-title pull-left like2">Editar reto de mercado</h4>
         <button type="button" class="btn like2" (click)="modal.hide()">
             <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
@@ -392,7 +392,7 @@
 </ng-template>
 
 <ng-template #EvidencePanel>
-    <div class="modal-header bg-success">
+    <div class="modal-header color-modal">
         <h4 class="modal-title pull-left like2">Panel de Evidencias</h4>
         <button type="button" class="btn like2" (click)="modal.hide()">
             <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
@@ -404,7 +404,7 @@
                 <label class="form-col-form-label">Anexo de la evidencia</label>
                 <div>
                     <div class="custom2-input-file mx-auto"
-                        [ngStyle]="{'background-color': evidenceForm!.value.evidence !== '' ?  'green': 'purple'}">
+                        [ngStyle]="{'background-color': evidenceForm!.value.evidence !== '' ?  'green': '#629EB2'}">
                         <input type="file" class="input-file" id="evidence" (change)="onFileSelect($event)"
                             [disabled]="sizeEvidence">
                         <p *ngIf="evidenceForm!.value.evidence === ''">Subir Archivo...</p>
@@ -420,7 +420,7 @@
     </div>
     <div class="modal-footer">
         <button type="submit" *ngIf="!sizeEvidence" (click)="uploadEvidence()"
-            class="btn btn-md size-l btn-success"><svg [cIcon]="icons.cilCloudUpload" size="xl"
+            class="btn btn-md size-l color-modal"><svg [cIcon]="icons.cilCloudUpload" size="xl"
                 title="Cloud Upload Icon"></svg> Subir Evidencia</button>
         <button type="submit" *ngIf="sizeEvidence" (click)="modal!.hide()" class="btn btn-md size-l btn-danger"><svg
                 [cIcon]="icons.cilBan" size="xl" title="Ban Icon"></svg> Cerrar</button>

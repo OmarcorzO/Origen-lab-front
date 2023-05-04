@@ -91,10 +91,10 @@ $enable-rtl: true;
 
 // Input File  
 .custom-input-file {
-  background-color: purple;
+  background-color: #629EB2;
   color: #fff;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   margin-right: 10px;
   min-height: 15px;
@@ -102,7 +102,7 @@ $enable-rtl: true;
   padding: 10px;
   position: relative;
   text-align: center;
-  width: 400px;
+  width: 290px;
   border-radius: 10px;
 }
 
@@ -160,6 +160,27 @@ app-header {
 
 .like2 {
   color: #fff;
-  background-color: #2eb85c;
-  border-color: #2eb85c;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.color-modal {
+  background-color: #3e8457;
+  color: #fff;
+}
+
+.color-modal-two {
+  background-color: #629EB2;
+  color: #fff;
+}
+
+.color-modal-three {
+  background-color: #35748E ;
+  color: #fff;
+}
+
+table {
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
 }

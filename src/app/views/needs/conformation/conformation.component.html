@@ -2,14 +2,14 @@
   <div class="row">
     <div class="container">
       <div class="card">
-        <c-card-header class="card-header-unique bg-primary">
+        <c-card-header class="card-header-unique color-modal">
           <strong> Conformación de equipo</strong>
         </c-card-header>
         <div class="card-body">
           <div class="row">
             <div class="col">
               <div class="card">
-                <div class="card-header bg-info text-light">
+                <div class="card-header color-modal-two text-light">
                   <strong>Ideas disponibles para unirse</strong>
                 </div>
                 <div class="card-body" *ngIf="ideasTBArray.length > 0">
@@ -58,7 +58,7 @@
             <!-- Tabla de idea donde se unió -->
             <div class="col-md-6">
               <div class="card">
-                <div class="card-header bg-warning text-light">
+                <div class="card-header color-modal-three text-light">
                   <strong>Equipos inscritos</strong>
                 </div>
                 <div class="card-body" *ngIf="teamUserArray.length > 0">
@@ -92,15 +92,15 @@
                         <td>
                           <div style="display: inline-flex;">
                             <button (click)="processIdea(teamU.ideaId._id, teamU.ideaId.phase)" style="cursor: pointer;"
-                              class="btn bg-info">
+                              class="btn color-modal-two">
                               <svg [cIcon]="icons.cilBookmark" size="xl" title="List Icon"></svg>
                             </button>
-                            <button (click)="removeTeam(teamU.ideaId._id)" style="cursor: pointer;"
-                              class="btn bg-danger">
+                            <button (click)="removeTeam(teamU.ideaId._id)" style="cursor: pointer; margin-left: 5px; color: white;"
+                              class="btn btn-danger">
                               <svg [cIcon]="icons.cilMinus" size="xl" title="List Icon"></svg>
                             </button>
                             <button *ngIf="teamU.rol == 'administrator' && teamU.ideaId.phase == 'teamBuilding'"
-                              (click)="changePhase(teamU.ideaId._id)" style="cursor: pointer;" class="btn btn-info">
+                              (click)="changePhase(teamU.ideaId._id)" style="cursor: pointer; margin-left: 5px;" class="btn btn-info">
                               <svg [cIcon]="icons.cilArrowThickToRight" size="xl" title="List Icon"></svg>
                             </button>
                           </div>
@@ -124,7 +124,7 @@
 </div>
 
 <ng-template #AddUser>
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Escoja las necesidades</h4>
     <button type="button" class="btn like2" (click)="modalAddUser!.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
@@ -188,7 +188,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" (click)="sendEnte()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i>
+    <button type="submit" (click)="sendEnte()" class="btn btn-md size-l color-modal"><i class="fa fa-check"></i>
       Unirse</button>
   </div>
 </ng-template>

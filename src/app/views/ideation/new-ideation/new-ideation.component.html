@@ -2,14 +2,14 @@
   <div class="row">
     <div class="container">
       <div class="card">
-        <c-card-header class="card-header-unique bg-primary">
+        <c-card-header class="card-header-unique color-modal">
           <strong>Ideación</strong>
         </c-card-header>
         <div class="card-body">
           <div class="row">
             <div class="col">
               <div class="card">
-                <div class="card-header lg bg-info text-light">
+                <div class="card-header lg color-modal-two text-light">
                   <strong>Lista de equipos</strong>
                 </div>
                 <div class="card-body" *ngIf="teamArray.length > 0">
@@ -46,14 +46,14 @@
                         </td>
                         <td class="text-center">
                           <div style="display: inline-flex;">
-                            <button (click)="processIdea(teamU.ideaId._id, 0, ShowNeeds)" class="btn bg-info">
+                            <button (click)="processIdea(teamU.ideaId._id, 0, ShowNeeds)" class="btn color-modal-two">
                               <svg [cIcon]="icons.cilBookmark" size="xl" title="Bookmark Icon"></svg>
                             </button>
-                            <button (click)="searchData(teamU.ideaId._id)" class="btn bg-info">
+                            <button (click)="searchData(teamU.ideaId._id)" class="btn color-modal-two">
                               <svg [cIcon]="icons.cilInfo" size="xl" title="Info Icon"></svg>
                             </button>
                             <button *ngIf="teamU.rol == 'administrator' && teamU.ideaId.phase == 'ideation'"
-                              (click)="changePhase(teamU.ideaId._id)" class="btn bg-info">
+                              (click)="changePhase(teamU.ideaId._id)" class="btn color-modal-two">
                               <svg [cIcon]="icons.cilArrowThickToRight" size="xl" title="Change Phase Icon"></svg>
                             </button>
                           </div>
@@ -70,7 +70,7 @@
             </div>
             <div class="col">
               <div class="card">
-                <div class="card-header lg bg-warning text-light">
+                <div class="card-header lg color-modal-three text-light">
                   <strong>Información del Equipo</strong>
                 </div>
                 <div class="card-body" *ngIf="selected">
@@ -81,7 +81,7 @@
                           <div class="form-group col-sm-12">
                             <div class="py-2">
                               <label class="form-col-form-label" for="link">Link del Meet</label>
-                              <button (click)="processIdea(ideaIdG, 1, '')" class="btn bg-info">
+                              <button (click)="processIdea(ideaIdG, 1, '')" class="btn color-modal-two">
                                 <svg [cIcon]="icons.cilBookmark" size="xl" title="Bookmark Icon"></svg>
                               </button>
                             </div>
@@ -90,7 +90,7 @@
                               <input type="text" class="form-control" id="link" formControlName="link"
                                 pattern="^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$"
                                 placeholder="Digite el link de la reunión" required minlength="10">
-                              <button class="btn btn-success" (click)="searchUrl()">
+                              <button class="btn color-modal" (click)="searchUrl()">
                                 <svg [cIcon]="icons.cilSearch" size="xl" title="Search Icon"></svg>
                               </button>
                             </div>
@@ -100,10 +100,10 @@
                           </div>
                         </div>
                         <div class="py-1">
-                          <button type="submit" *ngIf="!existLink" (click)="create('link')" class="btn bg-info">
+                          <button type="submit" *ngIf="!existLink" (click)="create('link')" class="btn color-modal-two">
                             <svg [cIcon]="icons.cilPlus" size="xl" title="Upload Icon"></svg> Subir</button>
                           <button type="submit" *ngIf="existLink" (click)="update('link')"
-                            class="btn btn-md size-l btn-success">
+                            class="btn btn-md size-l color-modal">
                             <svg [cIcon]="icons.cilLoopCircular" size="xl" title="Update Icon"></svg>
                             Actualizar</button>
                         </div>
@@ -205,7 +205,7 @@
                         <div class="form-group col-sm-12">
                           <div class="py-2">
                             <label class="form-col-form-label" for="description">Descripción del proyecto</label>
-                            <button (click)="processIdea(ideaIdG, 2, '')" class="btn bg-info pointer">
+                            <button (click)="processIdea(ideaIdG, 2, '')" class="btn color-modal-two pointer">
                               <svg [cIcon]="icons.cilBookmark" size="xl" title="Bookmark Icon"></svg>
                             </button>
                           </div>
@@ -222,14 +222,14 @@
                             class="btn btn-md size-l btn-info"><svg [cIcon]="icons.cilPlus" size="xl"
                               title="Upload Icon"></svg> Agregar</button>
                           <button type="submit" *ngIf="existDesc" (click)="update('desc')"
-                            class="btn btn-md size-l btn-success"><i class="cil-loop-circular"></i> Actualizar</button>
+                            class="btn btn-md size-l color-modal"><i class="cil-loop-circular"></i> Actualizar</button>
                         </div>
                       </form>
                     </tab>
                   </tabset>
                 </div>
                 <div class="card-body text-center" *ngIf="!selected">
-                  <img class="responsive2" src="../../../../assets/img/ideation_background.jpg" alt="No hay resultados"
+                  <img class="responsive2" src="../../../../assets/img/ideation_background.png" alt="No hay resultados"
                     height="300px">
                 </div>
               </div>
@@ -242,7 +242,7 @@
 </div>
 
 <ng-template #CreateTeamContri>
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Agregar Aporte</h4>
     <button type="button" class="btn like2" (click)="modal.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
@@ -264,13 +264,13 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" (click)="createContribution()" class="btn btn-md size-l btn-success"><i
+    <button type="submit" (click)="createContribution()" class="btn btn-md size-l color-modal"><i
         class="fa fa-check"></i> Agregar</button>
   </div>
 </ng-template>
 
 <ng-template #EditTeamContri>
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Editar Aporte</h4>
     <button type="button" class="btn like2" (click)="modal.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
@@ -297,7 +297,7 @@
 </ng-template>
 
 <ng-template #ViewTeamContri>
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Más detalles</h4>
     <button type="button" class="btn like2" (click)="modal.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
@@ -340,7 +340,7 @@
 </ng-template>
 
 <ng-template #ShowNeeds>
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Necesidades Asociadas</h4>
     <button type="button" class="btn like2" (click)="modal.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>

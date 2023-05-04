@@ -16,6 +16,7 @@ import {
   cilSortDescending,
   cilThumbUp,
   cilThumbDown,
+  cilPaperPlane,
   cilChatBubble,
   cilX,
 } from '@coreui/icons';
@@ -32,6 +33,7 @@ export class ViewIdeaComponent implements OnInit {
     cilShieldAlt,
     cilSortAscending,
     cilSortDescending,
+    cilPaperPlane,
     cilThumbUp,
     cilThumbDown,
     cilChatBubble,

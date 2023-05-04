@@ -2,7 +2,7 @@
     <div class="row">
       <div class="container">
         <div class="card">
-          <c-card-header class="card-header-unique bg-primary">
+          <c-card-header class="card-header-unique color-modal">
             <strong>Mis Ideas</strong>
           </c-card-header>
           <div class="card-body">
@@ -11,7 +11,7 @@
             </div>
   
             <div class="text-center" *ngIf="arrayIdeas.length == 0">
-              <img class="responsive" src="../../../../assets/img/nothing_search.png" alt="No hay resultados">
+              <img class="responsive" src="../../../../assets/img/nothing_search.png" height="150px" alt="No hay resultados">
             </div>
   
             <table *ngIf="arrayIdeas.length != 0" class="table table-responsive-lg table-hover col table-outline mb-0">
@@ -48,7 +48,7 @@
                     {{idea.comment_idea.length == 0 ? 0 : idea.comment_idea[0].count}}
                   </td>
                   <td class="text-center">
-                    <a *ngIf="idea.phase === 'coocreacion'" style="cursor: pointer;" (click)="openModalEditIdea(EditIdea, idea)" class="link mr-2" placement="top" tooltip="Editar">
+                    <a *ngIf="idea.phase === 'coocreacion'" style="cursor: pointer;" (click)="openModalEditIdea(EditIdea, idea)" class="link mr-2">
                       <svg [cIcon]="icons.cilPencil" size="xl" title="Pencil Icon"></svg>
                     </a>
                     <p *ngIf="idea.phase !== 'coocreacion'">
@@ -65,98 +65,110 @@
   </div>
   
   <ng-template #EditIdea>
-    <div class="modal-header bg-success">
-      <h4 class="modal-title pull-left like2">Editar Idea</h4>
-      <button type="button" class="btn like2" (click)="modalEdit.hide()">
-        <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
-      </button>
-    </div>
-    <c-card-body>
-      <form cForm id="formEditIdea" [formGroup]="formEditIdea">
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label"for="name">Nombre</label>
-              <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite su nombre" required minlength="10" >
-              <div class="text-danger mt-2" *ngIf="invalidField('name')">
-                {{ getErrorMessage("name") }}
-              </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label"for="description">Descripción</label>
-              <textarea class="form-control" id="description" formControlName="description" placeholder="Digite la descripción" required minlength="20" cols="30" rows="5"></textarea>
-              <div class="text-danger mt-2" *ngIf="invalidField('description')">
-                {{ getErrorMessage("description") }}
-              </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-12">
-              <label class="form-col-form-label" for="visualization">Visualizar en mural</label>
-              <br>
-              <label class="switch switch-3d switch-primary" >
-                <input type="checkbox" class="switch-input" id="visualization" (click)="checkVi($event.target)">
-                <span class="switch-slider"></span>
-              </label>
-              <div class="text-danger mt-2" *ngIf="invalidField('visualization')">
-                {{ getErrorMessage("visualization") }}
-              </div>
-          </div>
-        </div>
-      </form>
-  
-      <form id="formEditAnexo" [formGroup]="formEditAnexo">
-        <div class="row">
-          <div class="form-group col-sm-10">
-            <label class="form-col-form-label">Anexo 1</label>
-            <div class="input-fixed">
-              <div class="custom-input-file col-md-6 col-sm-6 col-xs-6"
-                [ngStyle]="{'background-color': formEditAnexo.value.anexoOne !== '' ?  'green': 'purple'}">
-                <input type="file" class="input-file" id="anexoOne" (change)="onFileSelect($event)">
-                <p *ngIf="formEditAnexo.value.anexoOne === ''">Subir Archivo...</p>
-                <p *ngIf="formEditAnexo.value.anexoOne !== ''">Archivo Subido!!!</p>
-              </div>
+    <c-card>
+      <div class="modal-header color-modal">
+        <h4 class="modal-title pull-left like2">Editar Idea</h4>
+        <button type="button" class="btn like2" (click)="modalEdit.hide()">
+          <svg [cIcon]="icons.cilX" size="xl" title="Close Icon"></svg>
+        </button>
+      </div>
+      <c-card-body>
+        <form cForm id="formEditIdea" [formGroup]="formEditIdea">
+          <div class="row">
+            <div class="form-group col-sm-12">
+                <label class="form-col-form-label"for="name">Nombre</label>
+                <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite su nombre" required minlength="10" >
+                <div class="text-danger mt-2" *ngIf="invalidField('name')">
+                  {{ getErrorMessage("name") }}
+                </div>
             </div>
-            <p class="bottom" *ngIf="sizeOne"> <a [href]="formEditAnexo.value.anexoOne.link" target="_blank">Anexo_1_Cargado</a> <i class="cil-trash" tooltip="Eliminar" placement="top" (click)="deleteAnexo('anexoOne')"></i></p>
-            <p class="bottom" *ngIf="!sizeOne" style="color: red;"> Anexos no adjuntados </p>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-10">
-            <label class="form-col-form-label">Anexo 2</label>
-            <div class="input-fixed">
-              <div class="custom-input-file col-md-6 col-sm-6 col-xs-6"
-                [ngStyle]="{'background-color': formEditAnexo.value.anexoTwo !== '' ?  'green': 'purple'}">
-                <input class="input-file" type="file" id="anexoTwo"  (change)="onFileSelect($event)">
-                <p *ngIf="formEditAnexo.value.anexoTwo === ''">Subir Archivo...</p>
-                <p *ngIf="formEditAnexo.value.anexoTwo !== ''">Archivo Subido!!!</p>
-              </div>
+          <div class="row">
+            <div class="form-group col-sm-12">
+                <label class="form-col-form-label"for="description">Descripción</label>
+                <textarea class="form-control" id="description" formControlName="description" placeholder="Digite la descripción" required minlength="20" cols="30" rows="5"></textarea>
+                <div class="text-danger mt-2" *ngIf="invalidField('description')">
+                  {{ getErrorMessage("description") }}
+                </div>
             </div>
-            <p class="bottom" *ngIf="sizeTwo"> <a [href]="formEditAnexo.value.anexoTwo.link" target="_blank">Anexo_2_Cargado</a> <i class="cil-trash" tooltip="Eliminar" placement="top" (click)="deleteAnexo('anexoTwo')"></i></p>
-            <p class="bottom" *ngIf="!sizeTwo" style="color: red;"> Anexos no adjuntados </p>
           </div>
-        </div>
-        <div class="row">
-          <div class="form-group col-sm-10">
-            <label class="form-col-form-label">Anexo 3</label>
-            <div class="input-fixed">
-              <div class="custom-input-file col-md-6 col-sm-6 col-xs-6"
-                [ngStyle]="{'background-color': formEditAnexo.value.anexoThree !== '' ?  'green': 'purple'}">
-                <input class="input-file" type="file" id="anexoThree" (change)="onFileSelect($event)">
-                <p *ngIf="formEditAnexo.value.anexoThree === ''">Subir Archivo...</p>
-                <p *ngIf="formEditAnexo.value.anexoThree !== ''">Archivo Subido!!!</p>
-              </div>
+          <div class="row">
+            <div class="form-group col-sm-12">
+                <label class="form-col-form-label" for="visualization">Visualizar en mural</label>
+                <br>
+                <c-form-check [switch]="true">
+                  <input cFormCheckInput type="checkbox" id="visualization" (click)="checkVi($event.target)"/>
+                </c-form-check>
+                <div class="text-danger mt-2" *ngIf="invalidField('visualization')">
+                  {{ getErrorMessage("visualization") }}
+                </div>
             </div>
-            <p class="bottom" *ngIf="sizeThree"> <a [href]="formEditAnexo.value.anexoThree.link" target="_blank">Anexo_3_Cargado</a> <i class="cil-trash" tooltip="Eliminar" placement="top" (click)="deleteAnexo('anexoThree')"></i></p>
-            <p class="bottom" *ngIf="!sizeThree" style="color: red;"> Anexos no adjuntados </p>
           </div>
-        </div>
-      </form>    
-      
-    </c-card-body>
-    <c-card-footer>
-      <button type="submit" (click)="updateIdea()" class="btn btn-md size-l btn-success"><i class="fa fa-check"></i> Guardar</button>
-      <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger"><i class="fa fa-ban"></i> Cerrar</button>
-    </c-card-footer>
+        </form>
+    
+        <form id="formEditAnexo" [formGroup]="formEditAnexo">
+          <div class="row">
+            <div class="form-group col-sm-10">
+              <label class="form-col-form-label">Anexo 1</label>
+              <div class="input-fixed">
+                <div class="custom-input-file col-md-6 col-sm-6 col-xs-6"
+                  [ngStyle]="{'background-color': formEditAnexo.value.anexoOne !== '' ?  'green': '#629EB2'}">
+                  <input type="file" class="input-file" id="anexoOne" (change)="onFileSelect($event)">
+                  <p *ngIf="formEditAnexo.value.anexoOne === ''">Subir Archivo...</p>
+                  <p *ngIf="formEditAnexo.value.anexoOne !== ''">Archivo Subido!!!</p>
+                </div>
+              </div>
+              <div *ngIf="sizeOne" (click)="deleteAnexo('anexoOne')" class="pointer">
+                  <p class="bottom" > <a [href]="formEditAnexo.value.anexoOne.link" target="_blank">Anexo_1_Cargado</a> 
+                  <svg cIcon name="cilTrash" size="xl" title="Trash Icon"></svg>
+                </div>
+              <p class="bottom" *ngIf="!sizeOne" style="color: red;"> Anexos no adjuntados </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-10">
+              <label class="form-col-form-label">Anexo 2</label>
+              <div class="input-fixed">
+                <div class="custom-input-file col-md-6 col-sm-6 col-xs-6"
+                  [ngStyle]="{'background-color': formEditAnexo.value.anexoTwo !== '' ?  'green': '#629EB2'}">
+                  <input class="input-file" type="file" id="anexoTwo"  (change)="onFileSelect($event)">
+                  <p *ngIf="formEditAnexo.value.anexoTwo === ''">Subir Archivo...</p>
+                  <p *ngIf="formEditAnexo.value.anexoTwo !== ''">Archivo Subido!!!</p>
+                </div>
+              </div>
+              <div *ngIf="sizeTwo" (click)="deleteAnexo('anexoTwo')" class="pointer">
+                <p class="bottom"> <a [href]="formEditAnexo.value.anexoTwo.link" target="_blank">Anexo_2_Cargado</a> </p>
+                <svg cIcon name="cilTrash" size="xl" title="Trash Icon"></svg>
+              </div>
+              <p class="bottom" *ngIf="!sizeTwo" style="color: red;"> Anexos no adjuntados </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-10">
+              <label class="form-col-form-label">Anexo 3</label>
+              <div class="input-fixed">
+                <div class="custom-input-file col-md-6 col-sm-6 col-xs-6"
+                  [ngStyle]="{'background-color': formEditAnexo.value.anexoThree !== '' ?  'green': '#629EB2'}">
+                  <input class="input-file" type="file" id="anexoThree" (change)="onFileSelect($event)">
+                  <p *ngIf="formEditAnexo.value.anexoThree === ''">Subir Archivo...</p>
+                  <p *ngIf="formEditAnexo.value.anexoThree !== ''">Archivo Subido!!!</p>
+                </div>
+              </div>
+              <div *ngIf="sizeThree" (click)="deleteAnexo('anexoThree')" class="pointer">
+                <p class="bottom"> <a [href]="formEditAnexo.value.anexoThree.link" target="_blank">Anexo_3_Cargado</a> </p>
+                <svg cIcon name="cilTrash" size="xl" title="Trash Icon"></svg>
+              </div>
+              <p class="bottom" *ngIf="!sizeThree" style="color: red;"> Anexos no adjuntados </p>
+            </div>
+          </div>
+        </form>    
+        
+      </c-card-body>
+      <c-card-footer>
+        <button type="submit" (click)="updateIdea()" class="btn btn-md size-l color-modal"><svg cIcon name="cilCheck" size="xl" title="Check Icon"></svg> Guardar</button>
+        <button style="margin-left: 10px;" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-light">
+          <svg cIcon name="cilBan" size="xl" title="Ban Icon"></svg>
+        Cerrar</button>
+      </c-card-footer>
+    </c-card>
   </ng-template>

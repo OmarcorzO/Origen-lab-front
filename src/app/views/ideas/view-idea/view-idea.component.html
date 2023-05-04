@@ -2,38 +2,38 @@
   <div class="row">
     <div class="container">
       <c-card>
-        <c-card-header class="card-header bg-primary">
+        <c-card-header class="card-header color-modal">
           <c-row>
             <c-col xl>
               <strong>Ideas</strong>
             </c-col>
             <c-col style="text-align: right">
               <button type="button" class="btn" (click)="ideasFilter('asc')" [ngClass]="{
-                  black: orderView !== 'asc',
+                  transparent: orderView !== 'asc',
                   like: orderView === 'asc'
                 }">
                 <svg [cIcon]="icons.cilSortAscending" size="xl" title="List Icon"></svg>
               </button>
               <button type="button" class="btn" (click)="ideasFilter('desc')" [ngClass]="{
-                  black: orderView !== 'desc',
+                  transparent: orderView !== 'desc',
                   like: orderView === 'desc'
                 }">
                 <svg [cIcon]="icons.cilSortDescending" size="xl" title="List Icon"></svg>
               </button>
               <button type="button" class="btn" (click)="ideasFilter('comment')" [ngClass]="{
-                  black: fieldView !== 'comment',
+                  transparent: fieldView !== 'comment',
                   like: fieldView === 'comment'
                 }">
                 <svg [cIcon]="icons.cilChatBubble" size="xl" title="List Icon"></svg>
               </button>
               <button type="button" class="btn" (click)="ideasFilter('dislikes')" [ngClass]="{
-                  black: fieldView !== 'dislikes',
+                  transparent: fieldView !== 'dislikes',
                   like: fieldView === 'dislikes'
                 }">
                 <svg [cIcon]="icons.cilThumbDown" size="xl" title="List Icon"></svg>
               </button>
               <button type="button" class="btn" (click)="ideasFilter('likes')" [ngClass]="{
-                  black: fieldView !== 'likes',
+                  transparent: fieldView !== 'likes',
                   like: fieldView === 'likes'
                 }">
                 <svg [cIcon]="icons.cilThumbUp" size="xl" title="List Icon"></svg>
@@ -47,41 +47,41 @@
             <div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let idea of arrayPublicIdeas; let i = index">
               <c-card class="brand-card mt-2" (click)="showIdea(idea, ViewIdea)">
                 <c-card-header style="color: black;">
-                  <h5 style="margin: 20px; height: 60px; overflow: auto;">
-                    <i>
-                      {{ idea.name }}
-                    </i>
+                  <h5 style="height: 60px; overflow: auto;">
+                    {{ idea.name }}
                   </h5>
                 </c-card-header>
                 <c-card-body style="display: inline-flex; justify-content: center;">
                   <div class="div-brand">
-
-                    {{
-                    idea.reacting_idea_likes.length == 0
-                    ? 0
-                    : idea.reacting_idea_likes[0].count
-                    }}
-
-                    <div class="text-uppercase text-muted small">Likes</div>
+                    <b style="font-size: xx-large;">
+                      {{
+                      idea.reacting_idea_likes.length == 0
+                      ? 0
+                      : idea.reacting_idea_likes[0].count
+                      }}
+                    </b>
+                    <div class="text-uppercase text-muted">Likes</div>
                   </div>
                   <div class="div-brand">
-
-                    {{
-                    idea.reacting_idea_dislikes.length == 0
-                    ? 0
-                    : idea.reacting_idea_dislikes[0].count
-                    }}
-
-                    <div class="text-uppercase text-muted small">Dislikes</div>
+                    <b style="font-size: xx-large;">
+                      {{
+                      idea.reacting_idea_dislikes.length == 0
+                      ? 0
+                      : idea.reacting_idea_dislikes[0].count
+                      }}
+                    </b>
+                    <div class="text-uppercase text-muted">Dislikes</div>
                   </div>
 
                   <div class="div-brand">
-                    {{
-                    idea.comment_idea.length == 0
-                    ? 0
-                    : idea.comment_idea[0].count
-                    }}
-                    <div class="text-uppercase text-muted small">Coments</div>
+                    <b style="font-size: xx-large;">
+                      {{
+                      idea.comment_idea.length == 0
+                      ? 0
+                      : idea.comment_idea[0].count
+                      }}
+                    </b>
+                    <div class="text-uppercase text-muted">Coments</div>
                   </div>
                 </c-card-body>
               </c-card>
@@ -101,7 +101,7 @@
   <!--/.row-->
 </div>
 <ng-template #ViewIdea>
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Resumen Idea</h4>
     <button type="button" class="btn like2" (click)="modalComment.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
@@ -132,8 +132,8 @@
       <div *ngIf="ideaView.idea_anexos.length > 0" style="display: flex">
         <div *ngFor="let item of ideaView.idea_anexos">
           <a [href]="item.link" target="_blank">
-            <i class="fa fa-file-pdf-o files" *ngIf="item.link.includes('.pdf')"></i>
-            <i class="fa fa-file-image-o files" *ngIf="item.link.includes('.jpg') || item.link.includes('.png')"></i>
+            <svg cIcon name="cibAdobeAcrobatReader" size="xl" title="Numbered List Icon" *ngIf="item.link.includes('.pdf')"></svg>
+            <svg cIcon name="cilImage" size="xl" title="Numbered List Icon" *ngIf="item.link.includes('.jpg') || item.link.includes('.png')"></svg>
           </a>
         </div>
       </div>
@@ -145,30 +145,34 @@
       <pagination [totalItems]="totalItems / sizePage" [(ngModel)]="currentPage" [maxSize]="4" previousText="&lsaquo;"
         nextText="&rsaquo;"></pagination>
     </div>
-    <table class="table table-bordered table-striped table-sm" *ngIf="arrayComments.length > 0">
-      <thead>
-        <tr>
-          <th class="lg">Comentarios</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="
-            let ideaC of arrayComments
-              | slice : (currentPage - 1) * sizePage : currentPage * sizePage;
-            let i = index
-          ">
-          <td>
-            {{ ideaC.comment }}
-            <br />
-            {{ ideaC.createdAt | date : "dd-MM-yyyy" }}
-            <br />
-            <span class="badge badge-success">{{
-              ideaC.type_comment_idea[0].name
-              }}</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="form-group">
+      <table class="table table-bordered table-striped table-sm" *ngIf="arrayComments.length > 0">
+        <thead style="background-color: #629EB2;">
+          <tr>
+            <th class="lg">Comentarios</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="
+              let ideaC of arrayComments
+                | slice : (currentPage - 1) * sizePage : currentPage * sizePage;
+              let i = index
+            ">
+            <td>
+              {{ ideaC.comment }}
+              <br />
+              {{ ideaC.createdAt | date : "dd-MM-yyyy" }}
+              <br />
+              <c-badge class="color-modal-three">
+                {{
+                ideaC.type_comment_idea[0].name
+                }}
+              </c-badge>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <!--/.form-->
   </c-card-body>
@@ -207,7 +211,7 @@
               placeholder="Comenta ahora!!" />
             <span class="input-group-append">
               <button type="submit" (click)="publicIdea()" class="btn btn-primary lg">
-                <svg [cIcon]="icons.cilChatBubble" size="xl" title="List Icon"></svg>
+                <svg [cIcon]="icons.cilPaperPlane" size="xl" title="List Icon"></svg>
               </button>
             </span>
             <div class="text-danger mt-2" *ngIf="invalidField('comment')">

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="container">
       <div class="card">
-        <c-card-header class="card-header-unique bg-primary">
+        <c-card-header class="card-header-unique color-modal">
           <strong>Mis Necesidades</strong>
         </c-card-header>
         <div class="card-body">
@@ -13,7 +13,7 @@
 
             <div class="mr-3">
               <button class="btn btn-primary" (click)="openModalCreate(CreateNeed, 'need')">
-                <i class="cil-plus"></i> Agregar
+                <svg cIcon name="cilPlus" size="sm " title="Plus Icon"></svg> Agregar
               </button>
             </div>
           </div>
@@ -83,7 +83,7 @@
 
 <ng-template #ListIndicators>
 
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Mis Indicadores</h4>
     <button type="button" class="btn like2" (click)="modalView!.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
@@ -100,7 +100,7 @@
 
       <div class="mr-3">
         <button class="btn btn-primary" (click)="openModalCreate(CreateIndi, 'indi')">
-          <i class="cil-plus"></i> Agregar
+          <svg cIcon name="cilPlus" size="sm " title="Plus Icon"></svg> Agregar
         </button>
       </div>
     </div>
@@ -152,7 +152,7 @@
 </ng-template>
 
 <ng-template #CreateNeed>
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Crear Necesidad</h4>
     <button type="button" class="btn like2" (click)="modalCreate!.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
@@ -195,17 +195,17 @@
   </c-card-body>
 
   <div class="modal-footer p-1">
-    <button type="submit" (click)="createNeed()" class="btn btn-md size-l btn-success">
+    <button type="submit" (click)="createNeed()" class="btn btn-md size-l color-modal">
       <svg [cIcon]="icons.cilCheck" size="xl" title="List Icon"></svg>
       Guardar</button>
-    <button type="button" (click)="modalCreate!.hide()" class="btn btn-md size-l btn-danger">
+    <button type="button" (click)="modalCreate!.hide()" class="btn btn-md size-l btn-light">
       <svg [cIcon]="icons.cilBan" size="xl" title="List Icon"></svg>
       Cerrar</button>
   </div>
 </ng-template>
 
 <ng-template #EditNeed>
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Editar Necesidad</h4>
     <button type="button" class="btn like2" (click)="modalEdit!.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
@@ -254,17 +254,17 @@
   </c-card-body>
 
   <div class="modal-footer p-1">
-    <button type="submit" (click)="updateNeed()" class="btn btn-md size-l btn-success">
+    <button type="submit" (click)="updateNeed()" class="btn btn-md size-l color-modal">
       <svg [cIcon]="icons.cilCheck" size="xl" title="Update Icon"></svg>
       Actualizar</button>
-    <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger">
+    <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-light">
       <svg [cIcon]="icons.cilBan" size="xl" title="Cancel Icon"></svg>
       Cerrar</button>
   </div>
 </ng-template>
 
 <ng-template #CreateIndi>
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Crear Indicador</h4>
     <button type="button" class="btn like2" (click)="modalCreate!.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
@@ -288,17 +288,17 @@
   </c-card-body>
 
   <div class="modal-footer p-1">
-    <button type="submit" (click)="createIndi()" class="btn btn-md size-l btn-success">
+    <button type="submit" (click)="createIndi()" class="btn btn-md size-l color-modal">
       <svg [cIcon]="icons.cilCheck" size="xl" title="Create Icon"></svg>
       Guardar</button>
-    <button type="button" (click)="modalCreate!.hide()" class="btn btn-md size-l btn-danger">
+    <button type="button" (click)="modalCreate!.hide()" class="btn btn-md size-l btn-light">
       <svg [cIcon]="icons.cilBan" size="xl" title="Cancel Icon"></svg>
       Cerrar</button>
   </div>
 </ng-template>
 
 <ng-template #EditIndi>
-  <div class="modal-header bg-success">
+  <div class="modal-header color-modal">
     <h4 class="modal-title pull-left like2">Editar Indicador</h4>
     <button type="button" class="btn like2" (click)="modalEdit!.hide()">
       <svg [cIcon]="icons.cilX" size="xl" title="List Icon"></svg>
@@ -321,10 +321,10 @@
   </c-card-body>
 
   <div class="modal-footer p-1">
-    <button type="submit" (click)="updateIndi()" class="btn btn-md size-l btn-success">
+    <button type="submit" (click)="updateIndi()" class="btn btn-md size-l color-modal">
       <svg [cIcon]="icons.cilCheck" size="xl" title="Update Icon"></svg>
       Actualizar</button>
-    <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-danger">
+    <button type="button" (click)="modalEdit!.hide()" class="btn btn-md size-l btn-light">
       <svg [cIcon]="icons.cilBan" size="xl" title="Cancel Icon"></svg>
       Cerrar</button>
   </div>

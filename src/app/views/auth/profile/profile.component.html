@@ -2,7 +2,7 @@
     <div class="row">
         <div class="container">
             <div class="card" *ngIf="!hasProfile">
-                <div class="card-header bg-primary text-light">
+                <div class="card-header color-modal text-light">
                   <strong>Perfil de Usuario</strong>
                 </div>
                 <form id="profileForm" [formGroup]="profileForm">
@@ -215,7 +215,7 @@
             </div>
 
             <div class="card" *ngIf="hasProfile">
-                <div class="card-header bg-success text-light">
+                <div class="card-header color-modal text-light">
                   <strong>Perfil de Usuario</strong>
                 </div>
                 <form id="editProfileForm" [formGroup]="editProfileForm">
@@ -265,7 +265,7 @@
                             <label for="img">Foto de Perfil</label>
                             <img [src]="tempImg" class="form-control img-profile-page" style="width: 70%;">
                             <div class="custom2-input-file col mt-2"
-                              [ngStyle]="{'background-color': editProfileForm.value.img !== '' ?  'green': 'purple'}">
+                              [ngStyle]="{'background-color': editProfileForm.value.img !== '' ?  'green': '#629EB2'}">
                               <input class="input-file " type="file" (change)="onFileSelect($event)">
                               <p *ngIf="editProfileForm.value.img === ''">Subir Archivo...</p>
                               <p *ngIf="editProfileForm.value.img !== ''">Archivo Subido!!!</p>
@@ -449,12 +449,12 @@
                 </form>
 
                 <div class="card-footer">
-                  <button type="submit" (click)="updateProfile()" class="btn btn-md size-l btn-success">
+                  <button type="submit" (click)="updateProfile()" class="btn btn-md size-l color-modal">
                     <i class="fa fa-check"></i> 
                     <svg cIcon name="cilCheck" size="xl" title="Numbered List Icon"></svg>
                     Actualizar
                   </button>
-                  <button type="submit" (click)="cleanDataEdit()" class="btn btn-md size-l btn-danger">
+                  <button type="submit" style="margin-left: 10px;" (click)="cleanDataEdit()" class="btn btn-md size-l btn-light">
                     <svg cIcon name="cilBan" size="xl" title="Numbered List Icon"></svg>
                     Limpiar</button>
                 </div>
